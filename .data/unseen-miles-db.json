@@ -1,0 +1,435 @@
+{
+  "trips": [
+    {
+      "id": "bali-december-escape",
+      "tripName": "Bali Quiet Escape",
+      "origin": "Kolkata",
+      "destination": "Bali",
+      "destinationId": "bali",
+      "durationDays": 5,
+      "travellers": 2,
+      "currency": "INR",
+      "estimatedTotal": 80000,
+      "targetBudget": 80000,
+      "travelMonth": "December",
+      "pace": "relaxed",
+      "interests": [
+        "Beaches",
+        "Cafes",
+        "Peaceful Places"
+      ],
+      "days": [
+        {
+          "day": 1,
+          "title": "Arrival in Bali & Unhurried Settling In",
+          "summary": "Touch down from Kolkata, transfer to Sanur Beachfront, and enjoy a calm evening walk.",
+          "activities": [
+            {
+              "id": "d1-a1",
+              "timeOfDay": "Morning",
+              "title": "Arrive at Ngurah Rai International Airport (DPS)",
+              "description": "Smooth airport pickup and luggage drop at Pantai Calm Boutique Residence.",
+              "location": "Ngurah Rai International Airport (DPS)",
+              "lat": -8.7482,
+              "lng": 115.1672,
+              "estimatedCost": 0,
+              "durationHours": 2,
+              "category": "transit",
+              "crowdLevel": "Moderate"
+            },
+            {
+              "id": "d1-a2",
+              "timeOfDay": "Afternoon",
+              "title": "Neighborhood Coffee & Walk near Padang & Thomas Cove",
+              "description": "Quiet limestone cliff staircase leading to clear turquoise surf.",
+              "location": "Padang & Thomas Cove",
+              "lat": -8.8149,
+              "lng": 115.1039,
+              "estimatedCost": 250,
+              "durationHours": 2.5,
+              "category": "food",
+              "crowdLevel": "Quiet"
+            },
+            {
+              "id": "d1-a3",
+              "timeOfDay": "Evening",
+              "title": "Sunset Local Dining & Early Rest",
+              "description": "Relaxed regional dinner showcasing fresh Bali flavors.",
+              "location": "Sanur Beachfront",
+              "lat": -8.694,
+              "lng": 115.262,
+              "estimatedCost": 1800,
+              "durationHours": 2,
+              "category": "food",
+              "crowdLevel": "Quiet"
+            }
+          ],
+          "hotelName": "Pantai Calm Boutique Residence",
+          "transport": [
+            {
+              "id": "tr-bali-airport",
+              "mode": "Airport Transfer",
+              "route": "Ngurah Rai (DPS) → Ubud / Sanur Hotel",
+              "durationMinutes": 65,
+              "distanceKm": 34,
+              "estimatedFareInr": 1450,
+              "provider": "Indicative Charter Desk",
+              "availabilityStatus": "Indicative Estimate (Confirm locally)",
+              "provenance": "indicative_estimate",
+              "bookingUrl": "https://www.klook.com"
+            }
+          ],
+          "estimatedCost": 7700
+        },
+        {
+          "day": 2,
+          "title": "Exploring Sidemen Valley Terraces & Sanur Sunrise Promenade",
+          "summary": "Early-morning pacing to experience Sidemen Valley Terraces before mid-day visitors arrive.",
+          "activities": [
+            {
+              "id": "d2-a1",
+              "timeOfDay": "Morning",
+              "title": "Sidemen Valley Terraces",
+              "description": "Serene east-Bali rice valley overlooking Mount Agung far from crowds.",
+              "location": "Sidemen Valley Terraces",
+              "lat": -8.4819,
+              "lng": 115.4426,
+              "estimatedCost": 350,
+              "durationHours": 3,
+              "category": "nature",
+              "crowdLevel": "Quiet"
+            },
+            {
+              "id": "d2-a2",
+              "timeOfDay": "Afternoon",
+              "title": "Sanur Sunrise Promenade",
+              "description": "Calm reef-protected shoreline ideal for unhurried morning walks.",
+              "location": "Sanur Sunrise Promenade",
+              "lat": -8.6938,
+              "lng": 115.2633,
+              "estimatedCost": 900,
+              "durationHours": 2.5,
+              "category": "sightseeing",
+              "crowdLevel": "Quiet"
+            },
+            {
+              "id": "d2-a3",
+              "timeOfDay": "Evening",
+              "title": "Quiet Evening & Local Cafe",
+              "description": "Unwind around Sanur Beachfront with regional tea or dinner.",
+              "location": "Sanur Beachfront",
+              "lat": -8.686000000000002,
+              "lng": 115.256,
+              "estimatedCost": 1550,
+              "durationHours": 2,
+              "category": "culture",
+              "crowdLevel": "Quiet"
+            }
+          ],
+          "hotelName": "Pantai Calm Boutique Residence",
+          "transport": [
+            {
+              "id": "tr-bali-cab",
+              "mode": "Cab",
+              "route": "Full-Day Private Island Driver (8 hrs)",
+              "durationMinutes": 480,
+              "distanceKm": 95,
+              "estimatedFareInr": 2600,
+              "provider": "Demo Mobility Adapter",
+              "availabilityStatus": "Simulated Demo Rate",
+              "provenance": "demo_adapter",
+              "bookingUrl": "https://www.bluebirdgroup.com"
+            }
+          ],
+          "estimatedCost": 7800
+        },
+        {
+          "day": 3,
+          "title": "Exploring Sanur Sunrise Promenade & Ubud Artisan Roastery Quarter",
+          "summary": "Early-morning pacing to experience Sanur Sunrise Promenade before mid-day visitors arrive.",
+          "activities": [
+            {
+              "id": "d3-a1",
+              "timeOfDay": "Morning",
+              "title": "Sanur Sunrise Promenade",
+              "description": "Calm reef-protected shoreline ideal for unhurried morning walks.",
+              "location": "Sanur Sunrise Promenade",
+              "lat": -8.6938,
+              "lng": 115.2633,
+              "estimatedCost": 450,
+              "durationHours": 3,
+              "category": "nature",
+              "crowdLevel": "Quiet"
+            },
+            {
+              "id": "d3-a2",
+              "timeOfDay": "Afternoon",
+              "title": "Ubud Artisan Roastery Quarter",
+              "description": "Single-origin Kintamani coffee bars and tranquil garden kitchens.",
+              "location": "Ubud Artisan Roastery Quarter",
+              "lat": -8.5069,
+              "lng": 115.2625,
+              "estimatedCost": 1100,
+              "durationHours": 2.5,
+              "category": "food",
+              "crowdLevel": "Moderate"
+            },
+            {
+              "id": "d3-a3",
+              "timeOfDay": "Evening",
+              "title": "Quiet Evening & Local Cafe",
+              "description": "Unwind around Sanur Beachfront with regional tea or dinner.",
+              "location": "Sanur Beachfront",
+              "lat": -8.686000000000002,
+              "lng": 115.256,
+              "estimatedCost": 1550,
+              "durationHours": 2,
+              "category": "culture",
+              "crowdLevel": "Quiet"
+            }
+          ],
+          "hotelName": "Pantai Calm Boutique Residence",
+          "transport": [
+            {
+              "id": "tr-bali-cab",
+              "mode": "Cab",
+              "route": "Full-Day Private Island Driver (8 hrs)",
+              "durationMinutes": 480,
+              "distanceKm": 95,
+              "estimatedFareInr": 2600,
+              "provider": "Demo Mobility Adapter",
+              "availabilityStatus": "Simulated Demo Rate",
+              "provenance": "demo_adapter",
+              "bookingUrl": "https://www.bluebirdgroup.com"
+            }
+          ],
+          "estimatedCost": 7800
+        },
+        {
+          "day": 4,
+          "title": "Exploring Ubud Artisan Roastery Quarter & Padang & Thomas Cove",
+          "summary": "Early-morning pacing to experience Ubud Artisan Roastery Quarter before mid-day visitors arrive.",
+          "activities": [
+            {
+              "id": "d4-a1",
+              "timeOfDay": "Morning",
+              "title": "Ubud Artisan Roastery Quarter",
+              "description": "Single-origin Kintamani coffee bars and tranquil garden kitchens.",
+              "location": "Ubud Artisan Roastery Quarter",
+              "lat": -8.5069,
+              "lng": 115.2625,
+              "estimatedCost": 1100,
+              "durationHours": 3,
+              "category": "food",
+              "crowdLevel": "Moderate"
+            },
+            {
+              "id": "d4-a2",
+              "timeOfDay": "Afternoon",
+              "title": "Padang & Thomas Cove",
+              "description": "Quiet limestone cliff staircase leading to clear turquoise surf.",
+              "location": "Padang & Thomas Cove",
+              "lat": -8.8149,
+              "lng": 115.1039,
+              "estimatedCost": 250,
+              "durationHours": 2.5,
+              "category": "sightseeing",
+              "crowdLevel": "Quiet"
+            },
+            {
+              "id": "d4-a3",
+              "timeOfDay": "Evening",
+              "title": "Quiet Evening & Local Cafe",
+              "description": "Unwind around Sanur Beachfront with regional tea or dinner.",
+              "location": "Sanur Beachfront",
+              "lat": -8.686000000000002,
+              "lng": 115.256,
+              "estimatedCost": 1550,
+              "durationHours": 2,
+              "category": "culture",
+              "crowdLevel": "Quiet"
+            }
+          ],
+          "hotelName": "Pantai Calm Boutique Residence",
+          "transport": [
+            {
+              "id": "tr-bali-cab",
+              "mode": "Cab",
+              "route": "Full-Day Private Island Driver (8 hrs)",
+              "durationMinutes": 480,
+              "distanceKm": 95,
+              "estimatedFareInr": 2600,
+              "provider": "Demo Mobility Adapter",
+              "availabilityStatus": "Simulated Demo Rate",
+              "provenance": "demo_adapter",
+              "bookingUrl": "https://www.bluebirdgroup.com"
+            }
+          ],
+          "estimatedCost": 7800
+        },
+        {
+          "day": 5,
+          "title": "Morning Reflections & Departure to Kolkata",
+          "summary": "Slow breakfast, local artisan market stop, and stress-free airport transfer.",
+          "activities": [
+            {
+              "id": "d5-a1",
+              "timeOfDay": "Morning",
+              "title": "Quiet Sunrise Coffee & Packing",
+              "description": "Enjoy your final morning in Sanur Beachfront before checkout.",
+              "location": "Pantai Calm Boutique Residence",
+              "lat": -8.694,
+              "lng": 115.262,
+              "estimatedCost": 650,
+              "durationHours": 2,
+              "category": "wellness",
+              "crowdLevel": "Quiet"
+            },
+            {
+              "id": "d5-a2",
+              "timeOfDay": "Afternoon",
+              "title": "Airport Transfer to Ngurah Rai International Airport (DPS)",
+              "description": "Recommended 3-hour buffer prior to your return flight to Kolkata.",
+              "location": "Ngurah Rai International Airport (DPS)",
+              "lat": -8.7482,
+              "lng": 115.1672,
+              "estimatedCost": 1450,
+              "durationHours": 2.5,
+              "category": "transit",
+              "crowdLevel": "Moderate"
+            }
+          ],
+          "hotelName": "Departure Day",
+          "transport": [
+            {
+              "id": "tr-bali-airport",
+              "mode": "Airport Transfer",
+              "route": "Ngurah Rai (DPS) → Ubud / Sanur Hotel",
+              "durationMinutes": 65,
+              "distanceKm": 34,
+              "estimatedFareInr": 1450,
+              "provider": "Indicative Charter Desk",
+              "availabilityStatus": "Indicative Estimate (Confirm locally)",
+              "provenance": "indicative_estimate",
+              "bookingUrl": "https://www.klook.com"
+            }
+          ],
+          "estimatedCost": 2200
+        }
+      ],
+      "selectedHotel": {
+        "id": "ht-bali-sanur-cove",
+        "name": "Pantai Calm Boutique Residence",
+        "destinationId": "bali",
+        "area": "Sanur Beachfront",
+        "rating": 4.6,
+        "reviewCount": 289,
+        "pricePerNightInr": 4900,
+        "tier": "budget",
+        "roomTypes": [
+          "Coastal Balcony Room",
+          "Breeze Patio Twin"
+        ],
+        "distanceToCenterKm": 0.6,
+        "amenities": [
+          "Beachfront boardwalk",
+          "Bicycle loan",
+          "Cafe terrace",
+          "Wi-Fi"
+        ],
+        "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
+        "provider": "Unseen Stays Catalog",
+        "availabilityStatus": "Simulated Demo Inventory",
+        "provenance": "demo_adapter",
+        "lat": -8.694,
+        "lng": 115.262,
+        "mediaKey": "bali",
+        "recommendationReason": "Recommended because it fits comfortably within your nightly budget and matches your budget stay style.",
+        "matchScore": 96
+      },
+      "recommendations": [
+        "Recommended because it fits comfortably within your nightly budget and matches your budget stay style.",
+        "Best visited in December; start scenic visits before 08:30.",
+        "Keep local currency (IDR) handy for neighborhood cafés and transport."
+      ],
+      "travelTips": [
+        "Wear a sarong and sash when entering Hindu temple courtyards.",
+        "Use your right hand when passing items or offering payment.",
+        "Carry bottled water and confirm reef-safe conditions before swimming on southern beaches."
+      ],
+      "budgetBreakdown": {
+        "flights": 33600,
+        "hotels": 19600,
+        "localTransport": 5896,
+        "food": 8576,
+        "sightseeing": 4824,
+        "shopping": 2144,
+        "activities": 3216,
+        "emergencyReserve": 2144
+      },
+      "provenanceNote": "Itinerary budgets and transport fares combine indicative local estimates with simulated demo adapter rates.",
+      "createdAt": "2026-11-13T07:52:20.336Z",
+      "updatedAt": "2026-11-13T07:52:20.336Z"
+    }
+  ],
+  "savedDestinationIds": [
+    "bali",
+    "nepal"
+  ],
+  "savedHotelIds": [
+    "ht-bali-ubud-sanctuary",
+    "ht-nepal-pokhara-lake"
+  ],
+  "bookings": [
+    {
+      "id": "bk-flight-1",
+      "tripId": "bali-december-escape",
+      "type": "Flight",
+      "title": "Kolkata (CCU) → Denpasar (DPS) Round-Trip Reference",
+      "provider": "Demo Flight Adapter",
+      "referenceCode": "UM-FLT-8824",
+      "dateLabel": "14 Dec – 19 Dec",
+      "status": "Saved Record",
+      "amount": 33600,
+      "currency": "INR",
+      "cancellationPolicy": "Indicative fare rules: modification fee applies within 72h of departure.",
+      "providerUrl": "https://www.google.com/travel/flights"
+    },
+    {
+      "id": "bk-hotel-1",
+      "tripId": "bali-december-escape",
+      "type": "Hotel",
+      "title": "Pantai Calm Boutique Residence",
+      "provider": "Unseen Stays Catalog",
+      "referenceCode": "UM-STY-4109",
+      "dateLabel": "14 Dec – 18 Dec (4 nights)",
+      "status": "Saved Record",
+      "amount": 19600,
+      "currency": "INR",
+      "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
+      "providerUrl": "https://www.booking.com"
+    }
+  ],
+  "preferences": {
+    "name": "Aarav Sen",
+    "email": "traveller@unseenmiles.app",
+    "homeCity": "Kolkata",
+    "preferredCurrency": "INR",
+    "travelStyle": "balanced",
+    "hotelPreference": "boutique",
+    "foodPreferences": [
+      "Local Cafés",
+      "Vegetarian Friendly"
+    ],
+    "interests": [
+      "Beaches",
+      "Cafes",
+      "Peaceful Places"
+    ],
+    "preferredTransport": [
+      "Scenic Rail",
+      "Private Day Transfer"
+    ],
+    "avoidCrowds": true
+  }
+}

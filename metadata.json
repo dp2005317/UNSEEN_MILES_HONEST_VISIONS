@@ -1,0 +1,6 @@
+{
+  "name": "Unseen Miles",
+  "description": "Every mile planned, even the unseen ones. An intelligent AI travel companion for destination discovery, custom itineraries, stays, flights, local transport, and smart budgeting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

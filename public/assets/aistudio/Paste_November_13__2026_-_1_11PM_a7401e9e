@@ -1,0 +1,1295 @@
+# BUILD UNSEEN MILES — AN AI-POWERED AUTONOMOUS TRAVEL AGENT
+
+## 1. YOUR ROLE
+
+Act as a senior full-stack software architect, AI engineer, product designer, UI/UX specialist and travel technology developer.
+
+Build a complete, production-minded, responsive AI travel platform called **Unseen Miles**.
+
+This is not a static landing page, ordinary travel booking website, or basic chatbot.
+
+It must be a functional, AI-powered virtual travel agent that can understand a traveller's requirements, research destinations, discover travel options, compare hotels, construct itineraries, calculate budgets, recommend transportation and assist throughout the entire journey.
+
+Build the actual working application, not just a UI prototype.
+
+Do not stop after creating the homepage. Implement the complete application, backend architecture, AI integrations, API routes, data models, and functional user workflows.
+
+---
+
+# 2. PRODUCT IDENTITY
+
+**Product:** Unseen Miles
+
+**Tagline:** Every mile planned, even the unseen ones.
+
+**Product description:**
+
+Unseen Miles is an intelligent AI travel companion that transforms a traveller's idea into a complete, personalized and actionable journey.
+
+From the starting point to the final destination, the platform coordinates travel research, accommodation, local transportation, sightseeing, language assistance, currency conversion, budgeting and post-booking support.
+
+**Core philosophy:**
+
+The traveller should not have to visit ten different websites to plan one journey.
+
+One conversation should be enough to discover, organize and manage the entire trip.
+
+---
+
+# 3. TECHNOLOGY STACK
+
+Use the following technologies.
+
+### Frontend
+- Next.js with App Router
+- React
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Framer Motion
+- Lucide React icons
+- React Hook Form
+- Zod validation
+
+### Backend
+- Next.js API routes / server-side services
+- TypeScript
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Storage if required
+
+### Artificial Intelligence
+- Google Gemini API as the primary AI reasoning engine.
+- Tavily API for web search and destination research.
+- Gemini function calling / tool calling for agent orchestration.
+- Structured JSON responses for itinerary generation.
+
+### Maps and geographical services
+- Google Maps Platform or Mapbox.
+- Places search.
+- Geocoding.
+- Directions and route visualization.
+- Distance and travel-time estimates.
+
+Use an abstraction layer so the mapping provider can be changed without rewriting the application.
+
+### Additional integrations
+- Currency conversion API.
+- Weather API.
+- Flight search provider adapter.
+- Hotel search provider adapter.
+- Cab and local transportation provider adapter.
+
+Use real integrations wherever credentials and accessible APIs are available. For unsupported providers, create clearly labelled demo adapters with realistic sample data.
+
+Never represent simulated availability, fares, hotel rooms or booking confirmations as live verified information.
+
+---
+
+# 4. ENVIRONMENT CONFIGURATION
+
+Create a `.env.local.example` file.
+
+Include:
+
+GEMINI_API_KEY=
+TAVILY_API_KEY=
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+FIREBASE_CLIENT_EMAIL=
+FIREBASE_PRIVATE_KEY=
+GOOGLE_MAPS_API_KEY=
+CURRENCY_API_KEY=
+WEATHER_API_KEY=
+FLIGHT_API_KEY=
+HOTEL_API_KEY=
+CAB_API_KEY=
+
+Important security rules:
+
+1. All secret API keys must remain on the server.
+2. Never expose Gemini or Tavily secrets through frontend JavaScript.
+3. Never hardcode API keys.
+4. Validate and sanitize user inputs.
+5. Add API rate limiting and error handling.
+6. Restrict public mapping keys by domain and API permissions.
+7. Keep provider credentials in server-side environment variables.
+8. Never log authentication tokens or sensitive booking information.
+
+Create a configuration service that detects available integrations.
+
+If an API key is missing, gracefully use its demo adapter and visibly label the result as demo data.
+
+---
+
+# 5. WEBSITE DESIGN SYSTEM
+
+Use the uploaded Nepalora travel website screenshot as the primary layout inspiration.
+
+Use the uploaded black-and-purple 3D glass pitch deck as the secondary visual inspiration.
+
+Do not directly copy either design. Create a distinctive premium travel-tech identity.
+
+### Visual direction
+
+Think of:
+
+- Apple-quality product design.
+- Premium international travel platforms.
+- Cinematic destination photography.
+- Modern glassmorphism.
+- Minimal SaaS dashboards.
+- Elegant editorial typography.
+- Subtle 3D elements.
+- Smooth motion and transitions.
+
+### Colour palette
+
+Background: #080910
+
+Secondary background: #10121D
+
+Primary purple: #7C3AED
+
+Violet accent: #A78BFA
+
+Blue accent: #3B82F6
+
+Primary text: #FFFFFF
+
+Secondary text: #A1A1AA
+
+Glass borders: rgba(255,255,255,0.12)
+
+### Typography
+
+Use:
+- Inter or Geist for the main interface.
+- Playfair Display Italic for selected editorial headline accents.
+
+### Design characteristics
+
+- Large cinematic hero imagery.
+- Beautiful destination photography.
+- Rounded cards with 20–28px radius.
+- Frosted glass panels.
+- Subtle gradients and shadows.
+- Thin borders.
+- Soft purple ambient lighting.
+- Elegant pill-shaped buttons.
+- Smooth hover interactions.
+- Generous whitespace.
+- Responsive layouts.
+
+Avoid:
+- Excessive neon.
+- Unnecessary gradients.
+- Overcrowded dashboards.
+- Generic AI-generated-looking UI.
+- Excessive animations.
+- Tiny text.
+- Fake statistics and misleading availability indicators.
+
+Use real destination photographs from suitable image sources or properly configured image services.
+
+---
+
+# 6. APPLICATION STRUCTURE
+
+Create the following routes:
+
+/                       Landing page
+/explore                Explore destinations
+/plan                   AI trip planner
+/plan/[tripId]          Generated itinerary
+/stays                  Hotel discovery
+/flights                Flight discovery
+/transport              Transportation
+/trip/[tripId]          Complete trip dashboard
+/assistant              AI travel assistant
+/saved                  Saved destinations and trips
+/profile                User profile and preferences
+/login                  Authentication
+/register               Registration
+
+Create reusable components instead of duplicating page implementations.
+
+---
+
+# 7. LANDING PAGE — PREMIUM TRAVEL EXPERIENCE
+
+The homepage must look like a world-class travel brand.
+
+### Navigation
+
+Create a transparent navigation bar over the hero image.
+
+Left:
+Unseen Miles logo.
+
+Center:
+- Home
+- Destinations
+- Explore
+- Experiences
+- About
+
+Right:
+- Sign In
+- Plan My Journey button
+
+Make the navbar sticky and responsive.
+
+### Hero section
+
+Use a full-width cinematic destination image.
+
+Show a beautiful mountain, coastline or international destination photograph with a dark gradient overlay.
+
+Headline:
+
+"Travel Beyond the Ordinary."
+
+Use italic serif styling for "Beyond the Ordinary."
+
+Subtitle:
+
+"Your personal AI travel agent. From the first idea to every mile ahead."
+
+Add a prominent glassmorphism search card.
+
+Search card fields:
+
+- Where are you starting?
+- Where do you want to go?
+- Departure date
+- Return date
+- Number of travellers
+- Budget
+
+Primary CTA:
+
+"Plan My Journey"
+
+Secondary CTA:
+
+"Explore Destinations"
+
+The CTA should navigate to the AI planning experience and transfer the entered values.
+
+### Popular destinations
+
+Display beautiful destination cards.
+
+Examples:
+- Bali
+- Switzerland
+- Japan
+- Nepal
+- Thailand
+- Italy
+
+Each card should include:
+- Destination image
+- Country
+- Short description
+- Best time to visit
+- Estimated budget indicator
+- Explore button
+
+Do not hardcode claims about current prices or weather.
+
+### How Unseen Miles works
+
+Create three visual steps:
+
+01 — Tell us your dream.
+02 — AI discovers your journey.
+03 — Travel without the stress.
+
+### Why Unseen Miles
+
+Highlight:
+
+- One intelligent travel companion.
+- Personalized recommendations.
+- Smart itinerary optimization.
+- Complete travel cost estimation.
+- Local transportation discovery.
+- Assistance throughout the journey.
+
+### Statistics section
+
+Use an editorial statistics layout, but only display verified platform statistics. During development, use descriptive product capabilities instead of fabricated user counts.
+
+### Footer
+
+Include:
+- About
+- Contact
+- Privacy
+- Terms
+- Social links
+- Unseen Miles branding.
+
+---
+
+# 8. THE AI TRAVEL PLANNER — THE MOST IMPORTANT FEATURE
+
+This is the heart of the entire product.
+
+Build a beautiful conversational AI planning interface.
+
+The experience should resemble a premium AI assistant rather than a conventional form.
+
+### Interface layout
+
+Left sidebar:
+- New journey
+- Recent trips
+- Saved journeys
+- Explore destinations
+- Travel preferences
+- Settings
+
+Main area:
+- Conversation history
+- AI messages
+- User messages
+- Destination image cards
+- Hotel recommendations
+- Itinerary previews
+- Budget breakdowns
+
+Bottom:
+Large rounded chat input with:
+- Text input
+- Attachment option
+- Voice input (if browser support is available)
+- Send button
+
+### Initial assistant message
+
+"Hey traveller! I'm your personal travel agent.
+
+Tell me where you want to go, where you're starting from, your budget and the experience you're dreaming of.
+
+I'll take care of the unseen miles."
+
+### Conversational planning
+
+The AI must understand natural language.
+
+Example:
+
+User:
+
+"I want to travel from Kolkata to Bali for 5 days in December. My total budget is ₹80,000 for two people. I love beaches, cafés and peaceful places."
+
+The AI should extract:
+
+{
+  "origin": "Kolkata",
+  "destination": "Bali",
+  "duration_days": 5,
+  "travellers": 2,
+  "budget": 80000,
+  "currency": "INR",
+  "interests": ["beaches", "cafes", "peaceful places"],
+  "travel_month": "December"
+}
+
+If essential information is missing, ask conversational follow-up questions.
+
+Do not ask users to complete long forms unnecessarily.
+
+Examples:
+- Are your dates flexible?
+- Do you prefer luxury or budget hotels?
+- Would you prefer a relaxed or adventure-filled journey?
+- Do you have any dietary preferences?
+
+Maintain conversation context throughout the planning process.
+
+Do not repeatedly ask questions the user has already answered.
+
+### AI planning workflow
+
+Implement this sequence:
+
+1. Understand traveller intent.
+2. Extract structured travel requirements.
+3. Identify missing essential information.
+4. Research destination and attractions.
+5. Search available travel options.
+6. Discover accommodation.
+7. Compare transport options.
+8. Calculate estimated costs.
+9. Optimize itinerary.
+10. Present recommendations.
+11. Allow modifications.
+12. Save the finalized itinerary.
+
+The AI must be able to refine the plan dynamically.
+
+Example:
+
+User: "Make the trip cheaper."
+
+AI:
+- Finds alternative hotels.
+- Suggests cheaper transportation.
+- Removes expensive activities.
+- Recalculates the total budget.
+- Presents the differences.
+
+Example:
+
+User: "I don't want crowded places."
+
+AI:
+- Prioritizes quieter attractions.
+- Changes sightseeing timings.
+- Suggests less crowded alternatives.
+
+---
+
+# 9. GEMINI AI AGENT ARCHITECTURE
+
+Build a proper AI service layer.
+
+Suggested structure:
+
+lib/ai/
+- gemini.ts
+- agent.ts
+- prompts.ts
+- schemas.ts
+- tools.ts
+- itinerary-generator.ts
+- recommendation-engine.ts
+- conversation-memory.ts
+
+### Gemini responsibilities
+
+Gemini should handle:
+
+- Natural-language understanding.
+- Intent classification.
+- Preference extraction.
+- Follow-up question generation.
+- Destination recommendations.
+- Itinerary construction.
+- Hotel comparison explanations.
+- Budget optimization.
+- Travel assistance.
+- Modification requests.
+- Context-aware conversations.
+
+### Tool calling
+
+Give the AI agent access to these application tools:
+
+search_destinations()
+search_attractions()
+search_hotels()
+search_flights()
+search_transport()
+get_weather()
+get_currency_exchange()
+get_directions()
+calculate_trip_budget()
+generate_itinerary()
+modify_itinerary()
+save_trip()
+
+The model should decide which tools to invoke based on the traveller's request.
+
+Implement a controlled orchestration loop:
+
+User message
+→ Gemini interprets request
+→ Gemini selects relevant tools
+→ Backend executes tools
+→ Tool results return to Gemini
+→ Gemini reasons over verified results
+→ Gemini generates structured recommendations
+→ UI displays the results
+
+Set a maximum tool-call limit to avoid infinite loops.
+
+Never allow Gemini to invent successful API responses.
+
+Distinguish clearly between:
+- Verified live data.
+- Cached data.
+- Estimated data.
+- Simulated demo data.
+
+### Structured itinerary response
+
+Use validated JSON.
+
+Example schema:
+
+{
+  "trip_name": "Bali Escape",
+  "origin": "Kolkata",
+  "destination": "Bali",
+  "duration": 5,
+  "travellers": 2,
+  "currency": "INR",
+  "estimated_total": 80000,
+  "days": [
+    {
+      "day": 1,
+      "title": "Arrival in Bali",
+      "activities": [],
+      "hotel": {},
+      "transport": [],
+      "estimated_cost": 0
+    }
+  ],
+  "recommendations": [],
+  "travel_tips": [],
+  "budget_breakdown": {}
+}
+
+Validate the response using Zod before rendering.
+
+---
+
+# 10. TAVILY SEARCH INTEGRATION
+
+Tavily must be used as the web research engine.
+
+Create:
+
+lib/search/tavily.ts
+
+Implement:
+
+searchDestination()
+searchLocalAttractions()
+searchTravelGuides()
+searchSafetyInformation()
+searchLocalTransportInformation()
+searchCulturalInformation()
+searchTravelRestrictions()
+
+Use Tavily search to discover relevant information from the web.
+
+For example:
+
+Search query:
+"Best peaceful beaches and cafes in Bali for couples"
+
+Search query:
+"Best areas to stay in Ubud Bali with transport access"
+
+Search query:
+"Local transportation options in Bali and approximate fares"
+
+Search query:
+"Languages spoken in Bali and essential traveller phrases"
+
+Search query:
+"Tourist safety recommendations for Bali"
+
+### Search behaviour
+
+- Use specific contextual queries.
+- Prefer trustworthy and relevant sources.
+- Retrieve useful source titles, URLs and snippets.
+- Summarize information through Gemini.
+- Provide source links in the UI.
+- Cache appropriate research results.
+- Handle failed searches and empty results.
+- Never present old search results as live availability.
+
+Do not search the web for every conversation message.
+
+Use Tavily when external information is actually needed.
+
+Important: Tavily is a research and discovery API. It does not provide confirmed flight inventory, hotel room availability or cab booking by itself.
+
+---
+
+# 11. COMPLETE DESTINATION DISCOVERY
+
+Create a dedicated destination discovery system.
+
+Each destination should have:
+
+- Country and city.
+- Beautiful photographs.
+- Description.
+- Popular attractions.
+- Hidden gems.
+- Best travel season.
+- Estimated daily budget.
+- Local transport information.
+- Local language.
+- Currency.
+- Cultural tips.
+- Safety information.
+- Recommended duration.
+
+### Destination detail page
+
+Create a cinematic destination page with:
+
+1. Full-width destination hero.
+2. Destination overview.
+3. Interactive map.
+4. Popular attractions.
+5. Hidden places.
+6. Recommended hotels.
+7. Local experiences.
+8. Food and cafés.
+9. Weather information.
+10. Travel essentials.
+11. Estimated trip cost.
+12. Plan your journey CTA.
+
+Use Tavily for research and maps/place providers for geographical information.
+
+---
+
+# 12. HOTEL DISCOVERY AND RECOMMENDATION ENGINE
+
+Build a hotel recommendation interface.
+
+Each hotel card should contain:
+
+- Hotel photograph.
+- Name.
+- Location.
+- Rating and review count.
+- Room types.
+- Price per night.
+- Distance from attractions.
+- Available amenities.
+- Cancellation policy.
+- Provider/source.
+- Availability status.
+
+Create an intelligent ranking system.
+
+Consider:
+
+- Budget compatibility.
+- Distance from attractions.
+- Traveller preferences.
+- Review quality.
+- Location suitability.
+- Amenities.
+- Cancellation flexibility.
+
+Provide recommendation explanations.
+
+Example:
+
+"Recommended because it is close to the beaches you selected, fits your budget and offers easy access to nearby cafés."
+
+Allow users to:
+- Compare hotels.
+- Save hotels.
+- View on map.
+- Filter by price.
+- Filter by rating.
+- Select preferred accommodation.
+
+Only show room availability as confirmed when a connected provider actually confirms it.
+
+---
+
+# 13. FLIGHT AND TRANSPORT DISCOVERY
+
+### Flights
+
+Create a flight search interface with:
+
+- Origin.
+- Destination.
+- Departure date.
+- Return date.
+- Travellers.
+- Airline.
+- Departure and arrival times.
+- Duration.
+- Stops.
+- Baggage information.
+- Price.
+- Provider link.
+
+Create a provider adapter architecture so flight inventory providers can be connected later.
+
+### Local transportation
+
+Support:
+
+- Airport transfers.
+- Local taxis.
+- Cab services.
+- Rental cars.
+- Public transport.
+- Trains and buses.
+- Walking routes.
+
+For every recommendation, show:
+
+- Estimated fare.
+- Travel duration.
+- Distance.
+- Provider.
+- Availability status.
+- Booking or navigation link.
+
+Never claim that Uber, Ola or another cab is available in real time unless an authorized live provider confirms it.
+
+---
+
+# 14. INTERACTIVE TRAVEL MAP
+
+Create a visually impressive interactive trip map.
+
+Use Google Maps or Mapbox.
+
+Display:
+
+- Starting location.
+- Destination.
+- Airport.
+- Hotel.
+- Restaurants.
+- Attractions.
+- Sightseeing locations.
+- Transport routes.
+
+Use numbered map markers connected with route lines.
+
+When a user selects an itinerary activity, highlight its location on the map.
+
+Provide:
+
+- Directions.
+- Distance.
+- Estimated travel time.
+- Transportation mode.
+- Nearby attractions.
+
+The map must update dynamically when the itinerary changes.
+
+Do not invent coordinates or route durations.
+
+---
+
+# 15. CURRENCY AND LOCAL LANGUAGE ASSISTANT
+
+### Currency assistant
+
+Display:
+
+- Destination currency.
+- Traveller's home currency.
+- Exchange rate.
+- Conversion calculator.
+- Estimated daily spending.
+- Total budget in both currencies.
+
+Example:
+
+INR → IDR
+
+Allow manual conversion.
+
+Use a currency API when configured.
+
+Display the rate timestamp and identify indicative versus transaction rates.
+
+### Language assistant
+
+Display:
+
+- Languages commonly spoken.
+- Basic greetings.
+- Useful travel phrases.
+- Restaurant phrases.
+- Emergency phrases.
+- Pronunciation.
+- Translation assistance.
+
+Example:
+
+Hello — Halo
+
+Thank you — Terima kasih
+
+How much? — Berapa harganya?
+
+Provide an AI-powered contextual phrase assistant.
+
+---
+
+# 16. SMART BUDGET PLANNER
+
+Build a complete expense calculation engine.
+
+Categories:
+
+- Flights.
+- Hotels.
+- Local transportation.
+- Food.
+- Sightseeing.
+- Shopping.
+- Activities.
+- Emergency reserve.
+
+Show:
+
+- Estimated total.
+- Cost per traveller.
+- Cost per day.
+- Remaining budget.
+- Budget utilization.
+- Category-wise breakdown.
+
+Create a beautiful interactive chart.
+
+When the traveller changes the budget, the AI should optimize the itinerary.
+
+For example:
+
+Original budget: ₹80,000
+
+New budget: ₹60,000
+
+AI should suggest alternative hotels, activities and transport options and explain what changed.
+
+Keep estimates separate from confirmed prices.
+
+---
+
+# 17. COMPLETE TRIP DASHBOARD
+
+After generating an itinerary, create a dedicated trip dashboard.
+
+Route:
+
+/trip/[tripId]
+
+Dashboard sections:
+
+### Trip overview
+- Destination.
+- Travel dates.
+- Travellers.
+- Total estimated cost.
+- Weather summary.
+- Trip status.
+
+### Daily itinerary
+- Day-wise schedule.
+- Morning activities.
+- Afternoon activities.
+- Evening activities.
+- Hotel information.
+- Transport details.
+- Estimated activity costs.
+
+### Booking organizer
+- Flight details.
+- Hotel details.
+- Cab details.
+- Booking references.
+- Vouchers.
+- Confirmation documents.
+
+### Travel essentials
+- Passport reminders.
+- Visa information links.
+- Travel insurance reminders.
+- Currency.
+- Language.
+- Emergency contacts.
+
+### Trip assistant
+
+Add a contextual AI chat.
+
+Examples:
+
+"Find a nearby restaurant."
+
+"Can we change tomorrow's plan?"
+
+"How do I reach the airport?"
+
+"Find an alternative hotel."
+
+"What's the weather tomorrow?"
+
+The assistant must use the selected trip's context.
+
+---
+
+# 18. POST-BOOKING AI SUPPORT
+
+This is an important differentiator.
+
+The AI should help users after bookings.
+
+Implement support workflows for:
+
+- Retrieving saved confirmations.
+- Understanding booking details.
+- Modification assistance.
+- Cancellation policy explanations.
+- Rebooking recommendations.
+- Travel disruption support.
+- Alternative transport discovery.
+
+Before any consequential action:
+
+1. Explain the available options.
+2. Explain the costs and implications.
+3. Ask the user for explicit confirmation.
+4. Execute only through an authorized provider integration.
+5. Show the provider's actual result.
+
+If a booking provider is not connected, prepare the user for the action and provide the relevant provider link. Never pretend to cancel or modify a booking.
+
+---
+
+# 19. AUTHENTICATION AND DATABASE
+
+Use Firebase Authentication.
+
+Support:
+- Google sign-in.
+- Email and password.
+- Logout.
+- Protected routes.
+
+Use Firestore collections:
+
+users
+trips
+conversations
+messages
+saved_destinations
+saved_hotels
+booking_records
+user_preferences
+
+Example user preferences:
+
+{
+  "preferred_currency": "INR",
+  "travel_style": "balanced",
+  "hotel_preference": "boutique",
+  "food_preferences": [],
+  "interests": [],
+  "preferred_transport": [],
+  "budget_range": {}
+}
+
+Persist trips and conversations.
+
+Implement Firestore security rules so users can access only their own private data.
+
+---
+
+# 20. PERSONALIZATION ENGINE
+
+Create a traveller preference system.
+
+The AI should learn from explicitly provided preferences and previous trip choices.
+
+Examples:
+
+- Prefers peaceful destinations.
+- Likes boutique hotels.
+- Prefers vegetarian restaurants.
+- Likes adventure activities.
+- Prefers budget-friendly transport.
+- Enjoys photography locations.
+
+Use saved preferences when generating future itineraries.
+
+Allow users to view, edit and delete their preferences.
+
+Never infer sensitive personal information.
+
+---
+
+# 21. RECOMMENDATION ENGINE
+
+Build intelligent recommendations based on:
+
+- Budget.
+- Travel dates.
+- Interests.
+- Weather.
+- Location.
+- Travel duration.
+- Accommodation.
+- Distance.
+- Traveller preferences.
+
+Create a recommendation score using transparent weighted factors.
+
+The AI must explain why each recommendation was selected.
+
+Example:
+
+"Why we recommend Ubud:
+
+- Fits your peaceful travel preference.
+- Offers access to nature and cafés.
+- Provides alternatives across your budget range.
+- Connects conveniently to your selected activities."
+
+---
+
+# 22. UX AND MICROINTERACTIONS
+
+Create a premium experience throughout the application.
+
+Include:
+
+- Smooth page transitions.
+- Skeleton loading states.
+- Animated map markers.
+- Beautiful itinerary cards.
+- Hover effects.
+- Glassmorphism modals.
+- Responsive navigation.
+- Toast notifications.
+- Empty states.
+- Error states.
+- Search progress indicators.
+- AI thinking indicators.
+- Streaming AI responses where supported.
+
+The AI must show meaningful progress:
+
+"Understanding your travel preferences..."
+
+"Discovering destinations..."
+
+"Comparing accommodation..."
+
+"Optimizing transportation..."
+
+"Calculating your journey budget..."
+
+Do not display fake progress percentages or claim an API operation has completed before it actually has.
+
+---
+
+# 23. FOLDER STRUCTURE
+
+Use a clean, scalable architecture.
+
+app/
+  page.tsx
+  explore/
+  plan/
+  trip/
+  assistant/
+  stays/
+  flights/
+  transport/
+  saved/
+  profile/
+  login/
+  register/
+  api/
+    ai/
+    search/
+    destinations/
+    hotels/
+    flights/
+    transport/
+    weather/
+    currency/
+
+components/
+  layout/
+  landing/
+  planner/
+  destinations/
+  hotels/
+  flights/
+  transport/
+  maps/
+  itinerary/
+  budget/
+  assistant/
+  ui/
+
+lib/
+  ai/
+  search/
+  firebase/
+  maps/
+  currency/
+  weather/
+  providers/
+  validation/
+  utils/
+
+types/
+hooks/
+config/
+public/
+
+Organize all API integrations through provider adapters.
+
+Keep business logic out of React components.
+
+---
+
+# 24. IMPLEMENTATION PHASES
+
+Build the application in the following order.
+
+Phase 1 — Foundation
+- Initialize Next.js.
+- Configure TypeScript.
+- Configure Tailwind.
+- Install dependencies.
+- Create design system.
+- Configure Firebase.
+- Create environment configuration.
+
+Phase 2 — Landing page
+- Create responsive homepage.
+- Add cinematic hero.
+- Add destination cards.
+- Add navigation.
+- Add footer.
+
+Phase 3 — AI planner
+- Implement Gemini integration.
+- Implement conversational context.
+- Create preference extraction.
+- Implement structured responses.
+- Add itinerary generation.
+
+Phase 4 — Research integrations
+- Integrate Tavily.
+- Implement destination research.
+- Add attraction discovery.
+- Add hotel and travel research.
+
+Phase 5 — Travel services
+- Implement provider adapters.
+- Add flight search.
+- Add hotel comparison.
+- Add transportation discovery.
+- Add maps.
+- Add currency and weather.
+
+Phase 6 — Itinerary and budget
+- Implement day-wise itinerary.
+- Implement interactive maps.
+- Implement cost calculation.
+- Implement budget optimization.
+
+Phase 7 — User dashboard
+- Add authentication.
+- Persist conversations.
+- Save trips.
+- Create trip dashboard.
+- Add user preferences.
+
+Phase 8 — Post-booking support
+- Add booking organizer.
+- Add modification workflows.
+- Add cancellation assistance.
+- Add disruption support.
+
+Phase 9 — Testing and optimization
+- Test API routes.
+- Test Gemini tool calling.
+- Test missing API credentials.
+- Test Firestore permissions.
+- Test error handling.
+- Test responsive layouts.
+- Optimize performance.
+
+---
+
+# 25. IMPORTANT DEVELOPMENT RULES
+
+1. Build real working functionality, not decorative buttons.
+2. Never generate fake API success messages.
+3. Never fabricate live prices or availability.
+4. Use realistic demo adapters where real APIs are unavailable.
+5. Label simulated information clearly.
+6. Keep all API credentials secure.
+7. Validate all Gemini-generated structured data.
+8. Make every major feature accessible from navigation.
+9. Maintain consistent UI design across all routes.
+10. Avoid unnecessary dependencies.
+11. Use reusable components.
+12. Optimize for desktop, tablet and mobile.
+13. Add useful error and loading states.
+14. Preserve the user's trip context across pages.
+15. Never execute payments, cancellations or bookings without explicit confirmation.
+
+Do not leave major pages as placeholder screens.
+
+Do not stop at the homepage.
+
+---
+
+# 26. FINAL PRODUCT EXPECTATION
+
+The finished application should feel like a combination of:
+
+- A premium international travel platform.
+- An intelligent conversational AI assistant.
+- A personalized trip management dashboard.
+- A travel discovery and recommendation engine.
+
+The main user journey must work end to end:
+
+OPEN WEBSITE
+→ ENTER TRAVEL REQUIREMENTS
+→ CHAT WITH GEMINI AI
+→ RESEARCH THROUGH TAVILY
+→ DISCOVER DESTINATIONS
+→ COMPARE HOTELS AND TRANSPORT
+→ VIEW INTERACTIVE MAP
+→ GENERATE COMPLETE ITINERARY
+→ CALCULATE TOTAL BUDGET
+→ MODIFY USING NATURAL LANGUAGE
+→ SAVE THE TRIP
+→ MANAGE THE JOURNEY
+
+### Final instruction
+
+Start by inspecting the project repository and existing files.
+
+If a project already exists, preserve useful existing code and improve it rather than unnecessarily rebuilding everything.
+
+Then implement the application phase by phase.
+
+After each phase:
+- Run the development server.
+- Check TypeScript errors.
+- Fix build errors.
+- Test the implemented functionality.
+- Continue to the next phase.
+
+Do not just tell me how to build the application. Actually build it.
+
+The final result must be a beautiful, functional and extensible AI travel platform named **UNSEEN MILES**.
+
+**Every mile planned, even the unseen ones.**
