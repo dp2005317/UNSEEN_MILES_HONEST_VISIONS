@@ -1,0 +1,7 @@
+.git
+node_modules
+dist
+.aistudio
+.gmp_cache
+.env*
+!.env.example
