@@ -11,3 +11,5 @@ coverage/
 .gmp_cache/
 *.local
 
+.vercel
+.env*.local
