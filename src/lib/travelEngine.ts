@@ -6,6 +6,11 @@ import {
   getTransportOptions,
 } from '../data/catalog';
 import {
+  findKnownCity,
+  resolveOrSynthesizeDestination,
+  synthesizeHotelsForDestination,
+} from './worldwideDestinations';
+import {
   ItinerarySchema,
   type BudgetBreakdown,
   type Destination,
@@ -30,17 +35,17 @@ export function resolveCatalogDestination(query: string): Destination | undefine
 
   const aliases: Array<[string[], string]> = [
     [['pokhara', 'kathmandu', 'sarangkot', 'everest', 'annapurna'], 'nepal'],
-    [['kyoto', 'uji', 'tokyo', 'osaka', 'nara', 'arashiyama', 'hakone'], 'japan'],
-    [['amalfi', 'ravello', 'sorrento', 'rome', 'venice', 'florence', 'tuscany', 'positano'], 'italy'],
+    [['kyoto', 'uji', 'osaka', 'nara', 'arashiyama', 'hakone'], 'japan'],
+    [['amalfi', 'ravello', 'sorrento', 'positano', 'capri'], 'italy'],
     [['zermatt', 'lucerne', 'interlaken', 'zurich', 'geneva', 'grindelwald'], 'switzerland'],
     [['ubud', 'sanur', 'uluwatu', 'sidemen', 'seminyak', 'canggu', 'nusa'], 'bali'],
     [['leh', 'pangong', 'nubra', 'ladakh', 'khardung'], 'ladakh'],
     [['munnar', 'alleppey', 'kochi', 'kerala', 'backwaters', 'varkala', 'thekkady'], 'kerala'],
-    [['santorini', 'crete', 'athens', 'oia', 'fira', 'greece', 'cyclades'], 'greece'],
-    [['cappadocia', 'goreme', 'istanbul', 'uchisar', 'turkey', 'turkiye'], 'turkey'],
+    [['santorini', 'crete', 'oia', 'fira', 'cyclades'], 'greece'],
+    [['cappadocia', 'goreme', 'uchisar'], 'turkey'],
     [['reykjavik', 'vik', 'iceland', 'akureyri', 'golden circle'], 'iceland'],
     [['marrakech', 'atlas', 'imlil', 'morocco', 'essaouira', 'fes'], 'morocco'],
-    [['chiang mai', 'krabi', 'phuket', 'bangkok', 'thailand', 'ao nang'], 'thailand'],
+    [['chiang mai', 'krabi', 'phuket', 'ao nang'], 'thailand'],
   ];
 
   for (const [terms, id] of aliases) {
@@ -66,14 +71,29 @@ export function extractRequirementsFromText(
   const fromMatch = text.match(/\bfrom\s+([A-Za-z\s]{2,28}?)(?=\s+(?:to|for|in|with|on|,|\.)|$)/i);
   const origin = fromMatch?.[1]?.trim() || defaults?.origin || 'Kolkata';
 
-  // Destination detection
+  // Destination detection: prioritize exact world city matches, then catalog destinations, then regex
+  const knownCity = findKnownCity(lower);
   const matchedDest = resolveCatalogDestination(lower);
 
-  const toMatch = text.match(/\bto\s+([A-Za-z\s]{2,28}?)(?=\s+(?:for|in|with|on|,|\.)|$)/i);
-  const destination = matchedDest?.name || toMatch?.[1]?.trim() || defaults?.destination || 'Bali';
+  const toMatch = text.match(/\b(?:to|visit|in|exploring|explore)\s+([A-Za-z\s]{2,28}?)(?=\s+(?:for|in|with|on|from|,|\.)|$)/i);
+
+  let rawDest = knownCity?.name || matchedDest?.name || toMatch?.[1]?.trim();
+
+  // If still not found and input is concise or specifies a direct place name
+  if (!rawDest) {
+    const stripped = text
+      .replace(/\b(?:plan|a|trip|itinerary|travel|vacation|holiday|days?|nights?|for|with|couple|solo|family|\d+)\b/gi, '')
+      .replace(/[,\.?!]/g, '')
+      .trim();
+    if (stripped.length >= 3 && stripped.length <= 40) {
+      rawDest = stripped;
+    }
+  }
+
+  const destination = rawDest || defaults?.destination || 'London';
 
   // Duration days
-  const daysMatch = text.match(/(\d{1,2})\s*(?:days?|nights?)/i);
+  const daysMatch = text.match(/(\d{1,2})\s*[-–]?\s*(?:days?|nights?)/i);
   const durationDays = daysMatch ? Math.min(21, Math.max(1, Number(daysMatch[1]))) : defaults?.durationDays || 5;
 
   // Travellers
@@ -210,11 +230,17 @@ export function rankHotels(
     avoidCrowds?: boolean;
   }
 ): HotelOption[] {
-  const filtered = criteria.destinationId
-    ? hotels.filter((h) => h.destinationId === criteria.destinationId)
-    : hotels;
-
-  const pool = filtered.length > 0 ? filtered : hotels;
+  let pool = hotels;
+  if (criteria.destinationId) {
+    const matching = hotels.filter((h) => h.destinationId === criteria.destinationId);
+    if (matching.length > 0) {
+      pool = matching;
+    } else {
+      // Synthesize realistic local hotels for any worldwide destination
+      const dest = resolveOrSynthesizeDestination(criteria.destinationId);
+      pool = synthesizeHotelsForDestination(dest);
+    }
+  }
 
   return pool
     .map((hotel) => {
@@ -266,7 +292,7 @@ export function rankHotels(
 }
 
 export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?: string): Itinerary {
-  const dest = resolveCatalogDestination(req.destination) || DESTINATIONS[0];
+  const dest = resolveOrSynthesizeDestination(req.destination);
 
   const budgetInInr = req.currency === 'INR' ? req.budget : convertCurrency(req.budget, req.currency, 'INR');
   const nightlyTargetInr = Math.max(2500, Math.round((budgetInInr * 0.32) / Math.max(1, req.durationDays - 1)));

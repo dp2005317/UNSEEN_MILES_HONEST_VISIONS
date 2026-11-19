@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight, Bookmark, CloudSun, ExternalLink, Loader2, MapPin, Search, Sparkles } from 'lucide-react';
 import { DESTINATIONS } from '../data/catalog';
+import { resolveOrSynthesizeDestination } from '../lib/worldwideDestinations';
 import { getMediaUrl } from '../data/media';
 import type { Destination, HotelOption, ResearchSource, TransportLeg } from '../types/travel';
 import { Navbar } from '../components/layout/Navbar';
@@ -88,7 +89,7 @@ export function ExplorePage() {
   }
 
   const tags = ['All', 'Beaches', 'Mountains', 'Cafes', 'Culture', 'Peaceful Places', 'Nature'];
-  const filtered = DESTINATIONS.filter((d) => {
+  const rawFiltered = DESTINATIONS.filter((d) => {
     const matchesQ =
       !query.trim() ||
       d.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -99,6 +100,11 @@ export function ExplorePage() {
       selectedTag === 'All' || d.tags.some((t) => t.toLowerCase() === selectedTag.toLowerCase());
     return matchesQ && matchesTag;
   });
+
+  const filtered =
+    rawFiltered.length > 0 || !query.trim()
+      ? rawFiltered
+      : [resolveOrSynthesizeDestination(query.trim())];
 
   return (
     <div className="min-h-screen flex flex-col text-slate-900">
@@ -375,7 +381,7 @@ function DestinationDetailView({
   onToggleSave: (id: string) => void;
 }) {
   const [dest, setDest] = useState<Destination | null>(
-    DESTINATIONS.find((d) => d.slug === slug || d.id === slug) || null
+    () => DESTINATIONS.find((d) => d.slug === slug || d.id === slug) || resolveOrSynthesizeDestination(slug)
   );
   const [hotels, setHotels] = useState<HotelOption[]>([]);
   const [transport, setTransport] = useState<TransportLeg[]>([]);

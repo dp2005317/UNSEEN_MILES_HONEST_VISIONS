@@ -921,9 +921,534 @@ var DESTINATIONS = [
       { english: "Thank you", local: "Khop khun", pronunciation: "kop-koon", context: "Greeting" },
       { english: "Not spicy, please", local: "Mai phet", pronunciation: "mai pet", context: "Dining" }
     ]
+  },
+  {
+    id: "london",
+    slug: "london",
+    name: "London",
+    country: "United Kingdom",
+    region: "Western Europe",
+    tagline: "Historic mews, royal parks, quiet Thameside paths, and world-class culture.",
+    description: "Beyond the crowded avenues lies the real London: unhurried morning strolls through Hampstead Heath, quiet artisan coffee houses in Bloomsbury, secret courtyards behind St. Paul\u2019s, and sunset walks along the South Bank.",
+    mediaKey: "boutique_villa",
+    bestSeason: "May \u2013 October & festive December",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 7500, balanced: 14500, luxury: 29e3 },
+    currencyCode: "GBP",
+    currencySymbol: "\xA3",
+    languageName: "English",
+    localTransportSummary: "London Underground (Tube), Elizabeth Line, red double-decker buses, and Thames Clipper river boats.",
+    culturalTips: [
+      "Stand on the right on Tube escalators to let commuters pass.",
+      "Say please and thank you; queuing patiently is deeply ingrained.",
+      "Tipping around 10\u201312.5% in sit-down restaurants is customary (often included as a service charge)."
+    ],
+    safetyNotes: [
+      "Be alert to pickpockets in crowded tourist spots like Westminster and Oxford Street.",
+      "Look both ways and check traffic direction before crossing (vehicles drive on the left)."
+    ],
+    weatherSummary: {
+      tempRangeC: "11\xB0C \u2013 22\xB0C",
+      condition: "Pleasantly temperate with occasional light rain and fresh breezes",
+      humidity: "68%",
+      advisory: "Carry a compact umbrella or lightweight layer year-round."
+    },
+    coordinates: { lat: 51.5074, lng: -0.1278 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Nature", "Historic"],
+    places: [
+      {
+        id: "london-lhr",
+        name: "Heathrow International Airport (LHR)",
+        type: "Airport",
+        description: "Primary international airport with Elizabeth Line and Heathrow Express links.",
+        bestTime: "Arrival & Departure",
+        lat: 51.47,
+        lng: -0.4543,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "london-hampstead",
+        name: "Hampstead Heath & Parliament Hill Viewpoint",
+        type: "Attraction",
+        description: "Vast ancient parkland with stunning skyline views and quiet bathing ponds.",
+        bestTime: "08:00 \u2013 11:30",
+        lat: 51.5608,
+        lng: -0.1631,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        id: "london-bloomsbury",
+        name: "Bloomsbury Literary Quarter & British Museum",
+        type: "Attraction",
+        description: "Georgian squares, antiquarian bookshops, and quiet garden benches.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: 51.5194,
+        lng: -0.127,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "london-southbank",
+        name: "South Bank Riverside Walk & Borough Market",
+        type: "Cafe & Food",
+        description: "Scenic Thames footpath past Shakespeare\u2019s Globe and artisanal food stalls.",
+        bestTime: "12:00 \u2013 15:00",
+        lat: 51.5055,
+        lng: -0.091,
+        estimatedEntryInr: 800,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "london-kensington",
+        name: "Kensington Gardens & Notting Hill Quiet Mews",
+        type: "Attraction",
+        description: "Pastel mews houses, royal tree-lined paths, and independent coffee roasters.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: 51.507,
+        lng: -0.1877,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        id: "london-greenwich",
+        name: "Greenwich Maritime Park & Royal Observatory",
+        type: "Hidden Gem",
+        description: "Prime Meridian line, sweeping Canary Wharf vistas, and quiet covered market.",
+        bestTime: "14:00 \u2013 17:30",
+        lat: 51.4769,
+        lng: -5e-4,
+        estimatedEntryInr: 1800,
+        crowdLevel: "Quiet"
+      },
+      {
+        id: "london-nealsyard",
+        name: "Neal\u2019s Yard & Seven Dials Hidden Courtyard",
+        type: "Cafe & Food",
+        description: "Vibrant, colorful hidden alley with organic bakeries and micro-roasteries.",
+        bestTime: "11:00 \u2013 14:00",
+        lat: 51.514,
+        lng: -0.126,
+        estimatedEntryInr: 650,
+        crowdLevel: "Quiet"
+      }
+    ],
+    phrases: [
+      { english: "Hello / Good morning", local: "Cheers / Good morning", pronunciation: "cheerz", context: "Greeting" },
+      { english: "Thank you very much", local: "Cheers mate / Thank you", pronunciation: "cheerz mayt", context: "Greeting" },
+      { english: "Where is the nearest Tube station?", local: "Excuse me, where is the nearest Underground?", pronunciation: "un-der-grownd", context: "Transit" }
+    ]
+  },
+  {
+    id: "paris",
+    slug: "paris",
+    name: "Paris",
+    country: "France",
+    region: "Western Europe",
+    tagline: "Tree-lined boulevards, quiet Seine riverside bookstalls, and neighborhood bistros.",
+    description: "Experience the authentic romantic rhythm of Paris: unhurried mornings in Canal Saint-Martin, hidden courtyards of Le Marais, sunset picnics in Luxembourg Gardens, and quiet art ateliers.",
+    mediaKey: "boutique_villa",
+    bestSeason: "April \u2013 June & September \u2013 November",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 7200, balanced: 13800, luxury: 27500 },
+    currencyCode: "EUR",
+    currencySymbol: "\u20AC",
+    languageName: "French",
+    localTransportSummary: "Paris M\xE9tro, RER trains, V\xE9lib bike share, and scenic walking boulevards.",
+    culturalTips: [
+      'Always say "Bonjour Madame/Monsieur" when entering any shop or caf\xE9.',
+      "Keep your voice at a moderate, respectful level in public transit and dining rooms.",
+      "Round up the bill or leave 5\u201310% for attentive dining service."
+    ],
+    safetyNotes: [
+      "Watch your pockets around Gare du Nord and the Eiffel Tower lawns.",
+      "Validate your M\xE9tro ticket and keep it until you exit the station."
+    ],
+    weatherSummary: {
+      tempRangeC: "12\xB0C \u2013 24\xB0C",
+      condition: "Mild and pleasant with golden afternoon light",
+      humidity: "65%",
+      advisory: "Comfortable walking shoes are essential for Parisian cobblestones."
+    },
+    coordinates: { lat: 48.8566, lng: 2.3522 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    places: [
+      {
+        id: "paris-cdg",
+        name: "Charles de Gaulle Airport (CDG)",
+        type: "Airport",
+        description: "Main international airport with RER B train into central Paris.",
+        bestTime: "Arrival & Departure",
+        lat: 49.0097,
+        lng: 2.5479,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "paris-marais",
+        name: "Place des Vosges & Le Marais Historic Mansions",
+        type: "Attraction",
+        description: "Oldest planned square in Paris with arched arcades and quiet art galleries.",
+        bestTime: "09:30 \u2013 12:30",
+        lat: 48.8555,
+        lng: 2.3655,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        id: "paris-canal",
+        name: "Canal Saint-Martin Shaded Footbridges",
+        type: "Hidden Gem",
+        description: "Locals gathering along tree-shaded locks, specialty bakeries, and calm wine bars.",
+        bestTime: "15:00 \u2013 18:30",
+        lat: 48.8715,
+        lng: 2.366,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        id: "paris-luxembourg",
+        name: "Jardin du Luxembourg & Medici Fountain",
+        type: "Attraction",
+        description: "Green metal chairs, chestnut tree groves, and quiet reflection pools.",
+        bestTime: "08:30 \u2013 11:00",
+        lat: 48.8462,
+        lng: 2.3372,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      }
+    ],
+    phrases: [
+      { english: "Hello / Good day", local: "Bonjour", pronunciation: "bohn-zhoor", context: "Greeting" },
+      { english: "Thank you very much", local: "Merci beaucoup", pronunciation: "mair-see boh-koo", context: "Greeting" },
+      { english: "A coffee, please", local: "Un caf\xE9, s\u2019il vous pla\xEEt", pronunciation: "uhn kah-fay seel voo play", context: "Dining" }
+    ]
+  },
+  {
+    id: "tokyo",
+    slug: "tokyo",
+    name: "Tokyo",
+    country: "Japan",
+    region: "East Asia",
+    tagline: "Quiet alleyway izakayas, serene moss gardens, and seamless urban harmony.",
+    description: "Discover Tokyo\u2019s tranquil side: early mornings in Yanaka\u2019s historic craft district, peaceful temple courtyards in Asakusa, scenic walks in Shinjuku Gyoen, and meticulous neighborhood ramen counters.",
+    mediaKey: "japan",
+    bestSeason: "March \u2013 May (Cherry Blossom) & October \u2013 November (Autumn Foliage)",
+    recommendedDays: 6,
+    dailyBudgetInr: { budget: 6200, balanced: 11500, luxury: 24e3 },
+    currencyCode: "JPY",
+    currencySymbol: "\xA5",
+    languageName: "Japanese",
+    localTransportSummary: "Tokyo Metro, JR Yamanote Line, Suica/Pasmo IC cards, and high-speed Shinkansen.",
+    culturalTips: [
+      "Bow gently when greeting or thanking hosts.",
+      "Do not eat or drink while walking on busy streets; consume at the stall or bench.",
+      "Tipping is not customary in Japan and can cause polite embarrassment."
+    ],
+    safetyNotes: [
+      "Tokyo is exceptionally safe at all hours.",
+      "Keep your IC card tapped or phone loaded for seamless gate passage."
+    ],
+    weatherSummary: {
+      tempRangeC: "14\xB0C \u2013 23\xB0C",
+      condition: "Crisp clear skies with gentle seasonal breezes",
+      humidity: "62%",
+      advisory: "Ideal walking weather across autumn and spring."
+    },
+    coordinates: { lat: 35.6762, lng: 139.6503 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    places: [
+      {
+        id: "tokyo-hnd",
+        name: "Haneda International Airport (HND)",
+        type: "Airport",
+        description: "Direct Monorail and Keikyu Line links into central Tokyo stations.",
+        bestTime: "Arrival & Departure",
+        lat: 35.5494,
+        lng: 139.7798,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "tokyo-yanaka",
+        name: "Yanaka Old Town Heritage District",
+        type: "Hidden Gem",
+        description: "Edo-period wooden houses, quiet artisan sweet shops, and traditional craft studios.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: 35.7275,
+        lng: 139.769,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        id: "tokyo-shinjuku-gyoen",
+        name: "Shinjuku Gyoen National Garden",
+        type: "Attraction",
+        description: "Sprawling tranquil landscape blending traditional Japanese, English, and French gardens.",
+        bestTime: "09:30 \u2013 12:00",
+        lat: 35.6852,
+        lng: 139.7101,
+        estimatedEntryInr: 320,
+        crowdLevel: "Moderate"
+      }
+    ],
+    phrases: [
+      { english: "Hello", local: "Konnichiwa", pronunciation: "kohn-nee-chee-wah", context: "Greeting" },
+      { english: "Thank you very much", local: "Arigatou gozaimasu", pronunciation: "ah-ree-gah-toh goh-zah-ee-mahs", context: "Greeting" },
+      { english: "Excuse me", local: "Sumimasen", pronunciation: "soo-mee-mah-sen", context: "Transit" }
+    ]
+  },
+  {
+    id: "newyork",
+    slug: "newyork",
+    name: "New York City",
+    country: "United States",
+    region: "North America",
+    tagline: "Quiet brownstone lanes, skyline waterfront paths, and iconic cultural energy.",
+    description: "Experience New York beyond the rush: morning strolls through the West Village, quiet reading lawns in Central Park Conservatory, walking the elevated High Line at sunrise, and neighborhood bakeries in Brooklyn.",
+    mediaKey: "boutique_villa",
+    bestSeason: "May \u2013 June & September \u2013 November (Crisp Autumn)",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 8500, balanced: 16500, luxury: 34e3 },
+    currencyCode: "USD",
+    currencySymbol: "$",
+    languageName: "English",
+    localTransportSummary: "NYC Subway (OMNY contactless tap-and-go), NYC Ferry, and Citi Bike share.",
+    culturalTips: [
+      "Walk briskly and step aside to check maps or phones on busy sidewalks.",
+      "Standard tip for restaurant service is 18\u201320%."
+    ],
+    safetyNotes: [
+      "Keep bags zipped on crowded subway trains.",
+      "Use official yellow cabs or rideshare apps from airport taxi dispatch lines."
+    ],
+    weatherSummary: {
+      tempRangeC: "15\xB0C \u2013 26\xB0C",
+      condition: "Bright clear skies and energetic coastal light",
+      humidity: "58%",
+      advisory: "Sensible walking sneakers are indispensable."
+    },
+    coordinates: { lat: 40.7128, lng: -74.006 },
+    tags: ["Culture", "Cafes", "Historic"],
+    places: [
+      {
+        id: "nyc-jfk",
+        name: "John F. Kennedy International Airport (JFK)",
+        type: "Airport",
+        description: "JFK AirTrain connects directly to Long Island Rail Road and Subway A/E trains.",
+        bestTime: "Arrival & Departure",
+        lat: 40.6413,
+        lng: -73.7781,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "nyc-highline",
+        name: "The High Line & Chelsea Waterside Park",
+        type: "Attraction",
+        description: "Elevated railway park with lush wildflowers, Hudson River views, and modern sculpture.",
+        bestTime: "07:30 \u2013 10:00",
+        lat: 40.748,
+        lng: -74.0048,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "nyc-westvillage",
+        name: "West Village Brownstones & Quiet Courtyards",
+        type: "Hidden Gem",
+        description: "Winding historic cobblestone streets, leafy townhouse gardens, and specialty coffee shops.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: 40.7358,
+        lng: -74.0036,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      }
+    ],
+    phrases: [
+      { english: "Hello", local: "Hi / How\u2019s it going?", pronunciation: "hahy", context: "Greeting" },
+      { english: "Thank you", local: "Thanks a lot", pronunciation: "thangks", context: "Greeting" }
+    ]
   }
 ];
 var HOTELS = [
+  {
+    id: "ht-london-bloomsbury",
+    name: "The Bloomsbury Townhouse",
+    destinationId: "london",
+    area: "Bloomsbury, Central London",
+    rating: 4.8,
+    reviewCount: 312,
+    pricePerNightInr: 14500,
+    tier: "boutique",
+    roomTypes: ["Georgian Deluxe Room", "Garden Mews Suite"],
+    distanceToCenterKm: 1.2,
+    amenities: ["Artisan breakfast lounge", "Library fireplace", "Complimentary afternoon tea", "Oyster transit card service"],
+    cancellationPolicy: "Free cancellation up to 48 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 51.5182,
+    lng: -0.1284,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Quiet Georgian residential street 5 minutes walk from the British Museum and Russell Square Tube.",
+    matchScore: 96
+  },
+  {
+    id: "ht-london-kensington",
+    name: "Kensington Mews Residence",
+    destinationId: "london",
+    area: "South Kensington, London",
+    rating: 4.7,
+    reviewCount: 228,
+    pricePerNightInr: 16800,
+    tier: "boutique",
+    roomTypes: ["Courtyard King Room", "Mews Balcony Studio"],
+    distanceToCenterKm: 3.1,
+    amenities: ["Victorian garden patio", "Complimentary bicycle hire", "Curated neighborhood walking maps", "Espresso bar"],
+    cancellationPolicy: "Free cancellation up to 72 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 51.4984,
+    lng: -0.1742,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Peaceful cobbled mews tucked away from tourist crowds, minutes from Hyde Park.",
+    matchScore: 93
+  },
+  {
+    id: "ht-london-paddington",
+    name: "The Canal Basin Lodge",
+    destinationId: "london",
+    area: "Paddington & Little Venice",
+    rating: 4.4,
+    reviewCount: 415,
+    pricePerNightInr: 7900,
+    tier: "budget",
+    roomTypes: ["Standard Double", "Canal View Pod"],
+    distanceToCenterKm: 2.8,
+    amenities: ["Direct Elizabeth Line access to Heathrow", "24h self check-in", "Shared work kitchen", "Luggage storage"],
+    cancellationPolicy: "Free cancellation up to 24 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 51.519,
+    lng: -0.176,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Exceptional budget-conscious base with direct 15-minute Heathrow Express & Elizabeth Line connection.",
+    matchScore: 89
+  },
+  {
+    id: "ht-london-covent",
+    name: "Covent Garden Quiet Sanctuary",
+    destinationId: "london",
+    area: "Seven Dials, Central London",
+    rating: 4.9,
+    reviewCount: 184,
+    pricePerNightInr: 27500,
+    tier: "luxury",
+    roomTypes: ["Heritage Suite", "Rooftop Terrace Penthouse"],
+    distanceToCenterKm: 0.5,
+    amenities: ["Private sommelier", "Soundproof historic sash windows", "Chauffeur booking desk", "Spa & soaking tub"],
+    cancellationPolicy: "Free cancellation up to 7 days prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 51.5135,
+    lng: -0.1272,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Ultra-luxurious historic haven hidden inside quiet Seven Dials with private rooftop courtyard.",
+    matchScore: 98
+  },
+  {
+    id: "ht-paris-marais",
+    name: "Maison Saint-Gilles Marais",
+    destinationId: "paris",
+    area: "Le Marais, Paris",
+    rating: 4.8,
+    reviewCount: 265,
+    pricePerNightInr: 15200,
+    tier: "boutique",
+    roomTypes: ["Courtyard Atelier Room", "Haussmann Balcony Suite"],
+    distanceToCenterKm: 1.5,
+    amenities: ["Fresh morning croissants & bakery basket", "Private stone courtyard", "Espresso machine", "Artisan toiletries"],
+    cancellationPolicy: "Free cancellation up to 48 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 48.857,
+    lng: 2.366,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Historic 17th-century courtyard stay steps away from Place des Vosges and quiet bakeries.",
+    matchScore: 97
+  },
+  {
+    id: "ht-paris-latin",
+    name: "H\xF4tel Jardin des Plantes",
+    destinationId: "paris",
+    area: "5th Arrondissement, Latin Quarter",
+    rating: 4.5,
+    reviewCount: 380,
+    pricePerNightInr: 8800,
+    tier: "budget",
+    roomTypes: ["Classic Double", "Rooftop Mansard Room"],
+    distanceToCenterKm: 2.1,
+    amenities: ["Terrace overlooking botanical gardens", "Bicycle storage", "Caf\xE9 bar", "Luggage locker"],
+    cancellationPolicy: "Free cancellation up to 48 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 48.8432,
+    lng: 2.3565,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Charming leafy retreat near botanical gardens with swift M\xE9tro links.",
+    matchScore: 91
+  },
+  {
+    id: "ht-tokyo-yanaka",
+    name: "Yanaka Machiya Heritage Inn",
+    destinationId: "tokyo",
+    area: "Yanaka Old Town, Tokyo",
+    rating: 4.9,
+    reviewCount: 198,
+    pricePerNightInr: 12800,
+    tier: "boutique",
+    roomTypes: ["Tatami Garden Suite", "Cypress Wood Room"],
+    distanceToCenterKm: 3.8,
+    amenities: ["Hinoki cypress soaking bath", "Traditional morning matcha & breakfast", "Quiet garden view", "Kimono loan"],
+    cancellationPolicy: "Free cancellation up to 72 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 35.727,
+    lng: 139.7685,
+    mediaKey: "japan",
+    recommendationReason: "Authentic restored wooden machiya surrounded by quiet temple pathways and artisan shops.",
+    matchScore: 98
+  },
+  {
+    id: "ht-nyc-westvillage",
+    name: "The Greenwich Mews Townhouse",
+    destinationId: "newyork",
+    area: "West Village, Manhattan",
+    rating: 4.8,
+    reviewCount: 240,
+    pricePerNightInr: 18500,
+    tier: "boutique",
+    roomTypes: ["Brownstone King Room", "Garden Terrace Studio"],
+    distanceToCenterKm: 2.2,
+    amenities: ["Private courtyard garden", "Artisan espresso lounge", "Evening wine hour", "OMNY subway pass service"],
+    cancellationPolicy: "Free cancellation up to 72 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 40.735,
+    lng: -74.004,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Tucked into the quietest brownstone lane in Manhattan, steps away from legendary jazz and bookstores.",
+    matchScore: 96
+  },
   {
     id: "ht-bali-ubud-sanctuary",
     name: "Kajane Quiet Ridge Sanctuary",
@@ -1230,6 +1755,15 @@ function getFlightsForRoute(origin, destinationName) {
   const cleanOrigin = origin.trim() || "Kolkata";
   const googleFlightsUrl = `https://www.google.com/travel/flights?q=${encodeURIComponent(`Flights from ${cleanOrigin} to ${destinationName}`)}`;
   const routeProfile = (() => {
+    if (dest.includes("london") || dest.includes("heathrow") || dest.includes("gatwick") || dest.includes("uk") || dest.includes("england") || dest.includes("britain")) {
+      return { base: 49500, carrier1: "British Airways", carrier2: "Air India / Emirates", code1: "BA-118", code2: "AI-161", code3: "EK-001", dur1: "9h 55m", dur2: "9h 15m", dur3: "12h 40m", dep1: "06:10", arr1: "11:45", dep2: "08:30", arr2: "13:50", stops2: 0 };
+    }
+    if (dest.includes("paris") || dest.includes("france") || dest.includes("cdg")) {
+      return { base: 48e3, carrier1: "Air France", carrier2: "Lufthansa / Swiss", code1: "AF-217", code2: "LH-763", code3: "EK-073", dur1: "9h 45m", dur2: "10h 10m", dur3: "12h 50m", dep1: "05:40", arr1: "11:20", dep2: "07:15", arr2: "14:25", stops2: 0 };
+    }
+    if (dest.includes("new york") || dest.includes("nyc") || dest.includes("jfk") || dest.includes("usa") || dest.includes("america")) {
+      return { base: 68e3, carrier1: "Air India / United", carrier2: "Emirates", code1: "AI-101", code2: "EK-201", code3: "QR-701", dur1: "15h 40m", dur2: "16h 20m", dur3: "18h 10m", dep1: "02:20", arr1: "07:30", dep2: "09:45", arr2: "19:15", stops2: 1 };
+    }
     if (dest.includes("ladakh") || dest.includes("leh")) {
       return { base: 11500, carrier1: "IndiGo", carrier2: "Air India", code1: "6E-209", code2: "AI-445", code3: "SG-121", dur1: "4h 10m", dur2: "2h 55m", dur3: "5h 20m", dep1: "06:20", arr1: "10:30", dep2: "09:40", arr2: "12:35", stops2: 0 };
     }
@@ -1532,6 +2066,82 @@ function getTransportOptions(destinationId) {
         bookingUrl: "https://maps.google.com"
       }
     ],
+    london: [
+      {
+        id: "tr-lon-hex",
+        mode: "Train",
+        route: "Heathrow Airport \u2192 Paddington / Central London (Elizabeth Line / Heathrow Express)",
+        durationMinutes: 20,
+        distanceKm: 24,
+        estimatedFareInr: 1650,
+        provider: "TfL Rail & Elizabeth Line",
+        availabilityStatus: "Every 5\u201315 mins",
+        provenance: "indicative_estimate",
+        bookingUrl: "https://tfl.gov.uk"
+      },
+      {
+        id: "tr-lon-tube",
+        mode: "Train",
+        route: "London Underground (Tube) & Bus All-Day Contactless Fare Cap",
+        durationMinutes: 45,
+        distanceKm: 18,
+        estimatedFareInr: 950,
+        provider: "Transport for London (TfL)",
+        availabilityStatus: "Unlimited daily transit",
+        provenance: "indicative_estimate",
+        bookingUrl: "https://tfl.gov.uk"
+      },
+      {
+        id: "tr-lon-boat",
+        mode: "Bus",
+        route: "Uber Boat by Thames Clipper Scenic River Route (Westminster \u2192 Greenwich)",
+        durationMinutes: 40,
+        distanceKm: 12,
+        estimatedFareInr: 900,
+        provider: "Thames Clippers",
+        availabilityStatus: "Every 20 mins",
+        provenance: "indicative_estimate",
+        bookingUrl: "https://www.thamesclippers.com"
+      },
+      {
+        id: "tr-lon-cab",
+        mode: "Cab",
+        route: "Iconic London Black Cab / Private City Transfer",
+        durationMinutes: 45,
+        distanceKm: 15,
+        estimatedFareInr: 3800,
+        provider: "Licensed London Taxis",
+        availabilityStatus: "Available across all ranks",
+        provenance: "indicative_estimate",
+        bookingUrl: "https://tfl.gov.uk"
+      }
+    ],
+    paris: [
+      {
+        id: "tr-par-rer",
+        mode: "Train",
+        route: "Charles de Gaulle Airport (CDG) \u2192 Ch\xE2telet-Les Halles (RER B)",
+        durationMinutes: 38,
+        distanceKm: 31,
+        estimatedFareInr: 1250,
+        provider: "RATP / \xCEle-de-France Mobilit\xE9s",
+        availabilityStatus: "Every 10\u201315 mins",
+        provenance: "indicative_estimate",
+        bookingUrl: "https://www.ratp.fr"
+      },
+      {
+        id: "tr-par-metro",
+        mode: "Train",
+        route: "Paris M\xE9tro Navigo Easy Day Pass",
+        durationMinutes: 30,
+        distanceKm: 12,
+        estimatedFareInr: 850,
+        provider: "RATP M\xE9tro",
+        availabilityStatus: "Unlimited daily rides",
+        provenance: "indicative_estimate",
+        bookingUrl: "https://www.ratp.fr"
+      }
+    ],
     thailand: [
       {
         id: "tr-th-rail",
@@ -1547,10 +2157,64 @@ function getTransportOptions(destinationId) {
       }
     ]
   };
-  return map[destinationId] || map.bali;
+  if (map[destinationId]) {
+    return map[destinationId];
+  }
+  const cleanName = destinationId.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  return [
+    {
+      id: `tr-${destinationId}-airport`,
+      mode: "Airport Transfer",
+      route: `${cleanName} International Gateway \u2192 City Center Rail/Shuttle`,
+      durationMinutes: 35,
+      distanceKm: 22,
+      estimatedFareInr: 1400,
+      provider: "Local Rail & Transit Hub",
+      availabilityStatus: "Scheduled service",
+      provenance: "indicative_estimate",
+      bookingUrl: "https://maps.google.com"
+    },
+    {
+      id: `tr-${destinationId}-transit`,
+      mode: "Train",
+      route: `${cleanName} Central Metro / Urban Transit Day Network`,
+      durationMinutes: 30,
+      distanceKm: 15,
+      estimatedFareInr: 650,
+      provider: "City Metro & Transit Network",
+      availabilityStatus: "Full day transit coverage",
+      provenance: "indicative_estimate",
+      bookingUrl: "https://maps.google.com"
+    },
+    {
+      id: `tr-${destinationId}-cab`,
+      mode: "Cab",
+      route: `${cleanName} Private Day Driver & Sightseeing Car`,
+      durationMinutes: 240,
+      distanceKm: 50,
+      estimatedFareInr: 3200,
+      provider: "Verified Local Dispatch",
+      availabilityStatus: "On-demand or scheduled",
+      provenance: "indicative_estimate",
+      bookingUrl: "https://maps.google.com"
+    },
+    {
+      id: `tr-${destinationId}-walk`,
+      mode: "Walking",
+      route: `${cleanName} Historic Quarter & Waterfront Footpath`,
+      durationMinutes: 45,
+      distanceKm: 3.5,
+      estimatedFareInr: 0,
+      provider: "Self-guided scenic route",
+      availabilityStatus: "Open public walkway",
+      provenance: "indicative_estimate",
+      bookingUrl: "https://maps.google.com"
+    }
+  ];
 }
 var INDICATIVE_CURRENCY_RATES_FROM_INR = {
   INR: { rate: 1, symbol: "\u20B9", name: "Indian Rupee" },
+  GBP: { rate: 94e-4, symbol: "\xA3", name: "British Pound" },
   USD: { rate: 0.0119, symbol: "$", name: "US Dollar" },
   EUR: { rate: 0.011, symbol: "\u20AC", name: "Euro" },
   CHF: { rate: 0.0104, symbol: "CHF", name: "Swiss Franc" },
@@ -1560,8 +2224,753 @@ var INDICATIVE_CURRENCY_RATES_FROM_INR = {
   TRY: { rate: 0.41, symbol: "\u20BA", name: "Turkish Lira" },
   ISK: { rate: 1.65, symbol: "kr", name: "Icelandic Kr\xF3na" },
   MAD: { rate: 0.12, symbol: "MAD", name: "Moroccan Dirham" },
-  THB: { rate: 0.41, symbol: "\u0E3F", name: "Thai Baht" }
+  THB: { rate: 0.41, symbol: "\u0E3F", name: "Thai Baht" },
+  AED: { rate: 0.0437, symbol: "AED", name: "UAE Dirham" },
+  SGD: { rate: 0.016, symbol: "S$", name: "Singapore Dollar" },
+  AUD: { rate: 0.018, symbol: "A$", name: "Australian Dollar" },
+  CAD: { rate: 0.016, symbol: "C$", name: "Canadian Dollar" }
 };
+
+// src/lib/worldwideDestinations.ts
+var KNOWN_WORLD_CITIES = {
+  london: {
+    name: "London",
+    country: "United Kingdom",
+    region: "Western Europe",
+    tagline: "Historic mews, royal parks, quiet Thameside paths, and world-class culture.",
+    description: "Explore London\u2019s peaceful side: morning walks across Hampstead Heath, quiet artisan coffee houses in Bloomsbury, secret courtyards behind St. Paul\u2019s, and sunset walks along the South Bank.",
+    mediaKey: "boutique_villa",
+    currencyCode: "GBP",
+    currencySymbol: "\xA3",
+    languageName: "English",
+    bestSeason: "May \u2013 October & festive December",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 7500, balanced: 14500, luxury: 29e3 },
+    coordinates: { lat: 51.5074, lng: -0.1278 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    airport: { name: "Heathrow International Airport (LHR)", lat: 51.47, lng: -0.4543 },
+    places: [
+      {
+        name: "Hampstead Heath & Parliament Hill",
+        type: "Attraction",
+        description: "Vast ancient parkland with stunning skyline views and quiet bathing ponds.",
+        bestTime: "08:00 \u2013 11:30",
+        lat: 51.5608,
+        lng: -0.1631,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Bloomsbury Literary Quarter & British Museum",
+        type: "Attraction",
+        description: "Georgian squares, antiquarian bookshops, and quiet garden benches.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: 51.5194,
+        lng: -0.127,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "South Bank Riverside Walk & Borough Market",
+        type: "Cafe & Food",
+        description: "Scenic Thames footpath past Shakespeare\u2019s Globe and artisanal food stalls.",
+        bestTime: "12:00 \u2013 15:00",
+        lat: 51.5055,
+        lng: -0.091,
+        estimatedEntryInr: 800,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "Kensington Gardens & Notting Hill Quiet Mews",
+        type: "Hidden Gem",
+        description: "Pastel mews houses, royal tree-lined paths, and independent coffee roasters.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: 51.507,
+        lng: -0.1877,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Greenwich Maritime Park & Royal Observatory",
+        type: "Hidden Gem",
+        description: "Prime Meridian line, sweeping Canary Wharf vistas, and quiet covered market.",
+        bestTime: "14:00 \u2013 17:30",
+        lat: 51.4769,
+        lng: -5e-4,
+        estimatedEntryInr: 1800,
+        crowdLevel: "Quiet"
+      }
+    ]
+  },
+  paris: {
+    name: "Paris",
+    country: "France",
+    region: "Western Europe",
+    tagline: "Tree-lined boulevards, quiet Seine riverside bookstalls, and neighborhood bistros.",
+    description: "Experience authentic Parisian rhythm: unhurried mornings along Canal Saint-Martin, hidden courtyards of Le Marais, and sunset picnics in Luxembourg Gardens.",
+    mediaKey: "boutique_villa",
+    currencyCode: "EUR",
+    currencySymbol: "\u20AC",
+    languageName: "French",
+    bestSeason: "April \u2013 June & September \u2013 November",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 7200, balanced: 13800, luxury: 27500 },
+    coordinates: { lat: 48.8566, lng: 2.3522 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    airport: { name: "Charles de Gaulle Airport (CDG)", lat: 49.0097, lng: 2.5479 },
+    places: [
+      {
+        name: "Place des Vosges & Le Marais Historic Mansions",
+        type: "Attraction",
+        description: "Oldest planned square in Paris with arched arcades and quiet art galleries.",
+        bestTime: "09:30 \u2013 12:30",
+        lat: 48.8555,
+        lng: 2.3655,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Canal Saint-Martin Shaded Footbridges",
+        type: "Hidden Gem",
+        description: "Locals gathering along tree-shaded locks, specialty bakeries, and calm wine bars.",
+        bestTime: "15:00 \u2013 18:30",
+        lat: 48.8715,
+        lng: 2.366,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Jardin du Luxembourg & Medici Fountain",
+        type: "Attraction",
+        description: "Green metal chairs, chestnut tree groves, and quiet reflection pools.",
+        bestTime: "08:30 \u2013 11:00",
+        lat: 48.8462,
+        lng: 2.3372,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      }
+    ]
+  },
+  tokyo: {
+    name: "Tokyo",
+    country: "Japan",
+    region: "East Asia",
+    tagline: "Quiet alleyway izakayas, serene moss gardens, and seamless urban harmony.",
+    description: "Discover Tokyo\u2019s tranquil side: early mornings in Yanaka\u2019s historic craft district, peaceful temple courtyards in Asakusa, and quiet garden walks in Shinjuku Gyoen.",
+    mediaKey: "japan",
+    currencyCode: "JPY",
+    currencySymbol: "\xA5",
+    languageName: "Japanese",
+    bestSeason: "March \u2013 May & October \u2013 November",
+    recommendedDays: 6,
+    dailyBudgetInr: { budget: 6200, balanced: 11500, luxury: 24e3 },
+    coordinates: { lat: 35.6762, lng: 139.6503 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    airport: { name: "Haneda International Airport (HND)", lat: 35.5494, lng: 139.7798 },
+    places: [
+      {
+        name: "Yanaka Old Town Heritage District",
+        type: "Hidden Gem",
+        description: "Edo-period wooden houses, quiet artisan sweet shops, and traditional craft studios.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: 35.7275,
+        lng: 139.769,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Shinjuku Gyoen National Garden",
+        type: "Attraction",
+        description: "Tranquil landscape blending Japanese, English, and French gardens.",
+        bestTime: "09:30 \u2013 12:00",
+        lat: 35.6852,
+        lng: 139.7101,
+        estimatedEntryInr: 320,
+        crowdLevel: "Moderate"
+      }
+    ]
+  },
+  newyork: {
+    name: "New York City",
+    country: "United States",
+    region: "North America",
+    tagline: "Quiet brownstone lanes, skyline waterfront paths, and iconic cultural energy.",
+    description: "Experience New York beyond the rush: morning strolls through the West Village, quiet reading lawns in Central Park Conservatory, and elevated walks on the High Line.",
+    mediaKey: "boutique_villa",
+    currencyCode: "USD",
+    currencySymbol: "$",
+    languageName: "English",
+    bestSeason: "May \u2013 June & September \u2013 November",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 8500, balanced: 16500, luxury: 34e3 },
+    coordinates: { lat: 40.7128, lng: -74.006 },
+    tags: ["Culture", "Cafes", "Historic"],
+    airport: { name: "John F. Kennedy International Airport (JFK)", lat: 40.6413, lng: -73.7781 },
+    places: [
+      {
+        name: "The High Line & Chelsea Waterside Park",
+        type: "Attraction",
+        description: "Elevated railway park with lush wildflowers and Hudson River views.",
+        bestTime: "07:30 \u2013 10:00",
+        lat: 40.748,
+        lng: -74.0048,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "West Village Brownstones & Quiet Courtyards",
+        type: "Hidden Gem",
+        description: "Winding historic cobblestone streets, leafy townhouse gardens, and coffee roasters.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: 40.7358,
+        lng: -74.0036,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      }
+    ]
+  },
+  rome: {
+    name: "Rome",
+    country: "Italy",
+    region: "Southern Europe",
+    tagline: "Cobblestone piazzas, golden afternoon light, and timeless open-air monuments.",
+    description: "Wander through ivy-draped alleyways of Trastevere, savor morning espresso beside silent fountains, and marvel at millennia of architectural grandeur.",
+    mediaKey: "italy",
+    currencyCode: "EUR",
+    currencySymbol: "\u20AC",
+    languageName: "Italian",
+    bestSeason: "April \u2013 June & September \u2013 October",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 6800, balanced: 13200, luxury: 26e3 },
+    coordinates: { lat: 41.9028, lng: 12.4964 },
+    tags: ["Culture", "Historic", "Cafes", "Peaceful Places"],
+    airport: { name: "Leonardo da Vinci\u2013Fiumicino Airport (FCO)", lat: 41.7999, lng: 12.2462 },
+    places: [
+      {
+        name: "Trastevere Quiet Alleyways & Santa Maria Piazza",
+        type: "Hidden Gem",
+        description: "Ochre-colored cobblestone passages with family trattorias and quiet courtyards.",
+        bestTime: "09:00 \u2013 11:30",
+        lat: 41.8894,
+        lng: 12.47,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Villa Borghese Gardens & Pincio Terrace",
+        type: "Attraction",
+        description: "Panoramic hilltop terrace overlooking Piazza del Popolo and shaded pine groves.",
+        bestTime: "16:00 \u2013 19:00",
+        lat: 41.9115,
+        lng: 12.4795,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      }
+    ]
+  },
+  barcelona: {
+    name: "Barcelona",
+    country: "Spain",
+    region: "Southern Europe",
+    tagline: "Gothic quarters, sun-drenched Mediterranean beaches, and modernist architecture.",
+    description: "Stroll through pedestrian alleys of El Born, discover quiet courtyards in Gr\xE0cia, and enjoy fresh tapas along the Mediterranean shoreline.",
+    mediaKey: "boutique_villa",
+    currencyCode: "EUR",
+    currencySymbol: "\u20AC",
+    languageName: "Spanish & Catalan",
+    bestSeason: "May \u2013 June & September \u2013 October",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 6400, balanced: 12500, luxury: 25e3 },
+    coordinates: { lat: 41.3851, lng: 2.1734 },
+    tags: ["Culture", "Beaches", "Cafes", "Historic"],
+    airport: { name: "Josep Tarradellas Barcelona-El Prat Airport (BCN)", lat: 41.2974, lng: 2.0833 },
+    places: [
+      {
+        name: "El Born Medieval Alleys & Santa Maria del Mar",
+        type: "Attraction",
+        description: "Artisan boutiques, quiet stone arches, and historic tapas cellars.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: 41.3837,
+        lng: 2.1818,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Parc de la Ciutadella & Waterfront Footpath",
+        type: "Attraction",
+        description: "Ornate monumental fountain, boating lake, and shaded palms.",
+        bestTime: "15:30 \u2013 18:30",
+        lat: 41.3883,
+        lng: 2.1874,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      }
+    ]
+  },
+  amsterdam: {
+    name: "Amsterdam",
+    country: "Netherlands",
+    region: "Western Europe",
+    tagline: "Tranquil canal rings, historic houseboats, and charming bicycle lanes.",
+    description: "Glide through Jordaan\u2019s quiet canals, visit world-class Dutch master museums, and relax in serene parkside cafes.",
+    mediaKey: "boutique_villa",
+    currencyCode: "EUR",
+    currencySymbol: "\u20AC",
+    languageName: "Dutch & English",
+    bestSeason: "April \u2013 October",
+    recommendedDays: 4,
+    dailyBudgetInr: { budget: 7e3, balanced: 13500, luxury: 27e3 },
+    coordinates: { lat: 52.3676, lng: 4.9041 },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    airport: { name: "Amsterdam Airport Schiphol (AMS)", lat: 52.3105, lng: 4.7683 },
+    places: [
+      {
+        name: "Jordaan Canal Footbridges & Hidden Courtyards (Hofjes)",
+        type: "Hidden Gem",
+        description: "Flower-draped bridges, indie bookshops, and silent historic residential gardens.",
+        bestTime: "08:30 \u2013 11:30",
+        lat: 52.3735,
+        lng: 4.8814,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Vondelpark & Rose Garden Promenade",
+        type: "Attraction",
+        description: "Expansive historic park with ponds, open-air pavilions, and bike paths.",
+        bestTime: "14:00 \u2013 17:00",
+        lat: 52.358,
+        lng: 4.8686,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      }
+    ]
+  },
+  dubai: {
+    name: "Dubai",
+    country: "United Arab Emirates",
+    region: "Middle East",
+    tagline: "Futuristic skylines, desert tranquility, and traditional creek abra boats.",
+    description: "Contrast modern architectural wonders with peaceful traditional heritage in Al Fahidi and serene desert sunset reserves.",
+    mediaKey: "boutique_villa",
+    currencyCode: "AED",
+    currencySymbol: "AED",
+    languageName: "Arabic & English",
+    bestSeason: "November \u2013 March (Comfortable Winter Sun)",
+    recommendedDays: 4,
+    dailyBudgetInr: { budget: 7800, balanced: 15500, luxury: 32e3 },
+    coordinates: { lat: 25.2048, lng: 55.2708 },
+    tags: ["Culture", "Beaches", "Luxury", "Adventure"],
+    airport: { name: "Dubai International Airport (DXB)", lat: 25.2532, lng: 55.3657 },
+    places: [
+      {
+        name: "Al Fahidi Historical Quarter & Dubai Creek Abra",
+        type: "Attraction",
+        description: "Traditional wind-tower architecture, art cafes, and scenic 1-dirham wooden boat rides.",
+        bestTime: "16:00 \u2013 19:30",
+        lat: 25.2631,
+        lng: 55.2972,
+        estimatedEntryInr: 50,
+        crowdLevel: "Quiet"
+      }
+    ]
+  },
+  singapore: {
+    name: "Singapore",
+    country: "Singapore",
+    region: "Southeast Asia",
+    tagline: "Lush garden city, multicultural culinary heritage, and sleek modern architecture.",
+    description: "Wander through tranquil heritage shop-houses in Kampong Glam, explore the futuristic flora of Gardens by the Bay, and savor Michelin-recognized street food.",
+    mediaKey: "boutique_villa",
+    currencyCode: "SGD",
+    currencySymbol: "S$",
+    languageName: "English, Malay, Mandarin & Tamil",
+    bestSeason: "Year-round tropical (pleasant evenings)",
+    recommendedDays: 4,
+    dailyBudgetInr: { budget: 6800, balanced: 13e3, luxury: 27e3 },
+    coordinates: { lat: 1.3521, lng: 103.8198 },
+    tags: ["Culture", "Cafes", "Nature", "Modern"],
+    airport: { name: "Singapore Changi Airport (SIN)", lat: 1.3644, lng: 103.9915 },
+    places: [
+      {
+        name: "Singapore Botanic Gardens & Rainforest Trail",
+        type: "Attraction",
+        description: "UNESCO World Heritage tropical gardens with tranquil lakes and heritage trees.",
+        bestTime: "07:30 \u2013 10:30",
+        lat: 1.3138,
+        lng: 103.8159,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      }
+    ]
+  },
+  sydney: {
+    name: "Sydney",
+    country: "Australia",
+    region: "Oceania",
+    tagline: "Glistening harbor waters, golden surf beaches, and coastal cliff walks.",
+    description: "Walk the scenic coastal trail from Bondi to Coogee, explore historic cobblestones in The Rocks, and enjoy fresh Pacific dining on the harbor.",
+    mediaKey: "bali",
+    currencyCode: "AUD",
+    currencySymbol: "A$",
+    languageName: "English",
+    bestSeason: "September \u2013 November & March \u2013 May",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 7500, balanced: 14800, luxury: 31e3 },
+    coordinates: { lat: -33.8688, lng: 151.2093 },
+    tags: ["Beaches", "Culture", "Nature", "Cafes"],
+    airport: { name: "Sydney Kingsford Smith Airport (SYD)", lat: -33.9399, lng: 151.1753 },
+    places: [
+      {
+        name: "The Rocks Historic Precinct & Campbells Cove",
+        type: "Attraction",
+        description: "Sandstone colonial passageways with harbour bridge views and craft weekend stalls.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: -33.859,
+        lng: 151.209,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      }
+    ]
+  },
+  goa: {
+    name: "Goa",
+    country: "India",
+    region: "South Asia",
+    tagline: "Quiet coconut groves, Portuguese heritage villas, and tranquil southern coves.",
+    description: "Experience South Goa\u2019s peaceful coastal rhythm: pastel Latin quarter villas in Fontainhas, calm swimming beaches in Palolem, and authentic Goan fish curry houses.",
+    mediaKey: "bali",
+    currencyCode: "INR",
+    currencySymbol: "\u20B9",
+    languageName: "Konkani & English",
+    bestSeason: "November \u2013 March",
+    recommendedDays: 4,
+    dailyBudgetInr: { budget: 2800, balanced: 5500, luxury: 12500 },
+    coordinates: { lat: 15.2993, lng: 74.124 },
+    tags: ["Beaches", "Cafes", "Peaceful Places", "Nature"],
+    airport: { name: "Dabolim Airport / Mopa Goa (GOI/GOX)", lat: 15.3808, lng: 73.8314 },
+    places: [
+      {
+        name: "Fontainhas Heritage Latin Quarter",
+        type: "Attraction",
+        description: "Portuguese colonial architecture, colorful tiled facades, and quiet bakeries.",
+        bestTime: "08:30 \u2013 11:00",
+        lat: 15.4989,
+        lng: 73.8315,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      }
+    ]
+  }
+};
+function normalizeString(val) {
+  return val.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+function findKnownCity(query) {
+  const norm = normalizeString(query);
+  if (!norm) return void 0;
+  for (const [key, city] of Object.entries(KNOWN_WORLD_CITIES)) {
+    if (key === norm || normalizeString(city.name) === norm || norm.includes(normalizeString(city.name)) || norm.includes(key)) {
+      return city;
+    }
+  }
+  return void 0;
+}
+function synthesizeCustomDestination(query) {
+  const raw = query.trim();
+  const parts = raw.split(/[,–-]/).map((p) => p.trim()).filter(Boolean);
+  const cityName = (parts[0] || "Worldwide").charAt(0).toUpperCase() + (parts[0] || "Worldwide").slice(1);
+  const countryName = parts.length > 1 ? parts[parts.length - 1] : "Global";
+  const slug = normalizeString(cityName).replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "dest";
+  let hash = 0;
+  for (let i = 0; i < raw.length; i++) {
+    hash = (hash << 5) - hash + raw.charCodeAt(i);
+    hash |= 0;
+  }
+  const latOffset = (Math.abs(hash) % 500 - 250) / 100;
+  const lngOffset = (Math.abs(hash >> 3) % 500 - 250) / 100;
+  const baseLat = 45 + latOffset;
+  const baseLng = 10 + lngOffset;
+  const places = [
+    {
+      id: `${slug}-airport`,
+      name: `${cityName} International Gateway`,
+      type: "Airport",
+      description: `Primary air gateway serving ${cityName} and the surrounding region.`,
+      bestTime: "Arrival & Departure",
+      lat: baseLat + 0.12,
+      lng: baseLng - 0.15,
+      estimatedEntryInr: 0,
+      crowdLevel: "Moderate"
+    },
+    {
+      id: `${slug}-old-quarter`,
+      name: `${cityName} Historic Old Quarter & Heritage Square`,
+      type: "Attraction",
+      description: `Atmospheric pedestrian streets, artisan workshops, and centuries of architecture in ${cityName}.`,
+      bestTime: "09:00 \u2013 12:00",
+      lat: baseLat,
+      lng: baseLng,
+      estimatedEntryInr: 0,
+      crowdLevel: "Quiet"
+    },
+    {
+      id: `${slug}-scenic-promenade`,
+      name: `${cityName} Scenic Riverside & Panoramic Promenade`,
+      type: "Attraction",
+      description: `Peaceful waterfront pathway with iconic vista viewpoints and coffee kiosks.`,
+      bestTime: "15:30 \u2013 18:30",
+      lat: baseLat + 0.015,
+      lng: baseLng + 0.02,
+      estimatedEntryInr: 0,
+      crowdLevel: "Quiet"
+    },
+    {
+      id: `${slug}-artisan-market`,
+      name: `${cityName} Local Artisan Food Market`,
+      type: "Cafe & Food",
+      description: `Vibrant regional produce, bakeries, specialty roasters, and culinary stalls.`,
+      bestTime: "11:30 \u2013 14:00",
+      lat: baseLat - 0.01,
+      lng: baseLng + 0.012,
+      estimatedEntryInr: 600,
+      crowdLevel: "Moderate"
+    },
+    {
+      id: `${slug}-gardens`,
+      name: `${cityName} Botanical Gardens & Quiet Courtyards`,
+      type: "Attraction",
+      description: `Tranquil green sanctuary with shaded benches, fountains, and native flora.`,
+      bestTime: "08:00 \u2013 10:30",
+      lat: baseLat - 0.02,
+      lng: baseLng - 0.015,
+      estimatedEntryInr: 250,
+      crowdLevel: "Quiet"
+    },
+    {
+      id: `${slug}-sunset-view`,
+      name: `${cityName} Hilltop Sunset Lookout & Dining Quarter`,
+      type: "Hidden Gem",
+      description: `Quiet evening gathering spot offering panoramic sunset vistas over the city skyline.`,
+      bestTime: "17:30 \u2013 20:30",
+      lat: baseLat + 0.035,
+      lng: baseLng - 0.025,
+      estimatedEntryInr: 0,
+      crowdLevel: "Quiet"
+    }
+  ];
+  return {
+    id: slug,
+    slug,
+    name: cityName,
+    country: countryName,
+    region: "Worldwide",
+    tagline: `Historic squares, scenic viewpoints, and unhurried local culture in ${cityName}.`,
+    description: `Discover ${cityName} beyond tourist crowds: tranquil morning neighborhood strolls, local artisan bakeries, scenic nature lookouts, and authentic regional hospitality.`,
+    mediaKey: "boutique_villa",
+    bestSeason: "Spring (April \u2013 June) & Autumn (September \u2013 November)",
+    recommendedDays: 5,
+    dailyBudgetInr: { budget: 5500, balanced: 10500, luxury: 22e3 },
+    currencyCode: "USD",
+    currencySymbol: "$",
+    languageName: "Local Regional Language & English",
+    localTransportSummary: `Local city metro, regional rail links, metered rideshares, and scenic walking trails.`,
+    culturalTips: [
+      `Greet shopkeepers and caf\xE9 hosts politely before ordering.`,
+      `Carry local currency notes for smaller neighborhood markets and transit booths.`,
+      `Respect quiet morning hours in residential and heritage quarters.`
+    ],
+    safetyNotes: [
+      `Keep personal belongings secure in central transit hubs.`,
+      `Verify licensed taxi fares or use verified ride-hailing apps from transit stations.`
+    ],
+    weatherSummary: {
+      tempRangeC: "14\xB0C \u2013 25\xB0C",
+      condition: "Pleasant temperate days with gentle seasonal breezes",
+      humidity: "60%",
+      advisory: "Verify 5-day live forecast before departure."
+    },
+    coordinates: { lat: baseLat, lng: baseLng },
+    tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
+    places,
+    phrases: [
+      { english: "Hello / Good morning", local: "Hello", pronunciation: "hel-loh", context: "Greeting" },
+      { english: "Thank you very much", local: "Thank you", pronunciation: "thangk yoo", context: "Greeting" },
+      { english: "Where is the station?", local: "Where is the station?", pronunciation: "stay-shun", context: "Transit" }
+    ]
+  };
+}
+function resolveOrSynthesizeDestination(query) {
+  const clean = query.trim();
+  if (!clean) return DESTINATIONS[0];
+  const norm = normalizeString(clean);
+  const catalogMatch = DESTINATIONS.find(
+    (d) => normalizeString(d.id) === norm || normalizeString(d.slug) === norm || normalizeString(d.name) === norm || norm.includes(normalizeString(d.name))
+  );
+  if (catalogMatch) return catalogMatch;
+  const known = findKnownCity(clean);
+  if (known) {
+    const slug = normalizeString(known.name).replace(/[^a-z0-9]+/g, "-");
+    const allPlaces = [
+      {
+        id: `${slug}-airport`,
+        name: known.airport.name,
+        type: "Airport",
+        description: `Primary gateway into ${known.name}.`,
+        bestTime: "Arrival & Departure",
+        lat: known.airport.lat,
+        lng: known.airport.lng,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      ...known.places.map((p, idx) => ({
+        id: `${slug}-place-${idx + 1}`,
+        name: p.name,
+        type: p.type,
+        description: p.description,
+        bestTime: p.bestTime,
+        lat: p.lat,
+        lng: p.lng,
+        estimatedEntryInr: p.estimatedEntryInr,
+        crowdLevel: p.crowdLevel
+      }))
+    ];
+    return {
+      id: slug,
+      slug,
+      name: known.name,
+      country: known.country,
+      region: known.region,
+      tagline: known.tagline,
+      description: known.description,
+      mediaKey: known.mediaKey,
+      bestSeason: known.bestSeason,
+      recommendedDays: known.recommendedDays,
+      dailyBudgetInr: known.dailyBudgetInr,
+      currencyCode: known.currencyCode,
+      currencySymbol: known.currencySymbol,
+      languageName: known.languageName,
+      localTransportSummary: `Urban metro, airport express rail, metered transit, and scenic walking trails in ${known.name}.`,
+      culturalTips: [
+        `Greet locals politely in shops and cafes.`,
+        `Respect quiet zones on public transit.`,
+        `Keep digital payment cards or small cash ready for transit.`
+      ],
+      safetyNotes: [
+        `Watch personal items in busy transit terminals.`,
+        `Use official marked taxis or rideshare apps.`
+      ],
+      weatherSummary: {
+        tempRangeC: "12\xB0C \u2013 23\xB0C",
+        condition: "Temperate with pleasant seasonal breezes",
+        humidity: "65%",
+        advisory: "Check 5-day live forecast before departure."
+      },
+      coordinates: known.coordinates,
+      tags: known.tags,
+      places: allPlaces,
+      phrases: [
+        { english: "Hello", local: "Hello", pronunciation: "hel-loh", context: "Greeting" },
+        { english: "Thank you", local: "Thank you", pronunciation: "thangk yoo", context: "Greeting" },
+        { english: "Where is the station?", local: "Station", pronunciation: "stay-shun", context: "Transit" }
+      ]
+    };
+  }
+  return synthesizeCustomDestination(clean);
+}
+function synthesizeHotelsForDestination(dest) {
+  const basePrice = Math.round(dest.dailyBudgetInr.balanced * 0.85);
+  return [
+    {
+      id: `ht-${dest.id}-heritage`,
+      name: `The ${dest.name} Heritage Boutique Hotel`,
+      destinationId: dest.id,
+      area: `${dest.name} Historic Center`,
+      rating: 4.8,
+      reviewCount: 248,
+      pricePerNightInr: Math.max(3800, basePrice),
+      tier: "boutique",
+      roomTypes: ["Courtyard Deluxe Room", "Historic Balcony Suite"],
+      distanceToCenterKm: 1.1,
+      amenities: ["Artisan organic breakfast", "Courtyard terrace", "Espresso bar", "Curated walking maps"],
+      cancellationPolicy: "Free cancellation up to 48 hours prior",
+      provider: "Unseen Stays Catalog",
+      availabilityStatus: "Simulated Demo Inventory",
+      provenance: "demo_adapter",
+      lat: dest.coordinates.lat + 5e-3,
+      lng: dest.coordinates.lng - 4e-3,
+      mediaKey: "boutique_villa",
+      recommendationReason: `Quiet residential location within 10 minutes walk of ${dest.places[1]?.name || dest.name + " center"}.`,
+      matchScore: 96
+    },
+    {
+      id: `ht-${dest.id}-quiet-residence`,
+      name: `${dest.name} Leafy Garden Residence`,
+      destinationId: dest.id,
+      area: `${dest.name} Residential Garden Quarter`,
+      rating: 4.7,
+      reviewCount: 192,
+      pricePerNightInr: Math.max(3200, Math.round(basePrice * 0.9)),
+      tier: "boutique",
+      roomTypes: ["Garden King Room", "Quiet Studio with Balcony"],
+      distanceToCenterKm: 2.3,
+      amenities: ["Private courtyard garden", "Bicycle loan", "Quiet reading library", "Breakfast included"],
+      cancellationPolicy: "Free cancellation up to 72 hours prior",
+      provider: "Unseen Stays Catalog",
+      availabilityStatus: "Simulated Demo Inventory",
+      provenance: "demo_adapter",
+      lat: dest.coordinates.lat - 8e-3,
+      lng: dest.coordinates.lng + 6e-3,
+      mediaKey: "boutique_villa",
+      recommendationReason: `Peaceful neighborhood away from tourist bustle, surrounded by local bakeries.`,
+      matchScore: 93
+    },
+    {
+      id: `ht-${dest.id}-budget-lodge`,
+      name: `The ${dest.name} Central Express Lodge`,
+      destinationId: dest.id,
+      area: `${dest.name} Transit & Station Quarter`,
+      rating: 4.4,
+      reviewCount: 380,
+      pricePerNightInr: Math.max(2200, Math.round(dest.dailyBudgetInr.budget * 0.8)),
+      tier: "budget",
+      roomTypes: ["Standard Double", "Compact City Pod"],
+      distanceToCenterKm: 1.8,
+      amenities: ["Direct airport transit connection", "24h self check-in", "Shared kitchen", "Luggage storage"],
+      cancellationPolicy: "Free cancellation up to 24 hours prior",
+      provider: "Unseen Stays Catalog",
+      availabilityStatus: "Simulated Demo Inventory",
+      provenance: "demo_adapter",
+      lat: dest.coordinates.lat + 0.012,
+      lng: dest.coordinates.lng + 0.015,
+      mediaKey: "boutique_villa",
+      recommendationReason: `High-value budget stay offering swift transit access across the city.`,
+      matchScore: 88
+    },
+    {
+      id: `ht-${dest.id}-luxury-haven`,
+      name: `${dest.name} Horizon Luxury Sanctuary`,
+      destinationId: dest.id,
+      area: `${dest.name} Panoramic Skyline Promenade`,
+      rating: 4.9,
+      reviewCount: 154,
+      pricePerNightInr: Math.max(8500, Math.round(dest.dailyBudgetInr.luxury * 0.85)),
+      tier: "luxury",
+      roomTypes: ["Panoramic River Suite", "Penthouse Terrace with Soaking Tub"],
+      distanceToCenterKm: 0.8,
+      amenities: ["Fine dining restaurant", "Spa & wellness center", "Chauffeur booking desk", "Concierge tour service"],
+      cancellationPolicy: "Free cancellation up to 7 days prior",
+      provider: "Unseen Stays Catalog",
+      availabilityStatus: "Simulated Demo Inventory",
+      provenance: "demo_adapter",
+      lat: dest.coordinates.lat - 3e-3,
+      lng: dest.coordinates.lng - 2e-3,
+      mediaKey: "boutique_villa",
+      recommendationReason: `Unrivaled luxury haven with panoramic vistas and private bespoke concierge service.`,
+      matchScore: 98
+    }
+  ];
+}
 
 // src/types/travel.ts
 import { z } from "zod";
@@ -1663,17 +3072,17 @@ function resolveCatalogDestination(query) {
   if (direct) return direct;
   const aliases = [
     [["pokhara", "kathmandu", "sarangkot", "everest", "annapurna"], "nepal"],
-    [["kyoto", "uji", "tokyo", "osaka", "nara", "arashiyama", "hakone"], "japan"],
-    [["amalfi", "ravello", "sorrento", "rome", "venice", "florence", "tuscany", "positano"], "italy"],
+    [["kyoto", "uji", "osaka", "nara", "arashiyama", "hakone"], "japan"],
+    [["amalfi", "ravello", "sorrento", "positano", "capri"], "italy"],
     [["zermatt", "lucerne", "interlaken", "zurich", "geneva", "grindelwald"], "switzerland"],
     [["ubud", "sanur", "uluwatu", "sidemen", "seminyak", "canggu", "nusa"], "bali"],
     [["leh", "pangong", "nubra", "ladakh", "khardung"], "ladakh"],
     [["munnar", "alleppey", "kochi", "kerala", "backwaters", "varkala", "thekkady"], "kerala"],
-    [["santorini", "crete", "athens", "oia", "fira", "greece", "cyclades"], "greece"],
-    [["cappadocia", "goreme", "istanbul", "uchisar", "turkey", "turkiye"], "turkey"],
+    [["santorini", "crete", "oia", "fira", "cyclades"], "greece"],
+    [["cappadocia", "goreme", "uchisar"], "turkey"],
     [["reykjavik", "vik", "iceland", "akureyri", "golden circle"], "iceland"],
     [["marrakech", "atlas", "imlil", "morocco", "essaouira", "fes"], "morocco"],
-    [["chiang mai", "krabi", "phuket", "bangkok", "thailand", "ao nang"], "thailand"]
+    [["chiang mai", "krabi", "phuket", "ao nang"], "thailand"]
   ];
   for (const [terms, id] of aliases) {
     if (terms.some((t) => lower.includes(t))) {
@@ -1688,10 +3097,18 @@ function extractRequirementsFromText(input, defaults) {
   const lower = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   const fromMatch = text.match(/\bfrom\s+([A-Za-z\s]{2,28}?)(?=\s+(?:to|for|in|with|on|,|\.)|$)/i);
   const origin = fromMatch?.[1]?.trim() || defaults?.origin || "Kolkata";
+  const knownCity = findKnownCity(lower);
   const matchedDest = resolveCatalogDestination(lower);
-  const toMatch = text.match(/\bto\s+([A-Za-z\s]{2,28}?)(?=\s+(?:for|in|with|on|,|\.)|$)/i);
-  const destination = matchedDest?.name || toMatch?.[1]?.trim() || defaults?.destination || "Bali";
-  const daysMatch = text.match(/(\d{1,2})\s*(?:days?|nights?)/i);
+  const toMatch = text.match(/\b(?:to|visit|in|exploring|explore)\s+([A-Za-z\s]{2,28}?)(?=\s+(?:for|in|with|on|from|,|\.)|$)/i);
+  let rawDest = knownCity?.name || matchedDest?.name || toMatch?.[1]?.trim();
+  if (!rawDest) {
+    const stripped = text.replace(/\b(?:plan|a|trip|itinerary|travel|vacation|holiday|days?|nights?|for|with|couple|solo|family|\d+)\b/gi, "").replace(/[,\.?!]/g, "").trim();
+    if (stripped.length >= 3 && stripped.length <= 40) {
+      rawDest = stripped;
+    }
+  }
+  const destination = rawDest || defaults?.destination || "London";
+  const daysMatch = text.match(/(\d{1,2})\s*[-–]?\s*(?:days?|nights?)/i);
   const durationDays = daysMatch ? Math.min(21, Math.max(1, Number(daysMatch[1]))) : defaults?.durationDays || 5;
   let travellers = defaults?.travellers || 2;
   const travNumMatch = text.match(/(\d{1,2})\s*(?:people|persons|travellers|travelers|guests|adults)/i);
@@ -1787,8 +3204,16 @@ function calculateBudgetBreakdown(totalBudget, hotelCostTotal, flightCostTotal) 
   };
 }
 function rankHotels(hotels, criteria) {
-  const filtered = criteria.destinationId ? hotels.filter((h) => h.destinationId === criteria.destinationId) : hotels;
-  const pool = filtered.length > 0 ? filtered : hotels;
+  let pool = hotels;
+  if (criteria.destinationId) {
+    const matching = hotels.filter((h) => h.destinationId === criteria.destinationId);
+    if (matching.length > 0) {
+      pool = matching;
+    } else {
+      const dest = resolveOrSynthesizeDestination(criteria.destinationId);
+      pool = synthesizeHotelsForDestination(dest);
+    }
+  }
   return pool.map((hotel) => {
     let score = 50;
     const reasons = [];
@@ -1826,7 +3251,7 @@ function rankHotels(hotels, criteria) {
   }).sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
 }
 function buildDeterministicItinerary(req, tripId) {
-  const dest = resolveCatalogDestination(req.destination) || DESTINATIONS[0];
+  const dest = resolveOrSynthesizeDestination(req.destination);
   const budgetInInr = req.currency === "INR" ? req.budget : convertCurrency(req.budget, req.currency, "INR");
   const nightlyTargetInr = Math.max(2500, Math.round(budgetInInr * 0.32 / Math.max(1, req.durationDays - 1)));
   const rankedHotels = rankHotels(HOTELS, {
@@ -2270,7 +3695,7 @@ var travelToolDeclarations = [
     parameters: {
       type: Type.OBJECT,
       properties: {
-        destinationId: { type: Type.STRING, description: "Destination name or id such as bali, nepal, ladakh, kerala, greece, switzerland, japan, italy, turkey, iceland, morocco, thailand." },
+        destinationId: { type: Type.STRING, description: "Destination name or id anywhere worldwide (e.g. London, Paris, Tokyo, Bali, New York, Rome, Barcelona, etc.)." },
         maxNightlyInr: { type: Type.NUMBER, description: "Maximum nightly budget in INR." },
         preferredTier: { type: Type.STRING, description: "Stay tier: budget, boutique, or luxury." },
         avoidCrowds: { type: Type.BOOLEAN, description: "Prefer quieter neighborhoods." }
@@ -2389,12 +3814,13 @@ async function runTravelAgent(input) {
     toolsUsed.push(name);
     switch (name) {
       case "search_destinations": {
-        const q = String(args.query || "").toLowerCase();
+        const q = String(args.query || "").toLowerCase().trim();
         const matches = DESTINATIONS.filter(
           (d) => d.name.toLowerCase().includes(q) || d.country.toLowerCase().includes(q) || d.tags.some((t) => t.toLowerCase().includes(q))
         );
+        const resolvedList = matches.length > 0 ? matches : q ? [resolveOrSynthesizeDestination(q)] : DESTINATIONS;
         return {
-          destinations: (matches.length ? matches : DESTINATIONS).map((d) => ({
+          destinations: resolvedList.map((d) => ({
             id: d.id,
             name: d.name,
             country: d.country,
@@ -2406,13 +3832,11 @@ async function runTravelAgent(input) {
         };
       }
       case "search_hotels": {
-        const destInput = String(args.destinationId || "bali");
-        const destMatch = DESTINATIONS.find(
-          (d) => d.id === destInput.toLowerCase() || d.name.toLowerCase().includes(destInput.toLowerCase())
-        );
+        const destInput = String(args.destinationId || "london");
+        const destObj = resolveOrSynthesizeDestination(destInput);
         const tier = args.preferredTier === "budget" || args.preferredTier === "luxury" ? args.preferredTier : "boutique";
         const ranked = rankHotels(HOTELS, {
-          destinationId: destMatch?.id || destInput.toLowerCase(),
+          destinationId: destObj.id,
           maxNightlyInr: typeof args.maxNightlyInr === "number" ? args.maxNightlyInr : void 0,
           preferredTier: tier,
           avoidCrowds: Boolean(args.avoidCrowds)
@@ -2420,7 +3844,7 @@ async function runTravelAgent(input) {
         recommendedHotels = ranked.slice(0, 3);
         const webHotels = await runLiveTravelWebSearch({
           category: "hotels",
-          destination: destMatch?.name || destInput,
+          destination: destObj.name,
           preferencesNote: `${tier} style${args.maxNightlyInr ? `, under \u20B9${args.maxNightlyInr}/night` : ""}${args.avoidCrowds ? ", quiet area" : ""}`
         });
         if (webHotels.sources.length > 0) {
@@ -2442,7 +3866,7 @@ async function runTravelAgent(input) {
       }
       case "search_flights": {
         const origin = String(args.origin || "Kolkata");
-        const destination = String(args.destination || "Bali");
+        const destination = String(args.destination || "London");
         const [demoFlights, webFlights] = await Promise.all([
           Promise.resolve(getFlightsForRoute(origin, destination)),
           runLiveTravelWebSearch({ category: "flights", origin, destination })
@@ -2458,13 +3882,11 @@ async function runTravelAgent(input) {
         };
       }
       case "search_transport": {
-        const destInput = String(args.destinationId || "bali");
-        const destMatch = DESTINATIONS.find(
-          (d) => d.id === destInput.toLowerCase() || d.name.toLowerCase().includes(destInput.toLowerCase())
-        );
+        const destInput = String(args.destinationId || "london");
+        const destObj = resolveOrSynthesizeDestination(destInput);
         const webTransit = await runLiveTravelWebSearch({
           category: "transport",
-          destination: destMatch?.name || destInput
+          destination: destObj.name
         });
         if (webTransit.sources.length > 0) {
           collectedSources = [...collectedSources, ...webTransit.sources].slice(0, 6);
@@ -2472,7 +3894,7 @@ async function runTravelAgent(input) {
         return {
           webSearchSummary: webTransit.summary,
           liveTransitHighlights: webTransit.highlights,
-          indicativeOptions: getTransportOptions(destMatch?.id || destInput)
+          indicativeOptions: getTransportOptions(destObj.id)
         };
       }
       case "get_currency_exchange": {
@@ -2557,10 +3979,11 @@ Traveller saved preferences: ${JSON.stringify(input.preferences || {})}
 Current active itinerary summary: ${generatedItinerary ? `${generatedItinerary.tripName} (${generatedItinerary.origin} -> ${generatedItinerary.destination}, ${generatedItinerary.durationDays} days, ${generatedItinerary.currency} ${generatedItinerary.estimatedTotal})` : "None yet"}
 
 Rules:
-1. Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
-2. Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or simulated catalog estimates.
-3. Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (\u2022). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
-4. Keep your response concise (under 115 words) and end with 1\u20132 thoughtful follow-up questions.`;
+1. You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, New York, Rome, Bali, or any location on earth). Never restrict the user to pre-set locations. Always generate plans and search stays for the exact destination requested.
+2. Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
+3. Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or simulated catalog estimates.
+4. Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (\u2022). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
+5. Keep your response concise (under 115 words) and end with 1\u20132 thoughtful follow-up questions.`;
     const contents = [
       ...input.history.slice(-8).map((m) => ({
         role: m.role === "assistant" ? "model" : "user",
@@ -3582,16 +5005,19 @@ function createApp() {
   app2.get("/api/destinations", (req, res) => {
     const q = String(req.query.q || "").toLowerCase().trim();
     const tag = String(req.query.tag || "").toLowerCase().trim();
-    const list = DESTINATIONS.filter((d) => {
+    let list = DESTINATIONS.filter((d) => {
       const matchesQ = !q || d.name.toLowerCase().includes(q) || d.country.toLowerCase().includes(q) || d.tagline.toLowerCase().includes(q);
       const matchesTag = !tag || tag === "all" || d.tags.some((t) => t.toLowerCase() === tag);
       return matchesQ && matchesTag;
     });
+    if (q && list.length === 0) {
+      list = [resolveOrSynthesizeDestination(q)];
+    }
     res.json({ destinations: list });
   });
   app2.get("/api/destinations/:slug", (req, res) => {
-    const dest = DESTINATIONS.find((d) => d.slug === req.params.slug || d.id === req.params.slug);
-    if (!dest) return res.status(404).json({ error: "Destination not found" });
+    const slug = req.params.slug;
+    const dest = DESTINATIONS.find((d) => d.slug === slug || d.id === slug) || resolveOrSynthesizeDestination(slug);
     const hotels = rankHotels(HOTELS, { destinationId: dest.id });
     const transport = getTransportOptions(dest.id);
     return res.json({ destination: dest, hotels, transport });
@@ -3671,8 +5097,8 @@ function createApp() {
     });
   });
   app2.get("/api/weather", async (req, res) => {
-    const destinationId = String(req.query.destinationId || "bali");
-    const dest = DESTINATIONS.find((d) => d.id === destinationId) || DESTINATIONS[0];
+    const destinationId = String(req.query.destinationId || "london");
+    const dest = resolveOrSynthesizeDestination(destinationId);
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${dest.coordinates.lat}&longitude=${dest.coordinates.lng}&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5`;
       const controller = new AbortController();

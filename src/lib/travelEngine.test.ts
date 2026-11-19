@@ -76,3 +76,37 @@ test('convertCurrency converts INR to IDR and USD consistently', () => {
   assert.ok(usd > 100 && usd < 150);
   assert.equal(idr, 187500);
 });
+
+test('extractRequirementsFromText handles London and arbitrary worldwide locations', () => {
+  const req1 = extractRequirementsFromText('Plan a 5-day trip from Kolkata to London for 2');
+  assert.equal(req1.destination, 'London');
+  assert.equal(req1.durationDays, 5);
+
+  const req2 = extractRequirementsFromText('London 4 days');
+  assert.equal(req2.destination, 'London');
+  assert.equal(req2.durationDays, 4);
+
+  const req3 = extractRequirementsFromText('Trip to Barcelona for 5 days');
+  assert.equal(req3.destination, 'Barcelona');
+});
+
+test('buildDeterministicItinerary generates London itinerary with London places and hotels', () => {
+  const req = extractRequirementsFromText('Plan a 5-day trip from Kolkata to London for 2');
+  const itinerary = buildDeterministicItinerary(req, 'london-trip-1');
+
+  assert.equal(itinerary.destination, 'London');
+  assert.equal(itinerary.days.length, 5);
+  assert.ok(itinerary.selectedHotel?.destinationId === 'london');
+  assert.ok(itinerary.days[0].activities[0].location.includes('Heathrow') || itinerary.days[0].activities[0].location.includes('London'));
+  assert.ok(itinerary.days.flatMap((d) => d.activities).some((a) => a.lat > 51 && a.lat < 52));
+});
+
+test('buildDeterministicItinerary supports any custom city anywhere in the world', () => {
+  const req = extractRequirementsFromText('Plan a 4-day trip to Barcelona from Mumbai for 2 travellers');
+  const itinerary = buildDeterministicItinerary(req, 'bcn-trip-1');
+
+  assert.equal(itinerary.destination, 'Barcelona');
+  assert.equal(itinerary.days.length, 4);
+  assert.ok(itinerary.selectedHotel?.name.includes('Barcelona'));
+  assert.ok(itinerary.estimatedTotal > 0);
+});

@@ -24,9 +24,9 @@ const INITIAL_ASSISTANT_MESSAGE: ChatMessage = {
   content:
     "Hey traveller! I'm your personal travel concierge.\n\nTell me where you want to go, where you're starting from, your budget, and the experience you're dreaming of.\n\nI'll craft the itinerary, search live flights & stays, map every stop, and provide direct booking links.",
   followUpQuestions: [
+    'Plan a 5-day trip to London for 2 with historic walks and boutique stays',
     'Kolkata to Bali for 5 days in December, ₹80,000 for 2 people, peaceful beaches and cafés',
-    '6 days in Santorini Greece for 2 travellers with quiet cliffside stays',
-    '6 days quiet Cappadocia & Kyoto, Japan or Ladakh mountain escape',
+    '6 days in Tokyo & Kyoto Japan with quiet temple visits and ramen counters',
   ],
 };
 

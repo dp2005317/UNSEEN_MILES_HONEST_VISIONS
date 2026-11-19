@@ -110,7 +110,7 @@ export function LandingPage() {
                     list="hero-dest-list"
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    placeholder="Bali, Santorini, Kyoto…"
+                    placeholder="London, Bali, Paris, Tokyo, New York…"
                     className="w-full px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-white/75 border border-white/90 text-sm text-slate-900 font-medium"
                   />
                   <datalist id="hero-dest-list">
@@ -119,6 +119,12 @@ export function LandingPage() {
                         {d.name}, {d.country}
                       </option>
                     ))}
+                    <option value="Rome">Rome, Italy</option>
+                    <option value="Barcelona">Barcelona, Spain</option>
+                    <option value="Amsterdam">Amsterdam, Netherlands</option>
+                    <option value="Dubai">Dubai, UAE</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Sydney">Sydney, Australia</option>
                   </datalist>
                 </div>
 

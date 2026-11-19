@@ -14,6 +14,7 @@ import {
   optimizeItineraryForBudget,
   rankHotels,
 } from '../src/lib/travelEngine';
+import { resolveOrSynthesizeDestination } from '../src/lib/worldwideDestinations';
 import { ItinerarySchema, type BookingRecord, type UserPreferences } from '../src/types/travel';
 import {
   runDestinationResearch,
@@ -67,7 +68,7 @@ export function createApp() {
   app.get('/api/destinations', (req, res) => {
     const q = String(req.query.q || '').toLowerCase().trim();
     const tag = String(req.query.tag || '').toLowerCase().trim();
-    const list = DESTINATIONS.filter((d) => {
+    let list = DESTINATIONS.filter((d) => {
       const matchesQ =
         !q ||
         d.name.toLowerCase().includes(q) ||
@@ -76,12 +77,19 @@ export function createApp() {
       const matchesTag = !tag || tag === 'all' || d.tags.some((t) => t.toLowerCase() === tag);
       return matchesQ && matchesTag;
     });
+
+    if (q && list.length === 0) {
+      list = [resolveOrSynthesizeDestination(q)];
+    }
+
     res.json({ destinations: list });
   });
 
   app.get('/api/destinations/:slug', (req, res) => {
-    const dest = DESTINATIONS.find((d) => d.slug === req.params.slug || d.id === req.params.slug);
-    if (!dest) return res.status(404).json({ error: 'Destination not found' });
+    const slug = req.params.slug;
+    const dest =
+      DESTINATIONS.find((d) => d.slug === slug || d.id === slug) ||
+      resolveOrSynthesizeDestination(slug);
     const hotels = rankHotels(HOTELS, { destinationId: dest.id });
     const transport = getTransportOptions(dest.id);
     return res.json({ destination: dest, hotels, transport });
@@ -175,8 +183,8 @@ export function createApp() {
 
   // Live Weather (Open-Meteo public API with seasonal fallback)
   app.get('/api/weather', async (req, res) => {
-    const destinationId = String(req.query.destinationId || 'bali');
-    const dest = DESTINATIONS.find((d) => d.id === destinationId) || DESTINATIONS[0];
+    const destinationId = String(req.query.destinationId || 'london');
+    const dest = resolveOrSynthesizeDestination(destinationId);
     try {
       const url = `https://api.open-meteo.com/v1/forecast?latitude=${dest.coordinates.lat}&longitude=${dest.coordinates.lng}&current=temperature_2m,relative_humidity_2m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5`;
       const controller = new AbortController();
@@ -427,3 +435,4 @@ export function createApp() {
 
 export const app = createApp();
 export default app;
+

@@ -15,6 +15,7 @@
 
 ## ✨ Features
 
+- 🌐 **Worldwide Destination Coverage**: Plan trips to **any location on Earth** — from curated global hubs (London, Paris, Tokyo, New York, Bali, Amalfi, Santorini, Kyoto) to any custom city, town, or region with automatic coordinate geocoding, realistic boutique stays, airports, and transit routes.
 - 🧠 **Conversational AI Travel Agent**: Powered by Google Gemini (`@google/genai`) to answer travel inquiries, tailor multi-day schedules, and provide local etiquette tips.
 - 🔍 **Live Travel Web Research**: Integrates with Tavily Search API for up-to-date neighborhood scouting, quiet cafe discovery, and live route verification.
 - 🗺️ **Interactive Google Maps**: Visualizes day-by-day stops and waypoints with interactive markers, coordinate geolocation, and direct Google Maps navigation links.
@@ -55,7 +56,9 @@ unseen-miles/
 ├── src/
 │   ├── components/         # Modular UI (Maps, Search, Budget, Nav, etc.)
 │   ├── data/               # Catalog data (Destinations, Hotels, Flights)
-│   ├── lib/                # Travel engine & deterministic itinerary planner
+│   ├── lib/                # Travel engine, worldwide geo-synthesizer & itinerary planner
+│   │   ├── travelEngine.ts # Deterministic travel calculations & budget optimizer
+│   │   └── worldwideDestinations.ts # Worldwide city database & dynamic destination synthesizer
 │   ├── pages/              # Main view routes (Explore, Planner, Stays, Dashboard)
 │   └── types/              # TypeScript definitions & Zod schemas
 ├── public/                 # Static assets & photography

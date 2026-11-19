@@ -13,6 +13,7 @@ import {
   optimizeItineraryForBudget,
   rankHotels,
 } from '../../src/lib/travelEngine';
+import { resolveOrSynthesizeDestination } from '../../src/lib/worldwideDestinations';
 import type {
   ChatMessage,
   HotelOption,
@@ -66,7 +67,7 @@ const travelToolDeclarations: FunctionDeclaration[] = [
     parameters: {
       type: Type.OBJECT,
       properties: {
-        destinationId: { type: Type.STRING, description: 'Destination name or id such as bali, nepal, ladakh, kerala, greece, switzerland, japan, italy, turkey, iceland, morocco, thailand.' },
+        destinationId: { type: Type.STRING, description: 'Destination name or id anywhere worldwide (e.g. London, Paris, Tokyo, Bali, New York, Rome, Barcelona, etc.).' },
         maxNightlyInr: { type: Type.NUMBER, description: 'Maximum nightly budget in INR.' },
         preferredTier: { type: Type.STRING, description: 'Stay tier: budget, boutique, or luxury.' },
         avoidCrowds: { type: Type.BOOLEAN, description: 'Prefer quieter neighborhoods.' },
@@ -212,15 +213,16 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
     toolsUsed.push(name);
     switch (name) {
       case 'search_destinations': {
-        const q = String(args.query || '').toLowerCase();
+        const q = String(args.query || '').toLowerCase().trim();
         const matches = DESTINATIONS.filter(
           (d) =>
             d.name.toLowerCase().includes(q) ||
             d.country.toLowerCase().includes(q) ||
             d.tags.some((t) => t.toLowerCase().includes(q))
         );
+        const resolvedList = matches.length > 0 ? matches : (q ? [resolveOrSynthesizeDestination(q)] : DESTINATIONS);
         return {
-          destinations: (matches.length ? matches : DESTINATIONS).map((d) => ({
+          destinations: resolvedList.map((d) => ({
             id: d.id,
             name: d.name,
             country: d.country,
@@ -232,18 +234,14 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
         };
       }
       case 'search_hotels': {
-        const destInput = String(args.destinationId || 'bali');
-        const destMatch = DESTINATIONS.find(
-          (d) =>
-            d.id === destInput.toLowerCase() ||
-            d.name.toLowerCase().includes(destInput.toLowerCase())
-        );
+        const destInput = String(args.destinationId || 'london');
+        const destObj = resolveOrSynthesizeDestination(destInput);
         const tier =
           args.preferredTier === 'budget' || args.preferredTier === 'luxury'
             ? args.preferredTier
             : 'boutique';
         const ranked = rankHotels(HOTELS, {
-          destinationId: destMatch?.id || destInput.toLowerCase(),
+          destinationId: destObj.id,
           maxNightlyInr: typeof args.maxNightlyInr === 'number' ? args.maxNightlyInr : undefined,
           preferredTier: tier,
           avoidCrowds: Boolean(args.avoidCrowds),
@@ -252,7 +250,7 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
 
         const webHotels = await runLiveTravelWebSearch({
           category: 'hotels',
-          destination: destMatch?.name || destInput,
+          destination: destObj.name,
           preferencesNote: `${tier} style${args.maxNightlyInr ? `, under ₹${args.maxNightlyInr}/night` : ''}${args.avoidCrowds ? ', quiet area' : ''}`,
         });
         if (webHotels.sources.length > 0) {
@@ -275,7 +273,7 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
       }
       case 'search_flights': {
         const origin = String(args.origin || 'Kolkata');
-        const destination = String(args.destination || 'Bali');
+        const destination = String(args.destination || 'London');
         const [demoFlights, webFlights] = await Promise.all([
           Promise.resolve(getFlightsForRoute(origin, destination)),
           runLiveTravelWebSearch({ category: 'flights', origin, destination }),
@@ -291,15 +289,11 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
         };
       }
       case 'search_transport': {
-        const destInput = String(args.destinationId || 'bali');
-        const destMatch = DESTINATIONS.find(
-          (d) =>
-            d.id === destInput.toLowerCase() ||
-            d.name.toLowerCase().includes(destInput.toLowerCase())
-        );
+        const destInput = String(args.destinationId || 'london');
+        const destObj = resolveOrSynthesizeDestination(destInput);
         const webTransit = await runLiveTravelWebSearch({
           category: 'transport',
-          destination: destMatch?.name || destInput,
+          destination: destObj.name,
         });
         if (webTransit.sources.length > 0) {
           collectedSources = [...collectedSources, ...webTransit.sources].slice(0, 6);
@@ -307,7 +301,7 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
         return {
           webSearchSummary: webTransit.summary,
           liveTransitHighlights: webTransit.highlights,
-          indicativeOptions: getTransportOptions(destMatch?.id || destInput),
+          indicativeOptions: getTransportOptions(destObj.id),
         };
       }
       case 'get_currency_exchange': {
@@ -403,10 +397,11 @@ Current active itinerary summary: ${
     }
 
 Rules:
-1. Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
-2. Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or simulated catalog estimates.
-3. Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (•). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
-4. Keep your response concise (under 115 words) and end with 1–2 thoughtful follow-up questions.`;
+1. You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, New York, Rome, Bali, or any location on earth). Never restrict the user to pre-set locations. Always generate plans and search stays for the exact destination requested.
+2. Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
+3. Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or simulated catalog estimates.
+4. Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (•). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
+5. Keep your response concise (under 115 words) and end with 1–2 thoughtful follow-up questions.`;
 
     const contents: Content[] = [
       ...input.history.slice(-8).map((m) => ({
