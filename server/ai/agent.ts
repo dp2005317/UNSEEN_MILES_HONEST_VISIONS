@@ -982,9 +982,12 @@ export async function runLiveTravelWebSearch(params: {
   const tavilyKey = process.env.TAVILY_API_KEY?.trim();
   if (tavilyKey) {
     try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 4000);
       const resp = await fetch('https://api.tavily.com/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
         body: JSON.stringify({
           api_key: tavilyKey,
           query: queryPrompt,
@@ -993,6 +996,7 @@ export async function runLiveTravelWebSearch(params: {
           include_answer: true,
         }),
       });
+      clearTimeout(timer);
       if (resp.ok) {
         const data = (await resp.json()) as {
           answer?: string;
@@ -1004,77 +1008,6 @@ export async function runLiveTravelWebSearch(params: {
           url: r.url || bookingLinks[0].url,
           snippet: cleanWebSnippet(r.content || '', 160),
         }));
-
-        // Let Gemini extract crisp, real hotel/flight/transport cards from Tavily's live web context
-        if (hasConfiguredGeminiKey() && !isGeminiTemporarilyExhausted() && rawResults.length > 0) {
-          try {
-            const ai = getGeminiClient();
-            const contextDigest = rawResults
-              .slice(0, 4)
-              .map((r, i) => `[${i + 1}] ${r.title}: ${cleanWebSnippet(r.content || '', 260)}`)
-              .join('\n');
-            const synthesis = await ai.models.generateContent({
-              model: GEMINI_MODEL,
-              contents: `Based on these live web search snippets for ${category} (${origin} -> ${destination}):\n${contextDigest}\n\nExtract 3 specific real-world ${category === 'hotels' ? 'hotel properties' : category === 'flights' ? 'airline flight options' : 'local transport options'} supported above. For indicativePrice, always express a crisp short estimate in INR (e.g. "₹24,000 – ₹34,000" or "₹6,500/night" or "Check live fare"), max 22 characters, converting foreign amounts approximately into INR if needed.`,
-              config: {
-                thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
-                responseMimeType: 'application/json',
-                responseSchema: {
-                  type: Type.OBJECT,
-                  properties: {
-                    summary: { type: Type.STRING },
-                    options: {
-                      type: Type.ARRAY,
-                      items: {
-                        type: Type.OBJECT,
-                        properties: {
-                          name: { type: Type.STRING },
-                          subtitle: { type: Type.STRING },
-                          detail: { type: Type.STRING },
-                          indicativePrice: { type: Type.STRING },
-                        },
-                        required: ['name', 'detail', 'indicativePrice'],
-                      },
-                    },
-                  },
-                  required: ['summary', 'options'],
-                },
-              },
-            });
-            const parsed = JSON.parse((synthesis.text || '{}').trim()) as {
-              summary?: string;
-              options?: Array<{
-                name: string;
-                subtitle?: string;
-                detail: string;
-                indicativePrice: string;
-              }>;
-            };
-            if (Array.isArray(parsed.options) && parsed.options.length > 0) {
-              return {
-                summary: cleanWebSnippet(parsed.summary || data.answer || '', 480),
-                highlights: parsed.options.slice(0, 3).map((opt, idx) => ({
-                  name: cleanWebSnippet(opt.name, 68),
-                  subtitle: opt.subtitle ? cleanWebSnippet(opt.subtitle, 48) : undefined,
-                  detail: cleanWebSnippet(opt.detail, 140),
-                  indicativePrice: cleanWebSnippet(opt.indicativePrice, 44),
-                  url:
-                    category === 'hotels'
-                      ? buildBookingSearchUrl('hotels', destination, origin, opt.name)
-                      : rawResults[idx]?.url || bookingLinks[0].url,
-                })),
-                sources,
-                providerLabel: 'AI Live Web Search (Tavily + Gemini)',
-                bookingLinks,
-              };
-            }
-          } catch (err) {
-            if (isGeminiQuotaError(err)) {
-              markGeminiQuotaExhausted();
-            }
-            // Fall through to sanitized Tavily snippets below
-          }
-        }
 
         return {
           summary: cleanWebSnippet(
