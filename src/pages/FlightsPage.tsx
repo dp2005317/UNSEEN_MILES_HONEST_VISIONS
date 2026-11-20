@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeftRight, ExternalLink, Plane, Search } from 'lucide-react';
 import { DESTINATIONS } from '../data/catalog';
 import type { FlightOption } from '../types/travel';
@@ -94,7 +95,7 @@ export function FlightsPage() {
                 type="button"
                 onClick={handleSwap}
                 aria-label="Swap origin and destination"
-                className="w-10 h-10 rounded-full liquid-glass-chip inline-flex items-center justify-center text-slate-700 hover:text-blue-700 cursor-pointer"
+                className="w-10 h-10 rounded-full liquid-glass-chip inline-flex items-center justify-center text-slate-700 hover:text-blue-700 cursor-pointer pressable"
               >
                 <ArrowLeftRight className="w-4 h-4" />
               </button>
@@ -125,7 +126,7 @@ export function FlightsPage() {
             <div className="md:col-span-3">
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-full bg-slate-950 text-white text-sm font-semibold hover:bg-slate-800 cursor-pointer shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-full bg-slate-950 text-white text-sm font-semibold hover:bg-slate-800 cursor-pointer shadow-sm pressable"
               >
                 <Search className="w-4 h-4" aria-hidden="true" />
                 <span>{loading ? 'Searching…' : 'Search Flights'}</span>
@@ -142,7 +143,7 @@ export function FlightsPage() {
                   key={d.id}
                   type="button"
                   onClick={() => handleQuickSelect(d.name)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
+                  className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer pressable ${
                     selected
                       ? 'bg-blue-600 text-white shadow-xs'
                       : 'liquid-glass-chip text-slate-700 hover:text-blue-700'
@@ -172,45 +173,55 @@ export function FlightsPage() {
             </p>
           </div>
 
-          {flights.map((f) => (
-            <article
-              key={f.id}
-              className="rounded-3xl liquid-glass p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
-            >
-              <div className="space-y-1.5">
-                <p className="text-xs font-semibold text-blue-700">
-                  {f.airline} · {f.flightNumber} · {f.cabinClass} · {f.provider}
-                </p>
-                <div className="flex items-center gap-3 text-xl font-bold text-slate-950 tabular-nums tracking-tight">
-                  <span>{f.departureTime}</span>
-                  <Plane className="w-4 h-4 text-blue-600" aria-hidden="true" />
-                  <span>{f.arrivalTime}</span>
-                </div>
-                <p className="text-xs text-slate-600 tabular-nums">
-                  {f.origin} → {f.destination} · {f.durationLabel} ·{' '}
-                  {f.stops === 0 ? 'Non-stop' : `${f.stops} stop`} · {f.baggage}
-                </p>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between lg:justify-end gap-4 pt-3 lg:pt-0 border-t lg:border-t-0 border-white/70">
-                <div className="text-left lg:text-right">
-                  <p className="text-xs text-slate-500">Indicative Estimate</p>
-                  <p className="text-2xl font-bold tabular-nums tracking-tight text-slate-950">
-                    ₹{f.priceInr.toLocaleString()}
+          <AnimatePresence mode="popLayout">
+            {flights.map((f, idx) => (
+              <motion.article
+                key={f.id}
+                initial={{ opacity: 0, y: 14, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{
+                  duration: 0.35,
+                  delay: Math.min(idx * 0.04, 0.2),
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                className="rounded-3xl liquid-glass p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 card-interactive"
+              >
+                <div className="space-y-1.5">
+                  <p className="text-xs font-semibold text-blue-700">
+                    {f.airline} · {f.flightNumber} · {f.cabinClass} · {f.provider}
+                  </p>
+                  <div className="flex items-center gap-3 text-xl font-bold text-slate-950 tabular-nums tracking-tight">
+                    <span>{f.departureTime}</span>
+                    <Plane className="w-4 h-4 text-blue-600" aria-hidden="true" />
+                    <span>{f.arrivalTime}</span>
+                  </div>
+                  <p className="text-xs text-slate-600 tabular-nums">
+                    {f.origin} → {f.destination} · {f.durationLabel} ·{' '}
+                    {f.stops === 0 ? 'Non-stop' : `${f.stops} stop`} · {f.baggage}
                   </p>
                 </div>
-                <a
-                  href={f.providerUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 whitespace-nowrap shadow-xs"
-                >
-                  <span>Book on Google Flights</span>
-                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
-                </a>
-              </div>
-            </article>
-          ))}
+
+                <div className="flex flex-wrap items-center justify-between lg:justify-end gap-4 pt-3 lg:pt-0 border-t lg:border-t-0 border-white/70">
+                  <div className="text-left lg:text-right">
+                    <p className="text-xs text-slate-500">Indicative Estimate</p>
+                    <p className="text-2xl font-bold tabular-nums tracking-tight text-slate-950">
+                      ₹{f.priceInr.toLocaleString()}
+                    </p>
+                  </div>
+                  <a
+                    href={f.providerUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 whitespace-nowrap shadow-xs pressable"
+                  >
+                    <span>Book on Google Flights</span>
+                    <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  </a>
+                </div>
+              </motion.article>
+            ))}
+          </AnimatePresence>
         </div>
       </main>
 

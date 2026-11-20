@@ -199,7 +199,7 @@ export function CurrencyLanguageTools({
           <button
             type="submit"
             disabled={translating}
-            className="px-4 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 disabled:opacity-50 whitespace-nowrap shrink-0 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 disabled:opacity-50 whitespace-nowrap shrink-0 cursor-pointer pressable"
           >
             {translating ? 'Translating…' : 'Translate Phrase'}
           </button>

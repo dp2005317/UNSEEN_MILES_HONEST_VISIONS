@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Compass, MapPin, ShieldCheck, Sparkles, Wallet } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { DESTINATIONS } from '../data/catalog';
 import { getMediaUrl } from '../data/media';
 import { Navbar } from '../components/layout/Navbar';
@@ -63,7 +64,12 @@ export function LandingPage() {
           />
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-3xl mx-auto text-center space-y-3.5 sm:space-y-5">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
+              className="max-w-3xl mx-auto text-center space-y-3.5 sm:space-y-5"
+            >
               <p className="text-xs sm:text-sm font-medium tracking-wide text-blue-100">
                 Every mile planned, even the unseen ones
               </p>
@@ -76,10 +82,13 @@ export function LandingPage() {
               <p className="text-sm sm:text-lg text-slate-100 max-w-2xl mx-auto leading-relaxed">
                 Your personal AI travel concierge. From live flight & stay web search to crowd-conscious itineraries, Google Maps routes, and direct booking links.
               </p>
-            </div>
+            </motion.div>
 
             {/* Liquid Glass Trip Planning Card */}
-            <form
+            <motion.form
+              initial={{ opacity: 0, y: 22, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.08, ease: [0.23, 1, 0.32, 1] }}
               onSubmit={handlePlanSubmit}
               className="mt-6 sm:mt-10 max-w-5xl mx-auto rounded-3xl bg-white/84 backdrop-blur-2xl border border-white/90 shadow-2xl p-4 sm:p-6"
             >
@@ -201,7 +210,7 @@ export function LandingPage() {
                   </Link>
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full bg-slate-950 text-white text-sm font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                    className="inline-flex items-center gap-3 pl-5 pr-2 py-2 rounded-full bg-slate-950 text-white text-sm font-semibold hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer pressable"
                   >
                     <span>Plan My Journey</span>
                     <span className="w-7 h-7 rounded-full bg-blue-600 text-white inline-flex items-center justify-center">
@@ -210,7 +219,7 @@ export function LandingPage() {
                   </button>
                 </div>
               </div>
-            </form>
+            </motion.form>
           </div>
         </section>
 
@@ -233,18 +242,20 @@ export function LandingPage() {
               </p>
             </div>
 
-            {/* Interactive 3-Card Liquid Glass Fanned Carousel */}
+            {/* Interactive 3-Card Liquid Glass Fanned Carousel with Fluid Layout */}
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
               {visibleIndices.map((destIdx, pos) => {
                 const dest = DESTINATIONS[destIdx];
                 const isCenter = pos === 1;
                 return (
-                  <article
+                  <motion.article
+                    layout
                     key={dest.id}
-                    className={`group rounded-[28px] liquid-glass overflow-hidden transition-all duration-300 ${
+                    transition={{ type: 'spring', duration: 0.45, bounce: 0.12 }}
+                    className={`group rounded-[28px] liquid-glass overflow-hidden card-interactive ${
                       isCenter
-                        ? 'shadow-2xl md:scale-[1.03] z-10'
-                        : 'hidden md:block opacity-92 hover:opacity-100'
+                        ? 'shadow-2xl md:scale-[1.03] z-10 border-blue-200/80 ring-1 ring-blue-500/20'
+                        : 'hidden md:block opacity-90 hover:opacity-100'
                     }`}
                   >
                     <div className="relative h-64 overflow-hidden bg-slate-200">
@@ -252,7 +263,7 @@ export function LandingPage() {
                         src={getMediaUrl(dest.mediaKey)}
                         alt={`${dest.name}, ${dest.country}`}
                         referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover img-zoom"
                       />
                       <div
                         aria-hidden="true"
@@ -281,9 +292,9 @@ export function LandingPage() {
                       </div>
                       <Link
                         to={`/explore/${dest.slug}`}
-                        className={`w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-sm font-semibold transition-colors ${
+                        className={`w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-full text-sm font-semibold transition-colors pressable ${
                           isCenter
-                            ? 'bg-slate-950 text-white hover:bg-blue-600'
+                            ? 'bg-slate-950 text-white hover:bg-blue-600 shadow-sm'
                             : 'liquid-glass-chip text-slate-900 hover:text-blue-700'
                         }`}
                       >
@@ -291,7 +302,7 @@ export function LandingPage() {
                         <ArrowRight className="w-4 h-4" aria-hidden="true" />
                       </Link>
                     </div>
-                  </article>
+                  </motion.article>
                 );
               })}
             </div>
@@ -302,13 +313,13 @@ export function LandingPage() {
                 type="button"
                 onClick={prevSlide}
                 aria-label="Previous destination"
-                className="w-11 h-11 rounded-full liquid-glass text-slate-700 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer"
+                className="w-11 h-11 rounded-full liquid-glass text-slate-700 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer pressable"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
               <Link
                 to="/explore"
-                className="text-sm font-semibold text-slate-800 hover:text-blue-700 transition-colors"
+                className="text-sm font-semibold text-slate-800 hover:text-blue-700 transition-colors pressable"
               >
                 View All {DESTINATIONS.length} Destinations & AI Search
               </Link>
@@ -316,7 +327,7 @@ export function LandingPage() {
                 type="button"
                 onClick={nextSlide}
                 aria-label="Next destination"
-                className="w-11 h-11 rounded-full liquid-glass text-slate-700 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer"
+                className="w-11 h-11 rounded-full liquid-glass text-slate-700 hover:text-blue-700 inline-flex items-center justify-center cursor-pointer pressable"
               >
                 <ArrowRight className="w-4 h-4" />
               </button>
@@ -344,7 +355,7 @@ export function LandingPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
               {/* Card 1: Sapphire Frosted Liquid Glass */}
-              <div className="rounded-[28px] bg-gradient-to-br from-blue-600/90 via-indigo-600/88 to-blue-700/92 backdrop-blur-2xl border border-white/40 text-white p-7 flex flex-col justify-between min-h-[300px] shadow-xl">
+              <div className="rounded-[28px] bg-gradient-to-br from-blue-600/90 via-indigo-600/88 to-blue-700/92 backdrop-blur-2xl border border-white/40 text-white p-7 flex flex-col justify-between min-h-[300px] shadow-xl card-interactive">
                 <div className="space-y-4">
                   <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/30 inline-flex items-center justify-center text-white">
                     <Compass className="w-5 h-5" aria-hidden="true" />
@@ -358,7 +369,7 @@ export function LandingPage() {
                 </div>
                 <Link
                   to="/plan"
-                  className="mt-6 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-white text-slate-950 text-sm font-semibold hover:bg-blue-50 transition-colors"
+                  className="mt-6 inline-flex items-center justify-center gap-2 py-3 px-5 rounded-full bg-white text-slate-950 text-sm font-semibold hover:bg-blue-50 transition-colors pressable"
                 >
                   <span>Start Tailored Planning</span>
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -366,12 +377,12 @@ export function LandingPage() {
               </div>
 
               {/* Card 2: Full-bleed Architectural Stay Card */}
-              <div className="relative rounded-[28px] overflow-hidden min-h-[300px] border border-white/85 shadow-lg">
+              <div className="relative rounded-[28px] overflow-hidden min-h-[300px] border border-white/85 shadow-lg group card-interactive">
                 <img
                   src={getMediaUrl('boutique_villa')}
                   alt="Minimalist luxury mountain lodge terrace at twilight"
                   referrerPolicy="no-referrer"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover img-zoom"
                 />
                 <div
                   aria-hidden="true"
@@ -391,7 +402,7 @@ export function LandingPage() {
               </div>
 
               {/* Card 3: Liquid Glass Unified Engine */}
-              <div className="rounded-[28px] liquid-glass p-7 flex flex-col justify-between min-h-[300px]">
+              <div className="rounded-[28px] liquid-glass p-7 flex flex-col justify-between min-h-[300px] card-interactive">
                 <div className="space-y-2">
                   <p className="text-3xl font-bold text-slate-950 font-sans tabular-nums tracking-tight">
                     12 Regions

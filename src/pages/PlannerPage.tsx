@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   ArrowRight,
   BookmarkCheck,
@@ -315,8 +316,11 @@ export function PlannerPage() {
             )}
 
             {messages.map((msg) => (
-              <div
+              <motion.div
                 key={msg.id}
+                initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
                 className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} space-y-3`}
               >
                 <div
@@ -378,13 +382,13 @@ export function PlannerPage() {
                     {msg.hotels.map((hotel) => (
                       <div
                         key={hotel.id}
-                        className="rounded-3xl liquid-glass overflow-hidden"
+                        className="rounded-3xl liquid-glass overflow-hidden card-interactive group"
                       >
                         <img
                           src={getMediaUrl(hotel.mediaKey)}
                           alt={hotel.name}
                           referrerPolicy="no-referrer"
-                          className="w-full h-32 object-cover"
+                          className="w-full h-32 object-cover img-zoom"
                         />
                         <div className="p-4 space-y-1.5">
                           <p className="text-xs text-slate-500">
@@ -429,7 +433,7 @@ export function PlannerPage() {
                           type="button"
                           disabled={savingTrip}
                           onClick={() => handleSaveTrip(msg.itinerary!)}
-                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 disabled:opacity-50 whitespace-nowrap shrink-0 cursor-pointer shadow-xs"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 disabled:opacity-50 whitespace-nowrap shrink-0 cursor-pointer shadow-xs pressable"
                         >
                           <BookmarkCheck className="w-4 h-4" aria-hidden="true" />
                           <span>{savingTrip ? 'Saving…' : 'Save & Open Trip Dashboard'}</span>
@@ -441,7 +445,7 @@ export function PlannerPage() {
                         {msg.itinerary.days.map((day) => (
                           <div
                             key={day.day}
-                            className="rounded-2xl liquid-glass-subtle p-4 space-y-2.5"
+                            className="rounded-2xl liquid-glass-subtle p-4 space-y-2.5 card-interactive"
                           >
                             <div className="flex items-center justify-between gap-2">
                               <span className="text-xs font-bold text-blue-700 tabular-nums">
@@ -477,27 +481,48 @@ export function PlannerPage() {
                 {/* Suggested Quick Follow-ups */}
                 {msg.followUpQuestions && msg.followUpQuestions.length > 0 && (
                   <div className="flex flex-wrap gap-2 max-w-3xl">
-                    {msg.followUpQuestions.map((q) => (
-                      <button
+                    {msg.followUpQuestions.map((q, qIdx) => (
+                      <motion.button
                         key={q}
                         type="button"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.22, delay: qIdx * 0.035, ease: [0.23, 1, 0.32, 1] }}
                         onClick={() => sendMessage(q)}
-                        className="px-3.5 py-2 rounded-full liquid-glass-chip text-xs font-medium text-slate-700 hover:text-blue-700 transition-colors text-left cursor-pointer"
+                        className="px-3.5 py-2 rounded-full liquid-glass-chip text-xs font-medium text-slate-700 hover:text-blue-700 transition-colors text-left cursor-pointer pressable"
                       >
                         {q}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
 
-            {loading && (
-              <div className="max-w-md rounded-2xl liquid-glass px-5 py-4 flex items-center gap-3 text-sm text-slate-700">
-                <Sparkles className="w-4 h-4 text-blue-600 animate-spin shrink-0" aria-hidden="true" />
-                <span>{progressStage || 'Planning your journey…'}</span>
-              </div>
-            )}
+            <AnimatePresence>
+              {loading && (
+                <motion.div
+                  initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.24, ease: [0.23, 1, 0.32, 1] }}
+                  className="max-w-md rounded-2xl liquid-glass px-5 py-4 flex items-center gap-3 text-sm text-slate-700 shadow-sm"
+                >
+                  <Sparkles className="w-4 h-4 text-blue-600 animate-spin shrink-0" aria-hidden="true" />
+                  <AnimatePresence mode="wait">
+                    <motion.span
+                      key={progressStage}
+                      initial={{ opacity: 0, y: 3 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -3 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {progressStage || 'Planning your journey…'}
+                    </motion.span>
+                  </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             <div ref={endRef} />
           </div>

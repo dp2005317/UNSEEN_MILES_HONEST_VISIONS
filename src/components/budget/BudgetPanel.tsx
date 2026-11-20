@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { RefreshCw } from 'lucide-react';
+import { motion } from 'motion/react';
 import type { Itinerary } from '../../types/travel';
 
 interface BudgetPanelProps {
@@ -71,7 +72,7 @@ export function BudgetPanel({
             <button
               type="submit"
               disabled={optimizing}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 disabled:opacity-50 whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 disabled:opacity-50 whitespace-nowrap shrink-0 cursor-pointer pressable"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${optimizing ? 'animate-spin' : ''}`} />
               <span>{optimizing ? 'Optimizing…' : 'Optimize Budget'}</span>
@@ -82,25 +83,25 @@ export function BudgetPanel({
 
       {/* KPI Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="rounded-2xl liquid-glass-subtle p-4">
+        <div className="rounded-2xl liquid-glass-subtle p-4 card-interactive">
           <p className="text-xs text-slate-500">Estimated Total</p>
           <p className="text-xl font-bold text-slate-900 font-sans tabular-nums tracking-tight mt-1">
             {itinerary.currency} {itinerary.estimatedTotal.toLocaleString()}
           </p>
         </div>
-        <div className="rounded-2xl liquid-glass-subtle p-4">
+        <div className="rounded-2xl liquid-glass-subtle p-4 card-interactive">
           <p className="text-xs text-slate-500">Per Traveller</p>
           <p className="text-xl font-bold text-slate-900 font-sans tabular-nums tracking-tight mt-1">
             {itinerary.currency} {perTraveller.toLocaleString()}
           </p>
         </div>
-        <div className="rounded-2xl liquid-glass-subtle p-4">
+        <div className="rounded-2xl liquid-glass-subtle p-4 card-interactive">
           <p className="text-xs text-slate-500">Per Day</p>
           <p className="text-xl font-bold text-slate-900 font-sans tabular-nums tracking-tight mt-1">
             {itinerary.currency} {perDay.toLocaleString()}
           </p>
         </div>
-        <div className="rounded-2xl bg-blue-50/80 backdrop-blur-md p-4 border border-blue-200/70">
+        <div className="rounded-2xl bg-blue-50/80 backdrop-blur-md p-4 border border-blue-200/70 card-interactive">
           <p className="text-xs text-blue-700 font-medium">Target Utilization</p>
           <p className="text-lg font-bold text-blue-950 font-sans tabular-nums tracking-tight mt-1">
             {utilizationPct}% · {itinerary.currency} {remaining.toLocaleString()} left
@@ -116,9 +117,11 @@ export function BudgetPanel({
             const pct = (val / Math.max(1, itinerary.estimatedTotal)) * 100;
             if (pct <= 0) return null;
             return (
-              <div
+              <motion.div
                 key={cat.key}
-                style={{ width: `${pct}%` }}
+                initial={{ width: 0 }}
+                animate={{ width: `${pct}%` }}
+                transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}
                 className={`${cat.color} h-full`}
                 title={`${cat.label}: ${itinerary.currency} ${val.toLocaleString()}`}
               />

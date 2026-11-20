@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Bookmark, Check, ExternalLink, Scale } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { DESTINATIONS } from '../data/catalog';
 import { getMediaUrl } from '../data/media';
 import type { HotelOption } from '../types/travel';
@@ -148,39 +149,47 @@ export function StaysPage() {
         />
 
         {/* Liquid Glass Comparison Tray */}
-        {comparedHotels.length > 0 && (
-          <section className="rounded-3xl liquid-glass border-blue-200/80 p-6 space-y-4">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-2">
-                <Scale className="w-4 h-4 text-blue-600" aria-hidden="true" />
-                <h2 className="text-base font-semibold text-slate-950">
-                  Side-by-Side Comparison ({comparedHotels.length}/3)
-                </h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => setCompareIds([])}
-                className="text-xs font-semibold text-slate-600 hover:text-slate-950 cursor-pointer"
-              >
-                Clear Comparison
-              </button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {comparedHotels.map((h) => (
-                <div key={h.id} className="rounded-2xl liquid-glass-subtle p-4 space-y-2 text-xs">
-                  <p className="font-semibold text-sm text-slate-950">{h.name}</p>
-                  <p className="text-blue-700 font-semibold tabular-nums">
-                    ₹{h.pricePerNightInr.toLocaleString()}/night · {h.rating}★ ({h.reviewCount})
-                  </p>
-                  <p className="text-slate-700 tabular-nums">
-                    Distance to center: {h.distanceToCenterKm} km
-                  </p>
-                  <p className="text-slate-500">{h.cancellationPolicy}</p>
+        <AnimatePresence>
+          {comparedHotels.length > 0 && (
+            <motion.section
+              initial={{ opacity: 0, y: -12, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -8, scale: 0.98 }}
+              transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
+              className="rounded-3xl liquid-glass border-blue-200/80 p-6 space-y-4"
+            >
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <Scale className="w-4 h-4 text-blue-600" aria-hidden="true" />
+                  <h2 className="text-base font-semibold text-slate-950">
+                    Side-by-Side Comparison ({comparedHotels.length}/3)
+                  </h2>
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+                <button
+                  type="button"
+                  onClick={() => setCompareIds([])}
+                  className="text-xs font-semibold text-slate-600 hover:text-slate-950 cursor-pointer pressable"
+                >
+                  Clear Comparison
+                </button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {comparedHotels.map((h) => (
+                  <div key={h.id} className="rounded-2xl liquid-glass-subtle p-4 space-y-2 text-xs card-interactive">
+                    <p className="font-semibold text-sm text-slate-950">{h.name}</p>
+                    <p className="text-blue-700 font-semibold tabular-nums">
+                      ₹{h.pricePerNightInr.toLocaleString()}/night · {h.rating}★ ({h.reviewCount})
+                    </p>
+                    <p className="text-slate-700 tabular-nums">
+                      Distance to center: {h.distanceToCenterKm} km
+                    </p>
+                    <p className="text-slate-500">{h.cancellationPolicy}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+          )}
+        </AnimatePresence>
 
         {/* Stay Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -193,7 +202,7 @@ export function StaysPage() {
             return (
               <article
                 key={hotel.id}
-                className="rounded-[26px] liquid-glass overflow-hidden flex flex-col justify-between transition-transform duration-200 hover:-translate-y-0.5"
+                className="rounded-[26px] liquid-glass overflow-hidden flex flex-col justify-between card-interactive group"
               >
                 <div>
                   <div className="relative h-52 bg-slate-200 overflow-hidden">
@@ -201,7 +210,7 @@ export function StaysPage() {
                       src={getMediaUrl(hotel.mediaKey)}
                       alt={hotel.name}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover img-zoom"
                     />
                     <span className="absolute top-3 left-3 px-3 py-1 rounded-full liquid-glass-chip text-xs font-semibold text-slate-900 capitalize">
                       {hotel.tier}
@@ -210,9 +219,9 @@ export function StaysPage() {
                       type="button"
                       onClick={() => toggleSave(hotel.id)}
                       aria-label={isSaved ? `Unsave ${hotel.name}` : `Save ${hotel.name}`}
-                      className={`absolute top-3 right-3 w-10 h-10 rounded-full inline-flex items-center justify-center border cursor-pointer backdrop-blur-md ${
+                      className={`absolute top-3 right-3 w-10 h-10 rounded-full inline-flex items-center justify-center border cursor-pointer backdrop-blur-md pressable ${
                         isSaved
-                          ? 'bg-blue-600 text-white border-blue-500'
+                          ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
                           : 'bg-white/85 text-slate-800 border-white/80 hover:bg-white'
                       }`}
                     >
@@ -254,7 +263,7 @@ export function StaysPage() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`Check live rates for ${hotel.name}`}
-                      className="inline-flex items-center gap-1 px-3 py-2 rounded-full liquid-glass-chip text-xs font-semibold text-blue-700 hover:text-blue-800"
+                      className="inline-flex items-center gap-1 px-3 py-2 rounded-full liquid-glass-chip text-xs font-semibold text-blue-700 hover:text-blue-800 pressable"
                     >
                       <span>Rates</span>
                       <ExternalLink className="w-3 h-3" />
@@ -262,7 +271,7 @@ export function StaysPage() {
                     <button
                       type="button"
                       onClick={() => toggleCompare(hotel.id)}
-                      className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold cursor-pointer ${
+                      className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold cursor-pointer pressable ${
                         isCompared
                           ? 'bg-blue-600 text-white'
                           : 'bg-slate-950 text-white hover:bg-slate-800'

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowRight, Bookmark, CloudSun, ExternalLink, Loader2, MapPin, Search, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { DESTINATIONS } from '../data/catalog';
 import { resolveOrSynthesizeDestination } from '../lib/worldwideDestinations';
 import { getMediaUrl } from '../data/media';
@@ -202,9 +203,12 @@ export function ExplorePage() {
               <p className="text-sm text-slate-700 leading-relaxed">{aiPlaces.summary}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {aiPlaces.places.map((p, idx) => (
-                  <div
+                  <motion.div
                     key={idx}
-                    className="rounded-2xl liquid-glass-subtle p-4 flex flex-col justify-between gap-3"
+                    initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.26, delay: idx * 0.04, ease: [0.23, 1, 0.32, 1] }}
+                    className="rounded-2xl liquid-glass-subtle p-4 flex flex-col justify-between gap-3 card-interactive"
                   >
                     <div className="space-y-1.5">
                       <p className="text-xs font-medium text-blue-700">
@@ -227,41 +231,49 @@ export function ExplorePage() {
                           href={p.mapsUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full liquid-glass-chip text-xs font-semibold text-slate-700 hover:text-blue-700"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full liquid-glass-chip text-xs font-semibold text-slate-700 hover:text-blue-700 pressable"
                         >
                           <MapPin className="w-3 h-3" />
                           <span>Map</span>
                         </a>
                         <Link
                           to={`/plan?destination=${encodeURIComponent(p.name)}`}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 pressable"
                         >
                           <span>Plan</span>
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
           )}
         </section>
 
-        {/* Segmented Filter Tabs */}
+        {/* Segmented Filter Tabs with Sliding Pill */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1">
           {tags.map((tag) => (
             <button
               key={tag}
               type="button"
               onClick={() => setSelectedTag(tag)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                selectedTag === tag
-                  ? 'bg-slate-950 text-white shadow-xs'
-                  : 'liquid-glass-chip text-slate-700 hover:text-slate-950'
+              className={`relative px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer pressable ${
+                selectedTag === tag ? 'text-white' : 'text-slate-700 hover:text-slate-950'
               }`}
             >
-              {tag}
+              {selectedTag === tag && (
+                <motion.span
+                  layoutId="explore-tag-pill"
+                  className="absolute inset-0 rounded-full bg-slate-950 -z-10 shadow-xs"
+                  transition={{ type: 'spring', duration: 0.35, bounce: 0.15 }}
+                />
+              )}
+              {selectedTag !== tag && (
+                <span className="absolute inset-0 rounded-full liquid-glass-chip -z-10" />
+              )}
+              <span className="relative z-10">{tag}</span>
             </button>
           ))}
         </div>
@@ -274,7 +286,7 @@ export function ExplorePage() {
             <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 to={`/plan?destination=${encodeURIComponent(query)}`}
-                className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700"
+                className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 pressable"
               >
                 Plan "{query}" with AI
               </Link>
@@ -284,7 +296,7 @@ export function ExplorePage() {
                   setQuery('');
                   setSelectedTag('All');
                 }}
-                className="px-4 py-2.5 rounded-full liquid-glass-chip text-slate-800 text-xs font-semibold cursor-pointer"
+                className="px-4 py-2.5 rounded-full liquid-glass-chip text-slate-800 text-xs font-semibold cursor-pointer pressable"
               >
                 Show All 12 Curated Regions
               </button>
@@ -295,9 +307,11 @@ export function ExplorePage() {
             {filtered.map((dest) => {
               const isSaved = savedIds.includes(dest.id);
               return (
-                <article
+                <motion.article
+                  layout
                   key={dest.id}
-                  className="group rounded-[28px] liquid-glass overflow-hidden flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
+                  transition={{ type: 'spring', duration: 0.42, bounce: 0.1 }}
+                  className="group rounded-[28px] liquid-glass overflow-hidden flex flex-col justify-between card-interactive"
                 >
                   <div>
                     <div className="relative h-60 overflow-hidden bg-slate-200">
@@ -305,7 +319,7 @@ export function ExplorePage() {
                         src={getMediaUrl(dest.mediaKey)}
                         alt={`${dest.name}, ${dest.country}`}
                         referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="w-full h-full object-cover img-zoom"
                       />
                       <div
                         aria-hidden="true"
@@ -318,9 +332,9 @@ export function ExplorePage() {
                         type="button"
                         onClick={() => toggleSave(dest.id)}
                         aria-label={isSaved ? `Remove ${dest.name} from saved` : `Save ${dest.name}`}
-                        className={`absolute top-3.5 right-3.5 w-10 h-10 rounded-full inline-flex items-center justify-center backdrop-blur-md border transition-colors cursor-pointer ${
+                        className={`absolute top-3.5 right-3.5 w-10 h-10 rounded-full inline-flex items-center justify-center backdrop-blur-md border transition-colors cursor-pointer pressable ${
                           isSaved
-                            ? 'bg-blue-600 text-white border-blue-500'
+                            ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
                             : 'bg-white/80 text-slate-800 border-white/80 hover:bg-white'
                         }`}
                       >
@@ -354,13 +368,13 @@ export function ExplorePage() {
                     </span>
                     <Link
                       to={`/explore/${dest.slug}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-blue-600 transition-colors whitespace-nowrap"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-blue-600 transition-colors whitespace-nowrap pressable"
                     >
                       <span>View Guide</span>
                       <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                     </Link>
                   </div>
-                </article>
+                </motion.article>
               );
             })}
           </div>

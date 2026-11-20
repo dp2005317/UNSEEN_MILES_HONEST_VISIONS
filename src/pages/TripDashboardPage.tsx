@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
 import {
   AlertTriangle,
   CalendarDays,
@@ -205,7 +206,7 @@ export function TripDashboardPage() {
           </div>
 
           {/* Dashboard Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pt-3 border-t border-white/75">
+          <div className="flex items-center gap-2 overflow-x-auto pt-3 border-t border-white/75 relative">
             {(
               [
                 ['itinerary', 'Daily Itinerary & Map'],
@@ -214,20 +215,30 @@ export function TripDashboardPage() {
                 ['essentials', 'Currency, Language & Essentials'],
                 ['assistant', 'Trip Assistant'],
               ] as const
-            ).map(([key, label]) => (
-              <button
-                key={key}
-                type="button"
-                onClick={() => setActiveTab(key)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
-                  activeTab === key
-                    ? 'bg-blue-600 text-white shadow-xs'
-                    : 'liquid-glass-chip text-slate-700 hover:text-slate-950'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
+            ).map(([key, label]) => {
+              const active = activeTab === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => setActiveTab(key)}
+                  className={`relative px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 cursor-pointer pressable transition-colors ${
+                    active
+                      ? 'text-white'
+                      : 'liquid-glass-chip text-slate-700 hover:text-slate-950'
+                  }`}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="trip-tab-active"
+                      className="absolute inset-0 rounded-full bg-blue-600 shadow-xs -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{label}</span>
+                </button>
+              );
+            })}
           </div>
         </section>
 
@@ -238,322 +249,372 @@ export function TripDashboardPage() {
           </div>
         )}
 
-        {/* Tab 1: Daily Itinerary + Interactive Map */}
-        {activeTab === 'itinerary' && (
-          <div className="space-y-8">
-            <InteractiveTripMap
-              title={`${trip.destination} Day-by-Day Route`}
-              points={mapPoints}
-              activePointId={selectedActivityId}
-              onSelectPoint={setSelectedActivityId}
-            />
+        {/* Tab Content with Smooth Transitions */}
+        <AnimatePresence mode="wait">
+          {activeTab === 'itinerary' && (
+            <motion.div
+              key="itinerary"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="space-y-8"
+            >
+              <InteractiveTripMap
+                title={`${trip.destination} Day-by-Day Route`}
+                points={mapPoints}
+                activePointId={selectedActivityId}
+                onSelectPoint={setSelectedActivityId}
+              />
 
-            <div className="space-y-5">
-              {trip.days.map((day) => (
-                <article
-                  key={day.day}
-                  className="rounded-3xl liquid-glass p-6 space-y-4"
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/75">
-                    <div>
-                      <p className="text-xs font-bold text-blue-700 tabular-nums">
-                        Day {String(day.day).padStart(2, '0')} · Stay: {day.hotelName}
-                      </p>
-                      <h2 className="text-lg font-bold text-slate-950 mt-0.5">{day.title}</h2>
+              <div className="space-y-5">
+                {trip.days.map((day) => (
+                  <article
+                    key={day.day}
+                    className="rounded-3xl liquid-glass p-6 space-y-4"
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-white/75">
+                      <div>
+                        <p className="text-xs font-bold text-blue-700 tabular-nums">
+                          Day {String(day.day).padStart(2, '0')} · Stay: {day.hotelName}
+                        </p>
+                        <h2 className="text-lg font-bold text-slate-950 mt-0.5">{day.title}</h2>
+                      </div>
+                      <span className="text-sm font-bold text-slate-900 tabular-nums">
+                        Est. {trip.currency} {day.estimatedCost.toLocaleString()}
+                      </span>
                     </div>
-                    <span className="text-sm font-bold text-slate-900 tabular-nums">
-                      Est. {trip.currency} {day.estimatedCost.toLocaleString()}
-                    </span>
+
+                    <p className="text-sm text-slate-600">{day.summary}</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {day.activities.map((act) => (
+                        <button
+                          key={act.id}
+                          type="button"
+                          onClick={() => setSelectedActivityId(act.id)}
+                          className={`text-left rounded-2xl p-4 border transition-colors cursor-pointer card-interactive pressable ${
+                            selectedActivityId === act.id
+                              ? 'bg-blue-50/85 border-blue-400'
+                              : 'liquid-glass-subtle hover:border-blue-300'
+                          }`}
+                        >
+                          <p className="text-xs font-semibold text-blue-700 tabular-nums">
+                            {act.timeOfDay} · {act.durationHours}h · {act.crowdLevel}
+                          </p>
+                          <h3 className="text-sm font-semibold text-slate-900 mt-1">{act.title}</h3>
+                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">{act.description}</p>
+                          <p className="text-xs font-semibold text-slate-700 mt-2 tabular-nums">
+                            {act.estimatedCost === 0
+                              ? 'Included / Free entry'
+                              : `Est. ${trip.currency} ${act.estimatedCost.toLocaleString()}`}
+                          </p>
+                        </button>
+                      ))}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Tab 2: Smart Budget */}
+          {activeTab === 'budget' && (
+            <motion.div
+              key="budget"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <BudgetPanel
+                itinerary={trip}
+                onOptimizeBudget={handleOptimizeBudget}
+                optimizing={optimizing}
+                lastChanges={optChanges}
+              />
+            </motion.div>
+          )}
+
+          {/* Tab 3: Booking Organizer & Post-Booking Support */}
+          {activeTab === 'bookings' && (
+            <motion.div
+              key="bookings"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="space-y-6"
+            >
+              <div className="rounded-3xl liquid-glass p-6 space-y-5">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-lg font-bold text-slate-950">Booking Organizer & Post-Booking Support</h2>
+                    <p className="text-xs text-slate-500">
+                      Store confirmation references and review cancellation policies before requesting any change.
+                    </p>
                   </div>
+                </div>
 
-                  <p className="text-sm text-slate-600">{day.summary}</p>
+                <form onSubmit={handleAddBooking} className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2">
+                  <select
+                    aria-label="Booking type"
+                    value={newBookingType}
+                    onChange={(e) => setNewBookingType(e.target.value as BookingRecord['type'])}
+                    className="px-3.5 py-2.5 rounded-xl border border-white/85 text-sm bg-white/80"
+                  >
+                    <option value="Flight">Flight</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Transport">Cab / Transfer</option>
+                    <option value="Activity">Activity</option>
+                  </select>
+                  <input
+                    type="text"
+                    required
+                    value={newBookingTitle}
+                    onChange={(e) => setNewBookingTitle(e.target.value)}
+                    placeholder="Reservation title or voucher…"
+                    className="sm:col-span-2 px-3.5 py-2.5 rounded-xl border border-white/85 bg-white/80 text-sm"
+                  />
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={newBookingRef}
+                      onChange={(e) => setNewBookingRef(e.target.value)}
+                      placeholder="Ref #"
+                      className="w-24 px-3 py-2.5 rounded-xl border border-white/85 bg-white/80 text-sm tabular-nums"
+                    />
+                    <button
+                      type="submit"
+                      className="flex-1 inline-flex items-center justify-center gap-1 px-4 py-2.5 rounded-xl bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer pressable"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add</span>
+                    </button>
+                  </div>
+                </form>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {day.activities.map((act) => (
-                      <button
-                        key={act.id}
-                        type="button"
-                        onClick={() => setSelectedActivityId(act.id)}
-                        className={`text-left rounded-2xl p-4 border transition-colors cursor-pointer ${
-                          selectedActivityId === act.id
-                            ? 'bg-blue-50/85 border-blue-400'
-                            : 'liquid-glass-subtle hover:border-blue-300'
-                        }`}
-                      >
+                <div className="space-y-3 pt-2">
+                  {bookings.map((bk) => (
+                    <div
+                      key={bk.id}
+                      className="rounded-2xl liquid-glass-subtle p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 card-interactive"
+                    >
+                      <div className="space-y-1">
                         <p className="text-xs font-semibold text-blue-700 tabular-nums">
-                          {act.timeOfDay} · {act.durationHours}h · {act.crowdLevel}
+                          {bk.type} · Ref {bk.referenceCode} · {bk.status}
                         </p>
-                        <h3 className="text-sm font-semibold text-slate-900 mt-1">{act.title}</h3>
-                        <p className="text-xs text-slate-600 mt-1 leading-relaxed">{act.description}</p>
-                        <p className="text-xs font-semibold text-slate-700 mt-2 tabular-nums">
-                          {act.estimatedCost === 0
-                            ? 'Included / Free entry'
-                            : `Est. ${trip.currency} ${act.estimatedCost.toLocaleString()}`}
+                        <h3 className="text-sm font-semibold text-slate-900">{bk.title}</h3>
+                        <p className="text-xs text-slate-600">
+                          {bk.provider} · {bk.dateLabel} · {bk.cancellationPolicy}
                         </p>
-                      </button>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
+                      </div>
 
-        {/* Tab 2: Smart Budget */}
-        {activeTab === 'budget' && (
-          <BudgetPanel
-            itinerary={trip}
-            onOptimizeBudget={handleOptimizeBudget}
-            optimizing={optimizing}
-            lastChanges={optChanges}
-          />
-        )}
+                      <div className="flex flex-wrap items-center gap-2 shrink-0">
+                        <a
+                          href={bk.providerUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 px-3 py-2 rounded-xl liquid-glass-chip text-xs font-semibold text-slate-700 hover:text-blue-700 pressable"
+                        >
+                          <span>Provider Portal</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setPendingAction({ booking: bk, targetStatus: 'Pending Modification' })
+                          }
+                          className="px-3 py-2 rounded-xl liquid-glass-chip text-xs font-semibold text-slate-800 hover:text-blue-700 cursor-pointer pressable"
+                        >
+                          Prepare Change
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setPendingAction({ booking: bk, targetStatus: 'Cancelled Record' })
+                          }
+                          className="px-3 py-2 rounded-xl bg-white/80 border border-red-200 text-xs font-semibold text-red-700 hover:bg-red-50 cursor-pointer pressable"
+                        >
+                          Mark Cancelled
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
 
-        {/* Tab 3: Booking Organizer & Post-Booking Support */}
-        {activeTab === 'bookings' && (
-          <div className="space-y-6">
-            <div className="rounded-3xl liquid-glass p-6 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          {/* Tab 4: Essentials, Currency & Language */}
+          {activeTab === 'essentials' && (
+            <motion.div
+              key="essentials"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="space-y-6"
+            >
+              <CurrencyLanguageTools
+                homeCurrency={trip.currency}
+                destinationCurrency={destinationObj.currencyCode}
+                languageName={destinationObj.languageName}
+                phrases={destinationObj.phrases}
+                estimatedTotalHome={trip.estimatedTotal}
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="rounded-3xl liquid-glass p-6 space-y-2 card-interactive">
+                  <CalendarDays className="w-5 h-5 text-blue-600" aria-hidden="true" />
+                  <h3 className="text-base font-semibold text-slate-900">Passport & Visa Check</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Ensure at least 6 months passport validity from your return date and check official embassy e-visa portals for {trip.destination}.
+                  </p>
+                </div>
+                <div className="rounded-3xl liquid-glass p-6 space-y-2 card-interactive">
+                  <ShieldAlert className="w-5 h-5 text-blue-600" aria-hidden="true" />
+                  <h3 className="text-base font-semibold text-slate-900">Safety & Insurance</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {destinationObj.safetyNotes[0] || 'Keep digital copies of travel insurance and emergency contacts.'}
+                  </p>
+                </div>
+                <div className="rounded-3xl liquid-glass p-6 space-y-2 card-interactive">
+                  <AlertTriangle className="w-5 h-5 text-blue-600" aria-hidden="true" />
+                  <h3 className="text-base font-semibold text-slate-900">Cultural Etiquette</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {destinationObj.culturalTips[0]}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Tab 5: Contextual Trip Assistant */}
+          {activeTab === 'assistant' && (
+            <motion.div
+              key="assistant"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="rounded-3xl liquid-glass p-6 space-y-5"
+            >
+              <div className="flex items-center gap-2.5">
+                <MessageSquare className="w-5 h-5 text-blue-600" aria-hidden="true" />
                 <div>
-                  <h2 className="text-lg font-bold text-slate-950">Booking Organizer & Post-Booking Support</h2>
+                  <h2 className="text-lg font-bold text-slate-950">Contextual Trip Assistant</h2>
                   <p className="text-xs text-slate-500">
-                    Store confirmation references and review cancellation policies before requesting any change.
+                    Answers using your saved {trip.destination} itinerary, hotel location, and budget.
                   </p>
                 </div>
               </div>
 
-              <form onSubmit={handleAddBooking} className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2">
-                <select
-                  aria-label="Booking type"
-                  value={newBookingType}
-                  onChange={(e) => setNewBookingType(e.target.value as BookingRecord['type'])}
-                  className="px-3.5 py-2.5 rounded-xl border border-white/85 text-sm bg-white/80"
-                >
-                  <option value="Flight">Flight</option>
-                  <option value="Hotel">Hotel</option>
-                  <option value="Transport">Cab / Transfer</option>
-                  <option value="Activity">Activity</option>
-                </select>
-                <input
-                  type="text"
-                  required
-                  value={newBookingTitle}
-                  onChange={(e) => setNewBookingTitle(e.target.value)}
-                  placeholder="Reservation title or voucher…"
-                  className="sm:col-span-2 px-3.5 py-2.5 rounded-xl border border-white/85 bg-white/80 text-sm"
-                />
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={newBookingRef}
-                    onChange={(e) => setNewBookingRef(e.target.value)}
-                    placeholder="Ref #"
-                    className="w-24 px-3 py-2.5 rounded-xl border border-white/85 bg-white/80 text-sm tabular-nums"
-                  />
+              <div className="flex flex-wrap gap-2">
+                {[
+                  'Find a quiet nearby café near my hotel',
+                  'How do I reach the airport smoothly on departure day?',
+                  'Make this trip 15% cheaper',
+                ].map((q) => (
                   <button
-                    type="submit"
-                    className="flex-1 inline-flex items-center justify-center gap-1 px-4 py-2.5 rounded-xl bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 cursor-pointer"
+                    key={q}
+                    type="button"
+                    onClick={() => handleAskTripAssistant(q)}
+                    className="px-3.5 py-2 rounded-full liquid-glass-chip text-xs font-medium text-slate-700 hover:text-blue-700 cursor-pointer pressable"
                   >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>Add</span>
+                    {q}
                   </button>
-                </div>
-              </form>
-
-              <div className="space-y-3 pt-2">
-                {bookings.map((bk) => (
-                  <div
-                    key={bk.id}
-                    className="rounded-2xl liquid-glass-subtle p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4"
-                  >
-                    <div className="space-y-1">
-                      <p className="text-xs font-semibold text-blue-700 tabular-nums">
-                        {bk.type} · Ref {bk.referenceCode} · {bk.status}
-                      </p>
-                      <h3 className="text-sm font-semibold text-slate-900">{bk.title}</h3>
-                      <p className="text-xs text-slate-600">
-                        {bk.provider} · {bk.dateLabel} · {bk.cancellationPolicy}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-2 shrink-0">
-                      <a
-                        href={bk.providerUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 px-3 py-2 rounded-xl liquid-glass-chip text-xs font-semibold text-slate-700 hover:text-blue-700"
-                      >
-                        <span>Provider Portal</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPendingAction({ booking: bk, targetStatus: 'Pending Modification' })
-                        }
-                        className="px-3 py-2 rounded-xl liquid-glass-chip text-xs font-semibold text-slate-800 hover:text-blue-700 cursor-pointer"
-                      >
-                        Prepare Change
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setPendingAction({ booking: bk, targetStatus: 'Cancelled Record' })
-                        }
-                        className="px-3 py-2 rounded-xl bg-white/80 border border-red-200 text-xs font-semibold text-red-700 hover:bg-red-50 cursor-pointer"
-                      >
-                        Mark Cancelled
-                      </button>
-                    </div>
-                  </div>
                 ))}
               </div>
-            </div>
-          </div>
-        )}
 
-        {/* Tab 4: Essentials, Currency & Language */}
-        {activeTab === 'essentials' && (
-          <div className="space-y-6">
-            <CurrencyLanguageTools
-              homeCurrency={trip.currency}
-              destinationCurrency={destinationObj.currencyCode}
-              languageName={destinationObj.languageName}
-              phrases={destinationObj.phrases}
-              estimatedTotalHome={trip.estimatedTotal}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="rounded-3xl liquid-glass p-6 space-y-2">
-                <CalendarDays className="w-5 h-5 text-blue-600" aria-hidden="true" />
-                <h3 className="text-base font-semibold text-slate-900">Passport & Visa Check</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Ensure at least 6 months passport validity from your return date and check official embassy e-visa portals for {trip.destination}.
-                </p>
-              </div>
-              <div className="rounded-3xl liquid-glass p-6 space-y-2">
-                <ShieldAlert className="w-5 h-5 text-blue-600" aria-hidden="true" />
-                <h3 className="text-base font-semibold text-slate-900">Safety & Insurance</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {destinationObj.safetyNotes[0] || 'Keep digital copies of travel insurance and emergency contacts.'}
-                </p>
-              </div>
-              <div className="rounded-3xl liquid-glass p-6 space-y-2">
-                <AlertTriangle className="w-5 h-5 text-blue-600" aria-hidden="true" />
-                <h3 className="text-base font-semibold text-slate-900">Cultural Etiquette</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {destinationObj.culturalTips[0]}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Tab 5: Contextual Trip Assistant */}
-        {activeTab === 'assistant' && (
-          <div className="rounded-3xl liquid-glass p-6 space-y-5">
-            <div className="flex items-center gap-2.5">
-              <MessageSquare className="w-5 h-5 text-blue-600" aria-hidden="true" />
-              <div>
-                <h2 className="text-lg font-bold text-slate-950">Contextual Trip Assistant</h2>
-                <p className="text-xs text-slate-500">
-                  Answers using your saved {trip.destination} itinerary, hotel location, and budget.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {[
-                'Find a quiet nearby café near my hotel',
-                'How do I reach the airport smoothly on departure day?',
-                'Make this trip 15% cheaper',
-              ].map((q) => (
-                <button
-                  key={q}
-                  type="button"
-                  onClick={() => handleAskTripAssistant(q)}
-                  className="px-3.5 py-2 rounded-full liquid-glass-chip text-xs font-medium text-slate-700 hover:text-blue-700 cursor-pointer"
-                >
-                  {q}
-                </button>
-              ))}
-            </div>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                void handleAskTripAssistant();
-              }}
-              className="flex gap-2"
-            >
-              <input
-                type="text"
-                value={assistInput}
-                onChange={(e) => setAssistInput(e.target.value)}
-                placeholder={`Ask anything about your ${trip.destination} trip…`}
-                className="flex-1 px-4 py-2.5 rounded-full border border-white/85 bg-white/80 text-sm"
-              />
-              <button
-                type="submit"
-                disabled={assistLoading || !assistInput.trim()}
-                className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 disabled:opacity-50 cursor-pointer"
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  void handleAskTripAssistant();
+                }}
+                className="flex gap-2"
               >
-                <Send className="w-3.5 h-3.5" />
-                <span>{assistLoading ? 'Thinking…' : 'Ask'}</span>
-              </button>
-            </form>
+                <input
+                  type="text"
+                  value={assistInput}
+                  onChange={(e) => setAssistInput(e.target.value)}
+                  placeholder={`Ask anything about your ${trip.destination} trip…`}
+                  className="flex-1 px-4 py-2.5 rounded-full border border-white/85 bg-white/80 text-sm"
+                />
+                <button
+                  type="submit"
+                  disabled={assistLoading || !assistInput.trim()}
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-slate-950 text-white text-xs font-semibold hover:bg-slate-800 disabled:opacity-50 cursor-pointer pressable"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{assistLoading ? 'Thinking…' : 'Ask'}</span>
+                </button>
+              </form>
 
-            {assistReply && (
-              <div className="rounded-2xl liquid-glass-subtle p-4 text-sm text-slate-800 whitespace-pre-line leading-relaxed">
-                {assistReply}
-              </div>
-            )}
-          </div>
-        )}
+              {assistReply && (
+                <div className="rounded-2xl liquid-glass-subtle p-4 text-sm text-slate-800 whitespace-pre-line leading-relaxed">
+                  {assistReply}
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
 
       {/* Post-Booking Explicit Confirmation Modal */}
-      {pendingAction && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="confirm-booking-title"
-          className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-xs flex items-center justify-center p-4"
-        >
-          <div className="bg-white/95 backdrop-blur-2xl rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-white">
-            <h3 id="confirm-booking-title" className="text-lg font-bold text-slate-950">
-              Confirm Booking Organizer Update
-            </h3>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              You are marking <strong>{pendingAction.booking.title}</strong> as{' '}
-              <strong>{pendingAction.targetStatus}</strong> in your local trip organizer.
-            </p>
-            <div className="rounded-2xl liquid-glass-subtle p-3.5 text-xs text-slate-600 space-y-1">
-              <p className="font-semibold text-slate-800">Policy & Live Provider Note</p>
-              <p>{pendingAction.booking.cancellationPolicy}</p>
-              <p>
-                Because live airline/hotel booking APIs are not connected, this updates your organizer record only—complete official partner changes on the provider portal.
+      <AnimatePresence>
+        {pendingAction && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-booking-title"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-xs flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+              className="bg-white/95 backdrop-blur-2xl rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-white"
+            >
+              <h3 id="confirm-booking-title" className="text-lg font-bold text-slate-950">
+                Confirm Booking Organizer Update
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                You are marking <strong>{pendingAction.booking.title}</strong> as{' '}
+                <strong>{pendingAction.targetStatus}</strong> in your local trip organizer.
               </p>
-            </div>
-            <div className="flex items-center justify-end gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => setPendingAction(null)}
-                className="px-4 py-2 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold hover:bg-slate-200 cursor-pointer"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={confirmPostBookingAction}
-                className="px-4 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 cursor-pointer"
-              >
-                Confirm Update
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+              <div className="rounded-2xl liquid-glass-subtle p-3.5 text-xs text-slate-600 space-y-1">
+                <p className="font-semibold text-slate-800">Policy & Live Provider Note</p>
+                <p>{pendingAction.booking.cancellationPolicy}</p>
+                <p>
+                  Because live airline/hotel booking APIs are not connected, this updates your organizer record only—complete official partner changes on the provider portal.
+                </p>
+              </div>
+              <div className="flex items-center justify-end gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setPendingAction(null)}
+                  className="px-4 py-2 rounded-full bg-slate-100 text-slate-800 text-xs font-semibold hover:bg-slate-200 cursor-pointer pressable"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={confirmPostBookingAction}
+                  className="px-4 py-2 rounded-full bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 cursor-pointer pressable"
+                >
+                  Confirm Update
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </div>
