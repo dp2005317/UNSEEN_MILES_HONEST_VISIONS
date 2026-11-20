@@ -1,5 +1,4 @@
 import {
-  ThinkingLevel,
   Type,
   type Content,
   type FunctionDeclaration,
@@ -13,6 +12,12 @@ import {
   optimizeItineraryForBudget,
   rankHotels,
 } from '../../src/lib/travelEngine';
+import {
+  getSeasonalProfile,
+  resolveSeason,
+  type Season,
+  type SeasonalProfile,
+} from '../../src/lib/seasonalIntelligence';
 import { resolveOrSynthesizeDestination } from '../../src/lib/worldwideDestinations';
 import type {
   ChatMessage,
@@ -198,7 +203,7 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
   let recommendedHotels: HotelOption[] | undefined;
   let collectedSources: ResearchSource[] = [];
 
-  const defaults = input.preferences
+  const defaults: Partial<ReturnType<typeof extractRequirementsFromText>> | undefined = input.preferences
     ? {
         origin: input.preferences.homeCity,
         currency: input.preferences.preferredCurrency,
@@ -355,6 +360,11 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
         return {
           status: 'generated',
           tripName: itinerary.tripName,
+          season: itinerary.season,
+          seasonalHighlights: itinerary.seasonalHighlights,
+          signatureFoods: itinerary.signatureFoods,
+          packingAdvice: itinerary.packingAdvice,
+          famousPlacesIncluded: Array.from(new Set(itinerary.days.flatMap((d) => d.activities.map((a) => a.title)))).slice(0, 10),
           estimatedTotal: itinerary.estimatedTotal,
           currency: itinerary.currency,
           selectedHotel: itinerary.selectedHotel?.name,
@@ -387,7 +397,19 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
 
   try {
     const ai = getGeminiClient();
-    const systemInstruction = `You are Unseen Miles, an attentive, seasoned private travel concierge.
+    const extractedPre = extractRequirementsFromText(input.message, {
+      ...defaults,
+      origin: input.currentItinerary?.origin || defaults?.origin,
+      destination: input.currentItinerary?.destination || defaults?.destination,
+      durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
+      travellers: input.currentItinerary?.travellers || defaults?.travellers,
+    });
+    const targetDest = extractedPre.destination || input.currentItinerary?.destination || 'Japan';
+    const destContext = resolveOrSynthesizeDestination(targetDest);
+    const targetSeason = resolveSeason(extractedPre.travelMonth || input.message, destContext.coordinates.lat);
+    const seasonalContext = getSeasonalProfile(destContext.name, targetSeason);
+
+    const systemInstruction = `You are Unseen Miles, an attentive, seasoned, and deeply knowledgeable private travel concierge.
 Tagline: "Every mile planned, even the unseen ones."
 Traveller saved preferences: ${JSON.stringify(input.preferences || {})}
 Current active itinerary summary: ${
@@ -396,12 +418,26 @@ Current active itinerary summary: ${
         : 'None yet'
     }
 
-Rules:
-1. You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, New York, Rome, Bali, or any location on earth). Never restrict the user to pre-set locations. Always generate plans and search stays for the exact destination requested.
-2. Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
-3. Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or simulated catalog estimates.
-4. Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (•). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
-5. Keep your response concise (under 115 words) and end with 1–2 thoughtful follow-up questions.`;
+Target Destination: ${destContext.name} (${destContext.country})
+Detected Season & Travel Timing: ${seasonalContext.season} (${seasonalContext.label})
+Weather & Climate: ${seasonalContext.weatherOverview} (Typical: ${seasonalContext.tempRange})
+Seasonal Highlights: ${seasonalContext.seasonalHighlights.join('; ')}
+Signature Seasonal Cuisine: ${seasonalContext.signatureFoods.join(', ')}
+Packing & Attire: ${seasonalContext.packingAdvice.join('; ')}
+Cultural & Practical Advisory: ${seasonalContext.culturalAdvisory}
+Key Sights & Landmarks in ${destContext.name}: ${destContext.places.slice(0, 10).map((p) => `${p.name} (${p.description})`).join('; ')}
+
+Rules & Guidelines:
+1. Universal Worldwide Coverage: You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, Kyoto, New York, Rome, Bali, or anywhere globally). Never restrict the user to preset locations. Always generate plans and search stays for the exact destination requested.
+2. Rich, Comprehensive & Seasonal Intelligence: The user expects thorough, high-value, and seasonal advice. Provide 220–340 words of rich, beautifully structured intelligence covering:
+   • Seasonal Climate & Character: Explain what makes ${seasonalContext.season} special in ${destContext.name}, temperature (${seasonalContext.tempRange}), and seasonal highlights (e.g. cherry blossom hanami, autumn koyo foliage, winter onsens & illuminations, or summer festivals).
+   • Must-See Iconic Landmarks & Hidden Gems: Always highlight famous must-see landmarks (e.g. for Japan, highlight both Tokyo's iconic hubs like Senso-ji, Shibuya Crossing, and Shinjuku, and Kyoto's Fushimi Inari and Arashiyama; for London, Big Ben, Tower Bridge, and British Museum; for Paris, Eiffel Tower and Louvre). Balance iconic landmarks with mindful, uncrowded moments.
+   • Seasonal Cuisine & Dining: Mention signature seasonal dishes and culinary experiences to savor during this time of year (e.g. ${seasonalContext.signatureFoods.slice(0, 3).join(', ')}).
+   • Smart Transit & Packing Essentials: Provide practical transit tips (e.g. Suica/Pasmo/JR Pass in Japan, Oyster card in London) and essential seasonal attire (${seasonalContext.packingAdvice.slice(0, 2).join(', ')}).
+3. Tools: Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
+4. Transparency: Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or catalog estimates.
+5. Formatting: Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (•). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
+6. Closing: End with 1–2 thoughtful follow-up questions tailored to their season, pace, and interests.`;
 
     const contents: Content[] = [
       ...input.history.slice(-8).map((m) => ({
@@ -417,7 +453,6 @@ Rules:
       config: {
         systemInstruction,
         tools: [{ functionDeclarations: travelToolDeclarations }],
-        thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
       },
     });
 
@@ -451,7 +486,6 @@ Rules:
         config: {
           systemInstruction,
           tools: [{ functionDeclarations: travelToolDeclarations }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         },
       });
     }
@@ -459,7 +493,7 @@ Rules:
     const rawReply =
       response.text?.trim() ||
       'I have crafted an updated travel plan with curated stays, route timing, and live booking links below.';
-    const replyText = cleanChatReply(rawReply, 1100);
+    const replyText = cleanChatReply(rawReply, 3800);
 
     if (!generatedItinerary && /\b(plan|trip|days|itinerary|budget|travel|cheaper|crowd)\b/i.test(input.message)) {
       const extracted = extractRequirementsFromText(input.message, defaults);
@@ -653,8 +687,24 @@ function runDeterministicFallback(
       avoidCrowds: extracted.avoidCrowds,
     }).slice(0, 3);
 
+  const season = resolveSeason(extracted.travelMonth || input.message, itinerary.coordinates?.lat || 35);
+  const seasonalProfile = getSeasonalProfile(itinerary.destination, season);
+  const destObj = resolveOrSynthesizeDestination(itinerary.destination);
+  const topLandmarks = destObj.places.slice(0, 6).map((p) => p.name).join(', ');
+
+  const replyLines = [
+    `I have prepared a detailed ${itinerary.durationDays}-day ${itinerary.destination} journey from ${itinerary.origin} for ${itinerary.travellers} travellers, crafted specifically for the ${seasonalProfile.label}.`,
+    `• Season & Weather (${seasonalProfile.season}): ${seasonalProfile.weatherOverview} Typical daytime temperatures hover around ${seasonalProfile.tempRange}.`,
+    `• Iconic Landmarks Featured: ${topLandmarks}.`,
+    `• Signature Seasonal Cuisine: Don’t miss authentic ${seasonalProfile.signatureFoods.slice(0, 4).join(', ')}.`,
+    `• Selected Stay: ${itinerary.selectedHotel?.name} in ${itinerary.selectedHotel?.area} (${itinerary.currency} ${itinerary.selectedHotel?.pricePerNightInr.toLocaleString()}/night).`,
+    `• Estimated Total Budget: ${itinerary.currency} ${itinerary.estimatedTotal.toLocaleString()} across return flights, stays, transit, and curated meals.`,
+    `• Smart Essentials & Attire: ${seasonalProfile.packingAdvice.join('; ')}.`,
+    `Your complete day-by-day itinerary with morning, afternoon, sunset, and evening experiences, hotel comparisons, and interactive maps is detailed below. Use the direct partner links to check live availability and locked rates.`,
+  ];
+
   return {
-    reply: `I have prepared your ${itinerary.durationDays}-day ${itinerary.destination} journey from ${itinerary.origin} for ${itinerary.travellers} travellers.\n\n• Selected Stay: ${itinerary.selectedHotel?.name} (${itinerary.selectedHotel?.area})\n• Estimated Total: ${itinerary.currency} ${itinerary.estimatedTotal.toLocaleString()}\n\nUse the direct booking links below to verify live partner availability and fares.`,
+    reply: replyLines.join('\n\n'),
     itinerary,
     hotels,
     toolsUsed: ['extract_requirements', 'search_hotels', 'calculate_trip_budget', 'generate_itinerary'],
@@ -738,7 +788,6 @@ export async function runDestinationResearch(destination: string, focus?: string
         contents: `Provide a concise, practical travel brief for ${destination} covering ${focus || 'best peaceful spots, cafés, local transport tips, and safety'}.`,
         config: {
           tools: [{ googleSearch: {} }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         },
       });
       const chunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
@@ -790,7 +839,6 @@ export async function translateTravelPhrase(phrase: string, targetLanguage: stri
         model: GEMINI_MODEL,
         contents: `Translate this short travel phrase into ${targetLanguage} and provide phonetic pronunciation and a 1-sentence politeness note: "${phrase}"`,
         config: {
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
           responseMimeType: 'application/json',
           responseSchema: {
             type: Type.OBJECT,
@@ -1044,7 +1092,6 @@ Respond clearly in plain text with:
 OPTION: <Name or Route> | <Key detail, neighborhood or duration> | <Typical indicative price range>`,
         config: {
           tools: [{ googleSearch: {} }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         },
       });
 
@@ -1147,7 +1194,6 @@ ${digest}
 
 Recommend 3 distinct, specific real-world travel places or neighborhoods matching this search. Include best season, 2 specific hidden gems/spots, and indicative daily budget in INR.`,
               config: {
-                thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
                 responseMimeType: 'application/json',
                 responseSchema: {
                   type: Type.OBJECT,
@@ -1246,7 +1292,6 @@ Recommend 3 distinct, specific real-world travel places or neighborhoods matchin
 Suggest 3 specific, calm, high-craft travel destinations or neighborhoods anywhere in the world matching this query, with hidden gems, best season, and realistic daily budget in INR.`,
         config: {
           tools: [{ googleSearch: {} }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
           responseMimeType: 'application/json',
           responseSchema: {
             type: Type.OBJECT,

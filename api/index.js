@@ -295,15 +295,114 @@ var DESTINATIONS = [
     tags: ["Culture", "Cafes", "Rail", "Peaceful Places", "Heritage"],
     places: [
       {
-        id: "jp-kix",
-        name: "Kansai International Airport (KIX)",
+        id: "jp-hnd",
+        name: "Tokyo Haneda International Airport (HND)",
         type: "Airport",
-        description: "Direct Haruka Express link into Kyoto Station in 75 minutes.",
+        description: "High-speed gateway into central Tokyo and direct Shinkansen bullet train connections across Japan.",
         bestTime: "Arrival & Departure",
-        lat: 34.432,
-        lng: 135.2304,
+        lat: 35.5494,
+        lng: 139.7798,
         estimatedEntryInr: 0,
         crowdLevel: "Moderate"
+      },
+      {
+        id: "jp-sensoji",
+        name: "Senso-ji Temple & Asakusa Heritage Quarter (Tokyo)",
+        type: "Attraction",
+        description: "Tokyo\u2019s oldest, most revered Buddhist temple featuring the giant red Kaminarimon lantern and traditional artisan market street.",
+        bestTime: "07:00 \u2013 10:00",
+        lat: 35.7148,
+        lng: 139.7967,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "jp-shibuya",
+        name: "Shibuya Crossing, Hachiko & Meiji Jingu Forest (Tokyo)",
+        type: "Attraction",
+        description: "World-famous pedestrian scramble crossing and Hachiko statue, paired with the serene 170-acre evergreen cedar forest of Meiji Shrine.",
+        bestTime: "09:00 \u2013 13:00",
+        lat: 35.6595,
+        lng: 139.7005,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "jp-shinjuku",
+        name: "Shinjuku Gyoen National Garden & Skyline (Tokyo)",
+        type: "Attraction",
+        description: "Sprawling 144-acre imperial garden showcasing cherry blossoms in spring, vibrant autumn maples, and tranquil Japanese landscape ponds.",
+        bestTime: "09:30 \u2013 12:30",
+        lat: 35.6852,
+        lng: 139.7101,
+        estimatedEntryInr: 320,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "jp-fuji",
+        name: "Mount Fuji & Lake Ashi Torii Gate (Hakone)",
+        type: "Attraction",
+        description: "Iconic snow-capped sacred volcano views from the pirate boat cruise across Lake Ashi and floating red Torii gate of Hakone Shrine.",
+        bestTime: "09:00 \u2013 15:00",
+        lat: 35.2045,
+        lng: 139.0253,
+        estimatedEntryInr: 1200,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "jp-fushimi",
+        name: "Fushimi Inari Taisha Thousand Torii Gates (Kyoto)",
+        type: "Attraction",
+        description: "Spectacular mountain trail shaded by over 10,000 vibrant vermilion Torii gates winding through sacred cedar woodlands.",
+        bestTime: "06:30 \u2013 09:00",
+        lat: 34.9671,
+        lng: 135.7727,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "jp-kinkakuji",
+        name: "Kinkaku-ji Golden Pavilion & Zen Gardens (Kyoto)",
+        type: "Attraction",
+        description: "Breathtaking Zen Buddhist temple covered in shimmering gold leaf, reflecting across the tranquil Mirror Pond surrounded by pine islands.",
+        bestTime: "09:00 \u2013 11:30",
+        lat: 35.0394,
+        lng: 135.7292,
+        estimatedEntryInr: 450,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "jp-arashiyama",
+        name: "Arashiyama Soaring Bamboo Grove & Tenryu-ji (Kyoto)",
+        type: "Attraction",
+        description: "Towering emerald green bamboo stalks swaying with wind chimes, beside a 14th-century UNESCO World Heritage Zen pond garden.",
+        bestTime: "07:30 \u2013 10:00",
+        lat: 35.0169,
+        lng: 135.6713,
+        estimatedEntryInr: 350,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "jp-gion",
+        name: "Gion Historic Geisha District & Kiyomizu-dera (Kyoto)",
+        type: "Hidden Gem",
+        description: "Atmospheric cobblestone alleys lined with wooden 17th-century machiya townhouses, leading to the dramatic wooden cliff stage of Kiyomizu-dera.",
+        bestTime: "16:00 \u2013 20:00",
+        lat: 34.9984,
+        lng: 135.785,
+        estimatedEntryInr: 400,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "jp-dotonbori",
+        name: "Dotonbori Culinary Canal & Osaka Castle (Osaka)",
+        type: "Cafe & Food",
+        description: "Vibrant neon food street famous for crispy Takoyaki and Okonomiyaki, combined with the towering 16th-century samurai fortress of Osaka Castle.",
+        bestTime: "17:00 \u2013 21:30",
+        lat: 34.6687,
+        lng: 135.5013,
+        estimatedEntryInr: 600,
+        crowdLevel: "Popular"
       },
       {
         id: "jp-ohara",
@@ -368,21 +467,87 @@ var DESTINATIONS = [
     tags: ["Coastline", "Cafes", "Culture", "Romantic", "Food"],
     places: [
       {
-        id: "it-nap",
-        name: "Naples International Airport (NAP)",
+        id: "it-fco",
+        name: "Rome Leonardo da Vinci\u2013Fiumicino Airport (FCO)",
         type: "Airport",
-        description: "Gateway to Sorrento, Ravello, and the Amalfi peninsula.",
+        description: "Primary international hub with Leonardo Express train into central Rome and Frecciarossa high-speed rail across Italy.",
         bestTime: "Arrival & Departure",
-        lat: 40.886,
-        lng: 14.2908,
+        lat: 41.8003,
+        lng: 12.2389,
         estimatedEntryInr: 0,
         crowdLevel: "Moderate"
       },
       {
+        id: "it-colosseum",
+        name: "Colosseum & Roman Forum Archeological Park (Rome)",
+        type: "Attraction",
+        description: "Monumental 2,000-year-old amphitheater of gladiators and the political center of the Roman Empire.",
+        bestTime: "08:30 \u2013 11:30",
+        lat: 41.8902,
+        lng: 12.4922,
+        estimatedEntryInr: 2100,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "it-vatican",
+        name: "Vatican City, St. Peter\u2019s Basilica & Sistine Chapel",
+        type: "Attraction",
+        description: "Michelangelo\u2019s legendary frescoes in the Sistine Chapel and the grandeur of St. Peter\u2019s Square.",
+        bestTime: "08:00 \u2013 12:00",
+        lat: 41.9029,
+        lng: 12.4534,
+        estimatedEntryInr: 2400,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "it-trevi",
+        name: "Trevi Fountain & The Pantheon Marble Dome (Rome)",
+        type: "Attraction",
+        description: "Baroque masterpiece fountain where tossing a coin guarantees your return to Rome, and the intact 2nd-century open-oculus temple.",
+        bestTime: "07:30 \u2013 10:00",
+        lat: 41.9009,
+        lng: 12.4833,
+        estimatedEntryInr: 500,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "it-florence",
+        name: "Florence Duomo (Santa Maria del Fiore) & Ponte Vecchio",
+        type: "Attraction",
+        description: "Brunelleschi\u2019s terracotta dome rising above Renaissance marble streets, and the historic gold-artisan bridge over the Arno River.",
+        bestTime: "09:00 \u2013 12:30",
+        lat: 43.7731,
+        lng: 11.256,
+        estimatedEntryInr: 1800,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "it-venice",
+        name: "Venice St. Mark\u2019s Square & Grand Canal Gondola Walk",
+        type: "Attraction",
+        description: "Floating city of canals, Byzantine golden mosaics in St. Mark\u2019s Basilica, and historic gondola docks.",
+        bestTime: "08:30 \u2013 12:00",
+        lat: 45.4342,
+        lng: 12.3385,
+        estimatedEntryInr: 1200,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "it-positano",
+        name: "Positano Pastel Cliffside & Amalfi Coast Panorama",
+        type: "Attraction",
+        description: "Pastel houses cascading vertically down limestone cliffs to sapphire Mediterranean waters and lemon grove terraces.",
+        bestTime: "10:00 \u2013 14:00",
+        lat: 40.6281,
+        lng: 14.485,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
         id: "it-ravello",
-        name: "Ravello Cliffside Gardens",
+        name: "Ravello Villa Cimbrone Cliffside Gardens",
         type: "Hidden Gem",
-        description: "Elevated medieval hilltop village high above the coastal traffic.",
+        description: "Elevated medieval hilltop village with infinity balconies high above the coastal traffic.",
         bestTime: "09:00 \u2013 12:00",
         lat: 40.6489,
         lng: 14.6128,
@@ -968,6 +1133,28 @@ var DESTINATIONS = [
         crowdLevel: "Moderate"
       },
       {
+        id: "london-westminster",
+        name: "Big Ben, Westminster Abbey & Parliament Square",
+        type: "Attraction",
+        description: "London\u2019s defining Gothic landmarks along the Thames, Royal coronation church, and iconic Elizabeth Tower clock face.",
+        bestTime: "08:30 \u2013 11:30",
+        lat: 51.4994,
+        lng: -0.1273,
+        estimatedEntryInr: 2400,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "london-towerbridge",
+        name: "Tower of London & Tower Bridge Promenade",
+        type: "Attraction",
+        description: "Nearly 1,000 years of royal history, Crown Jewels exhibition, and iconic Victorian suspension bridge crossing.",
+        bestTime: "09:00 \u2013 12:30",
+        lat: 51.5081,
+        lng: -0.0759,
+        estimatedEntryInr: 3200,
+        crowdLevel: "Popular"
+      },
+      {
         id: "london-hampstead",
         name: "Hampstead Heath & Parliament Hill Viewpoint",
         type: "Attraction",
@@ -1086,6 +1273,50 @@ var DESTINATIONS = [
         crowdLevel: "Moderate"
       },
       {
+        id: "paris-eiffel",
+        name: "Eiffel Tower & Champ de Mars Promenade",
+        type: "Attraction",
+        description: "The monumental iron icon of Paris with breathtaking panoramic vistas over the Seine and sunset light-ups.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: 48.8584,
+        lng: 2.2945,
+        estimatedEntryInr: 2800,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "paris-louvre",
+        name: "Mus\xE9e du Louvre & Tuileries Gardens",
+        type: "Attraction",
+        description: "World\u2019s greatest art museum home to the Mona Lisa and Venus de Milo, framed by the glass pyramid and royal sculpture gardens.",
+        bestTime: "09:00 \u2013 13:00",
+        lat: 48.8606,
+        lng: 2.3376,
+        estimatedEntryInr: 2200,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "paris-montmartre",
+        name: "Sacr\xE9-C\u0153ur Basilica & Montmartre Artists\u2019 Square",
+        type: "Attraction",
+        description: "Hilltop white dome cathedral overlooking the entire Paris basin, surrounded by Bohemian painting squares and historic windmills.",
+        bestTime: "08:30 \u2013 11:30",
+        lat: 48.8867,
+        lng: 2.3431,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "paris-notredame",
+        name: "Notre-Dame Cathedral & \xCEle de la Cit\xE9",
+        type: "Attraction",
+        description: "Gothic jewel on the Seine river island, surrounded by riverside bouquiniste bookstalls and medieval stone bridges.",
+        bestTime: "10:00 \u2013 13:00",
+        lat: 48.853,
+        lng: 2.3499,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
         id: "paris-marais",
         name: "Place des Vosges & Le Marais Historic Mansions",
         type: "Attraction",
@@ -1171,26 +1402,81 @@ var DESTINATIONS = [
         crowdLevel: "Moderate"
       },
       {
+        id: "tokyo-sensoji",
+        name: "Senso-ji Temple & Asakusa Heritage Quarter",
+        type: "Attraction",
+        description: "Tokyo\u2019s oldest, most iconic Buddhist temple with the giant red Kaminarimon lantern and traditional artisan crafts.",
+        bestTime: "07:30 \u2013 10:30",
+        lat: 35.7148,
+        lng: 139.7967,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "tokyo-shibuya",
+        name: "Shibuya Crossing, Hachiko & Shibuya Sky",
+        type: "Attraction",
+        description: "World-famous pedestrian scramble crossing and open-air rooftop observation deck with panoramic views of Tokyo and Mt. Fuji.",
+        bestTime: "10:00 \u2013 14:00",
+        lat: 35.6595,
+        lng: 139.7005,
+        estimatedEntryInr: 1200,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "tokyo-meiji",
+        name: "Meiji Jingu Sacred Forest Shrine & Harajuku",
+        type: "Attraction",
+        description: "Tranquil 170-acre evergreen forest shrine honoring Emperor Meiji, right beside the tree-lined avenues of Omotesando.",
+        bestTime: "08:00 \u2013 11:00",
+        lat: 35.6764,
+        lng: 139.6993,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "tokyo-shinjuku-gyoen",
+        name: "Shinjuku Gyoen National Garden & Greenhouses",
+        type: "Attraction",
+        description: "Imperial landscape park blending traditional Japanese, English, and French gardens with prime spring cherry blossoms and autumn maples.",
+        bestTime: "09:30 \u2013 12:30",
+        lat: 35.6852,
+        lng: 139.7101,
+        estimatedEntryInr: 320,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "tokyo-tsukiji",
+        name: "Tsukiji Outer Market & Ginza Artisanal Quarter",
+        type: "Cafe & Food",
+        description: "Bustling seafood stalls offering fresh sushi, tamagoyaki, wagyu skewers, and nearby luxury Ginza shopping boulevards.",
+        bestTime: "08:30 \u2013 12:00",
+        lat: 35.6655,
+        lng: 139.7708,
+        estimatedEntryInr: 1400,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "tokyo-skytree",
+        name: "Tokyo Skytree & Sumida River Promenade",
+        type: "Attraction",
+        description: "Towering 634-meter transmission tower offering 360-degree metropolitan vistas and scenic riverside walks.",
+        bestTime: "15:30 \u2013 19:00",
+        lat: 35.71,
+        lng: 139.8107,
+        estimatedEntryInr: 1800,
+        crowdLevel: "Popular"
+      },
+      {
         id: "tokyo-yanaka",
         name: "Yanaka Old Town Heritage District",
         type: "Hidden Gem",
-        description: "Edo-period wooden houses, quiet artisan sweet shops, and traditional craft studios.",
+        description: "Edo-period wooden houses, quiet artisan sweet shops, traditional craft studios, and tranquil temple cemeteries.",
         bestTime: "09:00 \u2013 12:00",
         lat: 35.7275,
         lng: 139.769,
         estimatedEntryInr: 0,
         crowdLevel: "Quiet"
-      },
-      {
-        id: "tokyo-shinjuku-gyoen",
-        name: "Shinjuku Gyoen National Garden",
-        type: "Attraction",
-        description: "Sprawling tranquil landscape blending traditional Japanese, English, and French gardens.",
-        bestTime: "09:30 \u2013 12:00",
-        lat: 35.6852,
-        lng: 139.7101,
-        estimatedEntryInr: 320,
-        crowdLevel: "Moderate"
       }
     ],
     phrases: [
@@ -1242,6 +1528,61 @@ var DESTINATIONS = [
         lng: -73.7781,
         estimatedEntryInr: 0,
         crowdLevel: "Moderate"
+      },
+      {
+        id: "nyc-centralpark",
+        name: "Central Park Bow Bridge, Bethesda Terrace & The Ramble",
+        type: "Attraction",
+        description: "843 acres of peaceful lakes, historic stone bridges, Victorian carriage paths, and lush maple groves in the heart of Manhattan.",
+        bestTime: "08:00 \u2013 11:30",
+        lat: 40.7829,
+        lng: -73.9654,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        id: "nyc-timessquare",
+        name: "Times Square & Broadway Theater District",
+        type: "Attraction",
+        description: "The electrifying crossroads of the world with towering digital marquees, street performers, and world-renowned Broadway shows.",
+        bestTime: "17:00 \u2013 22:00",
+        lat: 40.758,
+        lng: -73.9855,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "nyc-brooklynbridge",
+        name: "Brooklyn Bridge Pedestrian Boardwalk & DUMBO",
+        type: "Attraction",
+        description: "Walk above the East River along the historic 1883 suspension bridge with soaring Gothic arches and iconic lower Manhattan skyline vistas.",
+        bestTime: "07:30 \u2013 10:30",
+        lat: 40.7061,
+        lng: -73.9969,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "nyc-statue",
+        name: "Statue of Liberty & Ellis Island National Monument",
+        type: "Attraction",
+        description: "The copper monument of freedom in New York Harbor, reached via scenic ferry with views of the Financial District skyline.",
+        bestTime: "09:00 \u2013 13:00",
+        lat: 40.6892,
+        lng: -74.0445,
+        estimatedEntryInr: 2100,
+        crowdLevel: "Popular"
+      },
+      {
+        id: "nyc-met",
+        name: "The Metropolitan Museum of Art (The Met) & Rooftop",
+        type: "Attraction",
+        description: "Over 5,000 years of global art, Egyptian Temple of Dendur, European masterpieces, and panoramic Central Park rooftop garden.",
+        bestTime: "10:00 \u2013 14:00",
+        lat: 40.7794,
+        lng: -73.9632,
+        estimatedEntryInr: 2500,
+        crowdLevel: "Popular"
       },
       {
         id: "nyc-highline",
@@ -2355,13 +2696,13 @@ var KNOWN_WORLD_CITIES = {
     name: "Tokyo",
     country: "Japan",
     region: "East Asia",
-    tagline: "Quiet alleyway izakayas, serene moss gardens, and seamless urban harmony.",
-    description: "Discover Tokyo\u2019s tranquil side: early mornings in Yanaka\u2019s historic craft district, peaceful temple courtyards in Asakusa, and quiet garden walks in Shinjuku Gyoen.",
+    tagline: "Neon skylines, ancient cedar shrines, world-class gastronomy, and serene gardens.",
+    description: "From the iconic buzz of Shibuya Crossing and the timeless incense of Senso-ji to serene dawn walks through Meiji Shrine\u2019s forest and meticulous neighborhood ramen counters, Tokyo balances cutting-edge wonder with profound peace.",
     mediaKey: "japan",
     currencyCode: "JPY",
     currencySymbol: "\xA5",
     languageName: "Japanese",
-    bestSeason: "March \u2013 May & October \u2013 November",
+    bestSeason: "March \u2013 May (Cherry Blossom) & October \u2013 November (Autumn Foliage)",
     recommendedDays: 6,
     dailyBudgetInr: { budget: 6200, balanced: 11500, luxury: 24e3 },
     coordinates: { lat: 35.6762, lng: 139.6503 },
@@ -2369,24 +2710,74 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "Haneda International Airport (HND)", lat: 35.5494, lng: 139.7798 },
     places: [
       {
+        name: "Senso-ji Temple & Asakusa Heritage Quarter",
+        type: "Attraction",
+        description: "Tokyo\u2019s oldest, most iconic Buddhist temple with the giant red Kaminarimon lantern and traditional artisan crafts.",
+        bestTime: "07:30 \u2013 10:30",
+        lat: 35.7148,
+        lng: 139.7967,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Shibuya Crossing, Hachiko Memorial & Shibuya Sky",
+        type: "Attraction",
+        description: "World-famous pedestrian scramble crossing and open-air rooftop observation deck with panoramic views of Tokyo and Mt. Fuji.",
+        bestTime: "10:00 \u2013 14:00",
+        lat: 35.6595,
+        lng: 139.7005,
+        estimatedEntryInr: 1200,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Meiji Jingu Sacred Forest Shrine & Harajuku",
+        type: "Attraction",
+        description: "Tranquil 170-acre evergreen forest shrine honoring Emperor Meiji, right beside tree-lined Omotesando avenues.",
+        bestTime: "08:00 \u2013 11:00",
+        lat: 35.6764,
+        lng: 139.6993,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "Shinjuku Gyoen National Garden & Greenhouses",
+        type: "Attraction",
+        description: "Imperial landscape park blending traditional Japanese, English, and French gardens with prime spring cherry blossoms and autumn maples.",
+        bestTime: "09:30 \u2013 12:30",
+        lat: 35.6852,
+        lng: 139.7101,
+        estimatedEntryInr: 320,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "Tsukiji Outer Market & Ginza Artisanal Stalls",
+        type: "Cafe & Food",
+        description: "Bustling seafood stalls offering fresh sushi, tamagoyaki, wagyu skewers, and nearby luxury Ginza shopping boulevards.",
+        bestTime: "08:30 \u2013 12:00",
+        lat: 35.6655,
+        lng: 139.7708,
+        estimatedEntryInr: 1400,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Tokyo Skytree & Sumida River Promenade",
+        type: "Attraction",
+        description: "Towering 634-meter transmission tower offering 360-degree metropolitan vistas and scenic riverside walks.",
+        bestTime: "15:30 \u2013 19:00",
+        lat: 35.71,
+        lng: 139.8107,
+        estimatedEntryInr: 1800,
+        crowdLevel: "Popular"
+      },
+      {
         name: "Yanaka Old Town Heritage District",
         type: "Hidden Gem",
-        description: "Edo-period wooden houses, quiet artisan sweet shops, and traditional craft studios.",
+        description: "Edo-period wooden houses, quiet artisan sweet shops, traditional craft studios, and tranquil temple cemeteries.",
         bestTime: "09:00 \u2013 12:00",
         lat: 35.7275,
         lng: 139.769,
         estimatedEntryInr: 0,
         crowdLevel: "Quiet"
-      },
-      {
-        name: "Shinjuku Gyoen National Garden",
-        type: "Attraction",
-        description: "Tranquil landscape blending Japanese, English, and French gardens.",
-        bestTime: "09:30 \u2013 12:00",
-        lat: 35.6852,
-        lng: 139.7101,
-        estimatedEntryInr: 320,
-        crowdLevel: "Moderate"
       }
     ]
   },
@@ -2394,8 +2785,8 @@ var KNOWN_WORLD_CITIES = {
     name: "New York City",
     country: "United States",
     region: "North America",
-    tagline: "Quiet brownstone lanes, skyline waterfront paths, and iconic cultural energy.",
-    description: "Experience New York beyond the rush: morning strolls through the West Village, quiet reading lawns in Central Park Conservatory, and elevated walks on the High Line.",
+    tagline: "Iconic skylines, world-class museums, Broadway stages, and lush urban parks.",
+    description: "From the towering drama of Times Square and the Statue of Liberty to unhurried mornings beneath Central Park\u2019s weeping willows and sunset strolls across Brooklyn Bridge, NYC offers legendary sights at every turn.",
     mediaKey: "boutique_villa",
     currencyCode: "USD",
     currencySymbol: "$",
@@ -2408,9 +2799,59 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "John F. Kennedy International Airport (JFK)", lat: 40.6413, lng: -73.7781 },
     places: [
       {
+        name: "Central Park Bow Bridge, Bethesda Terrace & The Ramble",
+        type: "Attraction",
+        description: "843 acres of peaceful lakes, historic stone bridges, Victorian carriage paths, and lush maple groves in the heart of Manhattan.",
+        bestTime: "08:00 \u2013 11:30",
+        lat: 40.7829,
+        lng: -73.9654,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "Times Square & Broadway Theater District",
+        type: "Attraction",
+        description: "The electrifying crossroads of the world with towering digital marquees, street performers, and world-renowned Broadway shows.",
+        bestTime: "17:00 \u2013 22:00",
+        lat: 40.758,
+        lng: -73.9855,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Brooklyn Bridge Pedestrian Boardwalk & DUMBO",
+        type: "Attraction",
+        description: "Walk above the East River along the historic 1883 suspension bridge with soaring Gothic arches and iconic lower Manhattan skyline vistas.",
+        bestTime: "07:30 \u2013 10:30",
+        lat: 40.7061,
+        lng: -73.9969,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Statue of Liberty & Ellis Island National Monument",
+        type: "Attraction",
+        description: "The copper monument of freedom in New York Harbor, reached via scenic ferry with views of the Financial District skyline.",
+        bestTime: "09:00 \u2013 13:00",
+        lat: 40.6892,
+        lng: -74.0445,
+        estimatedEntryInr: 2100,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "The Metropolitan Museum of Art (The Met) & Fifth Avenue",
+        type: "Attraction",
+        description: "Over 5,000 years of global art, Egyptian Temple of Dendur, European masterpieces, and panoramic Central Park rooftop garden.",
+        bestTime: "10:00 \u2013 14:00",
+        lat: 40.7794,
+        lng: -73.9632,
+        estimatedEntryInr: 2500,
+        crowdLevel: "Popular"
+      },
+      {
         name: "The High Line & Chelsea Waterside Park",
         type: "Attraction",
-        description: "Elevated railway park with lush wildflowers and Hudson River views.",
+        description: "Elevated railway park with lush wildflowers, Hudson River views, and modern sculpture.",
         bestTime: "07:30 \u2013 10:00",
         lat: 40.748,
         lng: -74.0048,
@@ -2433,8 +2874,8 @@ var KNOWN_WORLD_CITIES = {
     name: "Rome",
     country: "Italy",
     region: "Southern Europe",
-    tagline: "Cobblestone piazzas, golden afternoon light, and timeless open-air monuments.",
-    description: "Wander through ivy-draped alleyways of Trastevere, savor morning espresso beside silent fountains, and marvel at millennia of architectural grandeur.",
+    tagline: "Ancient imperial monuments, Baroque fountains, and cobblestone piazza trattorias.",
+    description: "Walk where gladiators battled at the Colosseum, toss a coin in the Trevi Fountain, marvel at Michelangelo\u2019s Sistine Chapel ceiling, and savor cacio e pepe in sun-drenched Trastevere squares.",
     mediaKey: "italy",
     currencyCode: "EUR",
     currencySymbol: "\u20AC",
@@ -2447,9 +2888,49 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "Leonardo da Vinci\u2013Fiumicino Airport (FCO)", lat: 41.7999, lng: 12.2462 },
     places: [
       {
+        name: "Colosseum & Roman Forum Archeological Park",
+        type: "Attraction",
+        description: "Monumental 2,000-year-old amphitheater of gladiators and the political center of the ancient Roman Empire.",
+        bestTime: "08:30 \u2013 11:30",
+        lat: 41.8902,
+        lng: 12.4922,
+        estimatedEntryInr: 2100,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Vatican City, St. Peter\u2019s Basilica & Sistine Chapel",
+        type: "Attraction",
+        description: "Michelangelo\u2019s legendary frescoes in the Sistine Chapel and the immense marble grandeur of St. Peter\u2019s Square.",
+        bestTime: "08:00 \u2013 12:00",
+        lat: 41.9029,
+        lng: 12.4534,
+        estimatedEntryInr: 2400,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Trevi Fountain & The Pantheon Marble Dome",
+        type: "Attraction",
+        description: "Baroque masterpiece fountain where tossing a coin guarantees your return, and the intact 2nd-century open-oculus temple.",
+        bestTime: "07:30 \u2013 10:00",
+        lat: 41.9009,
+        lng: 12.4833,
+        estimatedEntryInr: 500,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Piazza Navona & Spanish Steps Promenade",
+        type: "Attraction",
+        description: "Bernini\u2019s Fountain of the Four Rivers, bustling painter squares, and the monumental 135-step baroque staircase.",
+        bestTime: "15:00 \u2013 18:30",
+        lat: 41.8992,
+        lng: 12.4731,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
         name: "Trastevere Quiet Alleyways & Santa Maria Piazza",
         type: "Hidden Gem",
-        description: "Ochre-colored cobblestone passages with family trattorias and quiet courtyards.",
+        description: "Ochre-colored cobblestone passages with family trattorias, hanging ivy, and quiet historic courtyards.",
         bestTime: "09:00 \u2013 11:30",
         lat: 41.8894,
         lng: 12.47,
@@ -2459,7 +2940,7 @@ var KNOWN_WORLD_CITIES = {
       {
         name: "Villa Borghese Gardens & Pincio Terrace",
         type: "Attraction",
-        description: "Panoramic hilltop terrace overlooking Piazza del Popolo and shaded pine groves.",
+        description: "Panoramic hilltop terrace overlooking Piazza del Popolo and shaded Roman umbrella pine groves.",
         bestTime: "16:00 \u2013 19:00",
         lat: 41.9115,
         lng: 12.4795,
@@ -2472,8 +2953,8 @@ var KNOWN_WORLD_CITIES = {
     name: "Barcelona",
     country: "Spain",
     region: "Southern Europe",
-    tagline: "Gothic quarters, sun-drenched Mediterranean beaches, and modernist architecture.",
-    description: "Stroll through pedestrian alleys of El Born, discover quiet courtyards in Gr\xE0cia, and enjoy fresh tapas along the Mediterranean shoreline.",
+    tagline: "Gaud\xED masterpieces, Gothic quarters, golden Mediterranean beaches, and tapas.",
+    description: "Gaze up at the dreamlike spires of Sagrada Fam\xEDlia, wander mosaic terraces at Park G\xFCell, lose yourself in Gothic Quarter stone alleys, and enjoy fresh paella by the Mediterranean.",
     mediaKey: "boutique_villa",
     currencyCode: "EUR",
     currencySymbol: "\u20AC",
@@ -2486,6 +2967,46 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "Josep Tarradellas Barcelona-El Prat Airport (BCN)", lat: 41.2974, lng: 2.0833 },
     places: [
       {
+        name: "Bas\xEDlica de la Sagrada Fam\xEDlia (Gaud\xED Masterpiece)",
+        type: "Attraction",
+        description: "Antoni Gaud\xED\u2019s awe-inspiring modernist basilica with soaring organic towers and stained glass that bathes the nave in rainbow light.",
+        bestTime: "09:00 \u2013 12:30",
+        lat: 41.4036,
+        lng: 2.1744,
+        estimatedEntryInr: 2600,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Park G\xFCell Mosaic Serpent Terrace & Fairy Gate",
+        type: "Attraction",
+        description: "Gaud\xED\u2019s colorful mosaic park perched on Carmel Hill offering sweeping views across Barcelona to the Mediterranean Sea.",
+        bestTime: "08:30 \u2013 11:00",
+        lat: 41.4145,
+        lng: 2.1527,
+        estimatedEntryInr: 1200,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Gothic Quarter (Barri G\xF2tic) & Barcelona Cathedral",
+        type: "Attraction",
+        description: "14th-century medieval labyrinth of stone alleyways, hidden plazas, and the grand Gothic Cathedral of Santa Eulalia.",
+        bestTime: "10:00 \u2013 13:30",
+        lat: 41.3839,
+        lng: 2.1762,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Casa Batll\xF3 & Passeig de Gr\xE0cia Modernist Mansions",
+        type: "Attraction",
+        description: "Gaud\xED\u2019s dragon-roofed iridescent masterpiece on Barcelona\u2019s most prestigious architectural avenue.",
+        bestTime: "13:30 \u2013 16:30",
+        lat: 41.3916,
+        lng: 2.1648,
+        estimatedEntryInr: 2900,
+        crowdLevel: "Popular"
+      },
+      {
         name: "El Born Medieval Alleys & Santa Maria del Mar",
         type: "Attraction",
         description: "Artisan boutiques, quiet stone arches, and historic tapas cellars.",
@@ -2496,13 +3017,13 @@ var KNOWN_WORLD_CITIES = {
         crowdLevel: "Quiet"
       },
       {
-        name: "Parc de la Ciutadella & Waterfront Footpath",
-        type: "Attraction",
-        description: "Ornate monumental fountain, boating lake, and shaded palms.",
-        bestTime: "15:30 \u2013 18:30",
-        lat: 41.3883,
-        lng: 2.1874,
-        estimatedEntryInr: 0,
+        name: "Barceloneta Beach Promenade & Seafood Tapas",
+        type: "Cafe & Food",
+        description: "Golden sandy Mediterranean boardwalk lined with open-air chiringuito bars and fresh seafood paella restaurants.",
+        bestTime: "17:00 \u2013 21:00",
+        lat: 41.3784,
+        lng: 2.1895,
+        estimatedEntryInr: 1600,
         crowdLevel: "Moderate"
       }
     ]
@@ -2511,8 +3032,8 @@ var KNOWN_WORLD_CITIES = {
     name: "Amsterdam",
     country: "Netherlands",
     region: "Western Europe",
-    tagline: "Tranquil canal rings, historic houseboats, and charming bicycle lanes.",
-    description: "Glide through Jordaan\u2019s quiet canals, visit world-class Dutch master museums, and relax in serene parkside cafes.",
+    tagline: "Gabled canal houses, Dutch master art, flower markets, and peaceful bridges.",
+    description: "Glide through UNESCO-listed canal rings, explore world-famous Rembrandt and Van Gogh galleries, and discover secret blooming courtyard gardens in Jordaan.",
     mediaKey: "boutique_villa",
     currencyCode: "EUR",
     currencySymbol: "\u20AC",
@@ -2524,6 +3045,36 @@ var KNOWN_WORLD_CITIES = {
     tags: ["Culture", "Cafes", "Peaceful Places", "Historic"],
     airport: { name: "Amsterdam Airport Schiphol (AMS)", lat: 52.3105, lng: 4.7683 },
     places: [
+      {
+        name: "Rijksmuseum & Museumplein Masterpieces",
+        type: "Attraction",
+        description: "The monumental Dutch national museum housing Rembrandt\u2019s The Night Watch and Vermeer\u2019s The Milkmaid.",
+        bestTime: "09:00 \u2013 12:30",
+        lat: 52.3599,
+        lng: 4.8852,
+        estimatedEntryInr: 2250,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Anne Frank House & Western Canal Ring",
+        type: "Attraction",
+        description: "Historic canal house and secret annex museum on Prinsengracht, surrounded by 17th-century merchant houses.",
+        bestTime: "09:30 \u2013 12:00",
+        lat: 52.3752,
+        lng: 4.884,
+        estimatedEntryInr: 1600,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Van Gogh Museum & Sunflower Galleries",
+        type: "Attraction",
+        description: "The world\u2019s largest collection of Vincent van Gogh paintings, drawings, and personal letters.",
+        bestTime: "13:00 \u2013 16:00",
+        lat: 52.3584,
+        lng: 4.8811,
+        estimatedEntryInr: 2200,
+        crowdLevel: "Popular"
+      },
       {
         name: "Jordaan Canal Footbridges & Hidden Courtyards (Hofjes)",
         type: "Hidden Gem",
@@ -2550,8 +3101,8 @@ var KNOWN_WORLD_CITIES = {
     name: "Dubai",
     country: "United Arab Emirates",
     region: "Middle East",
-    tagline: "Futuristic skylines, desert tranquility, and traditional creek abra boats.",
-    description: "Contrast modern architectural wonders with peaceful traditional heritage in Al Fahidi and serene desert sunset reserves.",
+    tagline: "Futuristic record-breaking architecture, luxury marina promenades, and desert sunsets.",
+    description: "Gaze from the heights of the world\u2019s tallest tower, cruise the dazzling Dubai Marina, and explore atmospheric spice and gold souks along Dubai Creek.",
     mediaKey: "boutique_villa",
     currencyCode: "AED",
     currencySymbol: "AED",
@@ -2564,10 +3115,30 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "Dubai International Airport (DXB)", lat: 25.2532, lng: 55.3657 },
     places: [
       {
+        name: "Burj Khalifa Observation Deck & Dubai Fountain",
+        type: "Attraction",
+        description: "World\u2019s tallest building rising 828 meters into the sky, overlooking the dancing fountain lake spectacle.",
+        bestTime: "16:30 \u2013 19:30",
+        lat: 25.1972,
+        lng: 55.2744,
+        estimatedEntryInr: 4200,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Palm Jumeirah & Dubai Marina Waterfront Walk",
+        type: "Attraction",
+        description: "Iconic palm-shaped archipelago, luxury superyacht marina, and illuminated evening beach promenades.",
+        bestTime: "17:00 \u2013 21:00",
+        lat: 25.1124,
+        lng: 55.139,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
         name: "Al Fahidi Historical Quarter & Dubai Creek Abra",
         type: "Attraction",
-        description: "Traditional wind-tower architecture, art cafes, and scenic 1-dirham wooden boat rides.",
-        bestTime: "16:00 \u2013 19:30",
+        description: "Traditional wind-tower architecture, art cafes, and scenic 1-dirham wooden boat rides across the historic trade creek.",
+        bestTime: "08:30 \u2013 11:30",
         lat: 25.2631,
         lng: 55.2972,
         estimatedEntryInr: 50,
@@ -2579,8 +3150,8 @@ var KNOWN_WORLD_CITIES = {
     name: "Singapore",
     country: "Singapore",
     region: "Southeast Asia",
-    tagline: "Lush garden city, multicultural culinary heritage, and sleek modern architecture.",
-    description: "Wander through tranquil heritage shop-houses in Kampong Glam, explore the futuristic flora of Gardens by the Bay, and savor Michelin-recognized street food.",
+    tagline: "Lush garden city, futuristic supertrees, vibrant hawker food, and marina skylines.",
+    description: "Wander beneath colossal vertical gardens at Gardens by the Bay, admire the skyline from Marina Bay Sands, and savor world-famous hawker stall delicacies.",
     mediaKey: "boutique_villa",
     currencyCode: "SGD",
     currencySymbol: "S$",
@@ -2593,13 +3164,43 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "Singapore Changi Airport (SIN)", lat: 1.3644, lng: 103.9915 },
     places: [
       {
-        name: "Singapore Botanic Gardens & Rainforest Trail",
+        name: "Gardens by the Bay Supertrees & Cloud Forest Dome",
         type: "Attraction",
-        description: "UNESCO World Heritage tropical gardens with tranquil lakes and heritage trees.",
+        description: "Futuristic 50-meter vertical plant towers and the world\u2019s largest glass greenhouse with an indoor mountain waterfall.",
+        bestTime: "16:00 \u2013 20:00",
+        lat: 1.2816,
+        lng: 103.8636,
+        estimatedEntryInr: 2200,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Marina Bay Sands SkyPark & Waterfront Promenade",
+        type: "Attraction",
+        description: "Iconic cantilevered rooftop sky deck offering 360-degree views over the Singapore Strait and evening light shows.",
+        bestTime: "17:30 \u2013 20:30",
+        lat: 1.2838,
+        lng: 103.8591,
+        estimatedEntryInr: 1800,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Chinatown & Buddha Tooth Relic Temple",
+        type: "Attraction",
+        description: "Tang-style religious monument housing sacred relics, surrounded by lively heritage shop-houses and Michelin hawker stalls.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: 1.2814,
+        lng: 103.8443,
+        estimatedEntryInr: 0,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "Singapore Botanic Gardens & National Orchid Garden",
+        type: "Attraction",
+        description: "UNESCO World Heritage tropical gardens with over 60,000 orchids and tranquil swan lakes.",
         bestTime: "07:30 \u2013 10:30",
         lat: 1.3138,
         lng: 103.8159,
-        estimatedEntryInr: 0,
+        estimatedEntryInr: 350,
         crowdLevel: "Quiet"
       }
     ]
@@ -2608,8 +3209,8 @@ var KNOWN_WORLD_CITIES = {
     name: "Sydney",
     country: "Australia",
     region: "Oceania",
-    tagline: "Glistening harbor waters, golden surf beaches, and coastal cliff walks.",
-    description: "Walk the scenic coastal trail from Bondi to Coogee, explore historic cobblestones in The Rocks, and enjoy fresh Pacific dining on the harbor.",
+    tagline: "Iconic sailhouse architecture, golden surf beaches, and coastal cliff trails.",
+    description: "Gaze at the architectural genius of the Sydney Opera House, walk across the Sydney Harbour Bridge, surf at Bondi Beach, and explore the sandstone colonial lanes of The Rocks.",
     mediaKey: "bali",
     currencyCode: "AUD",
     currencySymbol: "A$",
@@ -2622,10 +3223,40 @@ var KNOWN_WORLD_CITIES = {
     airport: { name: "Sydney Kingsford Smith Airport (SYD)", lat: -33.9399, lng: 151.1753 },
     places: [
       {
+        name: "Sydney Opera House & Circular Quay Promenade",
+        type: "Attraction",
+        description: "World-famous shell-tiled architectural icon jutting into the glistening harbor, with harborfront open-air bars.",
+        bestTime: "09:00 \u2013 12:00",
+        lat: -33.8568,
+        lng: 151.2153,
+        estimatedEntryInr: 2400,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Sydney Harbour Bridge Pylon Lookout & Walkway",
+        type: "Attraction",
+        description: 'Walk across the iconic "Coathanger" arch bridge with panoramic vistas over the harbor, ferries, and skyline.',
+        bestTime: "10:00 \u2013 13:00",
+        lat: -33.8523,
+        lng: 151.2108,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
+        name: "Bondi to Coogee Coastal Cliff Boardwalk",
+        type: "Attraction",
+        description: "6-kilometer clifftop walk passing turquoise ocean waves, dramatic sandstone sculptures, and ocean rockpools.",
+        bestTime: "07:30 \u2013 10:30",
+        lat: -33.8915,
+        lng: 151.2767,
+        estimatedEntryInr: 0,
+        crowdLevel: "Popular"
+      },
+      {
         name: "The Rocks Historic Precinct & Campbells Cove",
         type: "Attraction",
-        description: "Sandstone colonial passageways with harbour bridge views and craft weekend stalls.",
-        bestTime: "10:00 \u2013 13:00",
+        description: "Sandstone colonial passageways with harbour bridge views, weekend artisan markets, and historic pubs.",
+        bestTime: "14:00 \u2013 17:30",
         lat: -33.859,
         lng: 151.209,
         estimatedEntryInr: 0,
@@ -2972,11 +3603,267 @@ function synthesizeHotelsForDestination(dest) {
   ];
 }
 
+// src/lib/seasonalIntelligence.ts
+function resolveSeason(input, lat = 35) {
+  const clean = (input || "").toLowerCase();
+  let northernSeason = "Spring";
+  if (/\b(december|january|february|winter|snow|festive|christmas|cold)\b/i.test(clean)) {
+    northernSeason = "Winter";
+  } else if (/\b(march|april|may|spring|sakura|blossom|bloom)\b/i.test(clean)) {
+    northernSeason = "Spring";
+  } else if (/\b(june|july|august|summer|beach|monsoon|sun)\b/i.test(clean)) {
+    northernSeason = "Summer";
+  } else if (/\b(september|october|november|autumn|fall|foliage|koyo|leaves)\b/i.test(clean)) {
+    northernSeason = "Autumn";
+  } else {
+    const month = (/* @__PURE__ */ new Date()).getMonth();
+    if (month >= 2 && month <= 4) northernSeason = "Spring";
+    else if (month >= 5 && month <= 7) northernSeason = "Summer";
+    else if (month >= 8 && month <= 10) northernSeason = "Autumn";
+    else northernSeason = "Winter";
+  }
+  if (lat < -5) {
+    switch (northernSeason) {
+      case "Winter":
+        return "Summer";
+      case "Summer":
+        return "Winter";
+      case "Spring":
+        return "Autumn";
+      case "Autumn":
+        return "Spring";
+    }
+  }
+  return northernSeason;
+}
+function getSeasonalProfile(destinationName, season) {
+  const destLower = destinationName.toLowerCase();
+  if (destLower.includes("japan") || destLower.includes("tokyo") || destLower.includes("kyoto") || destLower.includes("osaka")) {
+    switch (season) {
+      case "Spring":
+        return {
+          season: "Spring",
+          label: "Cherry Blossom & Sakura Bloom Season",
+          weatherOverview: "Crisp pleasant days (12\xB0C \u2013 20\xB0C) with pale pink canopies across parks and shrine canals.",
+          tempRange: "12\xB0C \u2013 20\xB0C",
+          seasonalHighlights: [
+            "Hanami picnics under blooming cherry blossoms in Shinjuku Gyoen and Ueno Park",
+            "Evening light-ups at Meguro River and Chidorigafuchi Moat",
+            "Spring tea ceremonies with seasonal sakura matcha mochi in Kyoto"
+          ],
+          signatureFoods: ["Sakura Mochi", "Takenoko (Fresh Bamboo Shoot rice)", "Tai (Spring Sea Bream)", "Matcha Soft Cream"],
+          packingAdvice: ["Light layers with a comfortable denim or trench coat", "Comfortable slip-on walking shoes for temple visits", "Small umbrella for gentle spring showers"],
+          culturalAdvisory: "Peak season for domestic and international travel; reserve Shinkansen seats and popular restaurants 3\u20134 weeks in advance.",
+          suggestedActivity: {
+            title: "Early Morning Sakura Stroll & Hanami Walk",
+            description: "Wander beneath ancient cherry blossom boughs before midday crowds gather, with fresh morning matcha.",
+            category: "nature",
+            timeOfDay: "Morning"
+          }
+        };
+      case "Autumn":
+        return {
+          season: "Autumn",
+          label: "Momiji & Fiery Autumn Foliage Season",
+          weatherOverview: "Clear, crisp blue skies with stunning scarlet maple and golden ginkgo canopies (13\xB0C \u2013 21\xB0C).",
+          tempRange: "13\xB0C \u2013 21\xB0C",
+          seasonalHighlights: [
+            "Night illuminations of fiery maple trees at Kiyomizu-dera and Eikando in Kyoto",
+            "Golden ginkgo tree avenues along Meiji Jingu Gaien in Tokyo",
+            "Crisp clear vistas of snow-capped Mount Fuji from Lake Kawaguchiko"
+          ],
+          signatureFoods: ["Roasted Kuri (Sweet Chestnuts)", "Matsutake Mushroom Broth", "Sanma (Pacific Saury)", "Warm Sweet Potato (Yaki-imo)"],
+          packingAdvice: ["Merino wool sweaters or light jackets for breezy evenings", "Warm scarf for scenic dusk walks", "Comfortable footwear for stone stairways"],
+          culturalAdvisory: "Autumn foliage moves from north to south; November is prime time for Tokyo, Kyoto, and central Honshu.",
+          suggestedActivity: {
+            title: "Temple Maple Garden & Golden Ginkgo Promenade",
+            description: "Marvel at vibrant autumn colors reflecting across serene koi ponds and historic temple moss gardens.",
+            category: "nature",
+            timeOfDay: "Morning"
+          }
+        };
+      case "Winter":
+        return {
+          season: "Winter",
+          label: "Winter Illuminations & Serene Onsen Season",
+          weatherOverview: "Crisp sunny days with chilly evenings (3\xB0C \u2013 11\xB0C), snow-capped peaks, and sparkling holiday lights.",
+          tempRange: "3\xB0C \u2013 11\xB0C",
+          seasonalHighlights: [
+            "Rejuvenating natural hot spring (onsen) baths in Hakone or Arashiyama with Mt. Fuji views",
+            "Spectacular winter illuminations across Roppongi Hills, Shibuya Blue Cave, and Marunouchi",
+            "Peaceful, uncrowded mornings at Senso-ji and Fushimi Inari with crisp mountain air"
+          ],
+          signatureFoods: ["Steaming Tonkotsu Ramen", "Nabe Hot Pots & Sukiyaki", "Fresh Winter Oysters", "Warm Sake & Oden"],
+          packingAdvice: ["Warm thermal base layer (Uniqlo Heattech)", "Insulated winter down coat or overcoat", "Gloves, knit beanie, and lip balm"],
+          culturalAdvisory: "Winter offers the clearest views of Mount Fuji and significantly smaller tourist crowds at major cultural shrines.",
+          suggestedActivity: {
+            title: "Traditional Thermal Onsen Soak & Winter Illuminations",
+            description: "Warm up in mineral-rich hot spring waters followed by an evening stroll through mesmerizing urban light displays.",
+            category: "culture",
+            timeOfDay: "Evening"
+          }
+        };
+      case "Summer":
+        return {
+          season: "Summer",
+          label: "Matsuri Festivals & Vibrant Fireworks Season",
+          weatherOverview: "Warm, lush, and humid (24\xB0C \u2013 32\xB0C) with vibrant street festivals, river breezes, and lantern nights.",
+          tempRange: "24\xB0C \u2013 32\xB0C",
+          seasonalHighlights: [
+            "Traditional Yukata street festivals (Matsuri) with taiko drumming and food stalls",
+            "Kyoto Kamogawa riverside dining platforms (Kawadoko) cooled by evening waters",
+            "Scenic morning climbs and cool bamboo forest breezes in Arashiyama"
+          ],
+          signatureFoods: ["Kakigori (Fluffy Shaved Ice)", "Chilled Zaru Soba", "Yakitori & Cold Asahi", "Hiyashi Chuka (Cold Ramen)"],
+          packingAdvice: ["Lightweight breathable cotton or linen clothing", "UV protection umbrella or sun hat", "Handheld portable fan and electrolyte hydration"],
+          culturalAdvisory: "Schedule temple walks for 07:00\u201310:00 to avoid midday humidity; spend early afternoons in air-conditioned art museums.",
+          suggestedActivity: {
+            title: "Riverside Kawadoko Dining & Lantern Festival Walk",
+            description: "Dine on elevated wooden platforms above cooling river waters while listening to cicadas and temple bells.",
+            category: "food",
+            timeOfDay: "Evening"
+          }
+        };
+    }
+  }
+  if (destLower.includes("london") || destLower.includes("paris") || destLower.includes("italy") || destLower.includes("rome") || destLower.includes("france") || destLower.includes("switzerland") || destLower.includes("amsterdam")) {
+    switch (season) {
+      case "Winter":
+        return {
+          season: "Winter",
+          label: "Festive Holiday Lights & Historic Hearth Season",
+          weatherOverview: "Brisk, atmospheric days (2\xB0C \u2013 9\xB0C) with glowing Christmas markets, ice rinks, and cozy fireside bistros.",
+          tempRange: "2\xB0C \u2013 9\xB0C",
+          seasonalHighlights: [
+            "Festive holiday lights along Regent Street, Covent Garden, and Champs-\xC9lys\xE9es",
+            "Open-air ice skating at Somerset House or festive European city squares",
+            "World-class art galleries, museums, and theater shows without peak summer queues"
+          ],
+          signatureFoods: ["Hot Spiced Mulled Wine / Vin Chaud", "Traditional Sunday Roast or Beef Bourguignon", "Swiss Cheese Fondue & Raclette", "Warm Sticky Toffee Pudding"],
+          packingAdvice: ["Heavy wool coat or insulated parka", "Warm cashmere scarf, leather gloves, and waterproof boots", "Compact travel umbrella"],
+          culturalAdvisory: "Sun sets early around 16:00\u201316:30, making afternoons perfect for illuminated walking tours and warm pub hearths.",
+          suggestedActivity: {
+            title: "Festive City Lights & Cozy Fireside Tavern Evening",
+            description: "Stroll past world-famous illuminated facades followed by artisanal hot chocolate or spiced cider in a historic tavern.",
+            category: "culture",
+            timeOfDay: "Evening"
+          }
+        };
+      case "Spring":
+        return {
+          season: "Spring",
+          label: "Royal Park Blooms & Sidewalk Caf\xE9 Season",
+          weatherOverview: "Pleasant fresh breezes (11\xB0C \u2013 19\xB0C) with daffodil lawns, magnolia trees, and open-air caf\xE9 terraces.",
+          tempRange: "11\xB0C \u2013 19\xB0C",
+          seasonalHighlights: [
+            "Magnolias and wisteria draped across residential mews in Kensington and Le Marais",
+            "Picnics on the manicured lawns of Jardin du Luxembourg or Hampstead Heath",
+            "Pleasant sightseeing temperatures for exploring monuments on foot"
+          ],
+          signatureFoods: ["Fresh Butter Croissants & Caf\xE9 au Lait", "Spring Asparagus Risotto", "Artisanal Gelato", "Afternoon Clotted Cream Tea"],
+          packingAdvice: ["Layerable trench coat or casual blazer", "Comfortable leather walking shoes", "Light scarf for breezy morning strolls"],
+          culturalAdvisory: "April and May offer optimal conditions: long daylight hours, vibrant blossoms, and moderate crowds.",
+          suggestedActivity: {
+            title: "Royal Garden Magnolia Stroll & Artisan Caf\xE9 Terrace",
+            description: "Enjoy morning pastries at a sidewalk bistro before exploring botanical paths in bloom.",
+            category: "nature",
+            timeOfDay: "Morning"
+          }
+        };
+      case "Summer":
+        return {
+          season: "Summer",
+          label: "Golden Hour Sunsets & Riverfront Promenade Season",
+          weatherOverview: "Sun-drenched days (18\xB0C \u2013 28\xB0C) with daylight extending past 21:00 and vibrant outdoor terraces.",
+          tempRange: "18\xB0C \u2013 28\xB0C",
+          seasonalHighlights: [
+            "Sunset cruises along the Thames, Seine, or Mediterranean Amalfi coast",
+            "Lively open-air cinema, rooftop cocktail terraces, and food markets",
+            "Swimming in crystal clear coastal coves or scenic alpine lakes"
+          ],
+          signatureFoods: ["Chilled Crisp Ros\xE9 Wine", "Fresh Seafood Ceviche & Grilled Fish", "Caprese Salad with Buffalo Mozzarella", "Artisanal Gelato"],
+          packingAdvice: ["Lightweight linen shirts and dresses", "Polarized sunglasses and broad-spectrum sunscreen", "Comfortable sandals and walking trainers"],
+          culturalAdvisory: "Book tickets for top landmarks (Eiffel Tower, Colosseum, Tower of London) at least 3 weeks ahead.",
+          suggestedActivity: {
+            title: "Sunset Riverboat Promenade & Alfresco Terrace Dining",
+            description: "Glide along historic waterways at golden hour as monuments light up against twilight skies.",
+            category: "sightseeing",
+            timeOfDay: "Evening"
+          }
+        };
+      case "Autumn":
+        return {
+          season: "Autumn",
+          label: "Golden Parks, Grape Harvest & Cultural Season",
+          weatherOverview: "Crisp romantic days (10\xB0C \u2013 17\xB0C) with golden amber leaves carpeting historic cobblestones.",
+          tempRange: "10\xB0C \u2013 17\xB0C",
+          seasonalHighlights: [
+            "Golden tree avenues in Richmond Park, Central Rome villas, and Tuileries Gardens",
+            "New wine harvest celebrations and seasonal truffle festivals",
+            "Atmospheric, uncrowded exploration of historic squares and ancient ruins"
+          ],
+          signatureFoods: ["Wild Mushroom & Truffle Tagliatelle", "Roasted Chestnut Cones", "Cozy French Onion Soup", "Apple Crumble with Clotted Cream"],
+          packingAdvice: ["Tailored wool coat or warm jacket", "Waterproof ankle boots", "Warm knitwear and versatile scarves"],
+          culturalAdvisory: "September and October feature pleasant weather with far fewer crowds than July and August.",
+          suggestedActivity: {
+            title: "Golden Parkland Stroll & Truffle Culinary Tasting",
+            description: "Walk through rustling golden leaves before settling into an intimate wine bar for autumn tasting plates.",
+            category: "food",
+            timeOfDay: "Afternoon"
+          }
+        };
+    }
+  }
+  if (destLower.includes("bali") || destLower.includes("thailand") || destLower.includes("phuket")) {
+    const isDry = season === "Summer" || season === "Spring";
+    return {
+      season: isDry ? "Spring" : "Winter",
+      label: isDry ? "Dry Sunny Season & Calmer Waters" : "Tropical Green Season & Warm Breezes",
+      weatherOverview: isDry ? "Sunny skies with gentle sea breezes (24\xB0C \u2013 30\xB0C) and crystal-clear swimming waters." : "Warm tropical climate (25\xB0C \u2013 31\xB0C) with emerald-green rice terraces and afternoon rain showers.",
+      tempRange: "25\xB0C \u2013 31\xB0C",
+      seasonalHighlights: [
+        "Sunrise volcano treks to Mount Batur with clear panoramic island views",
+        "Sunset Kecak fire dance overlooking the dramatic ocean cliffs of Uluwatu",
+        "Emerald green rice terraces in Tegallalang at their most lush and photographic"
+      ],
+      signatureFoods: ["Nasi Campur Bali", "Fresh Coconuts & Dragonfruit Smoothie Bowls", "Babi Guling & Sate Lilit", "Iced Palm Sugar Kopi"],
+      packingAdvice: ["Breathable linen attire and swimwear", "Waterproof pouch and light rain poncho", "Eco-friendly reef-safe sunscreen"],
+      culturalAdvisory: "Carry a sarong for temple visits; during rainy season, mornings are sunny while showers typically happen in late afternoon.",
+      suggestedActivity: {
+        title: "Dawn Rice Terrace Walk & Sacred Cliffside Sunset",
+        description: "Explore misty green terraces in early morning tranquility followed by sunset prayers overlooking crashing waves.",
+        category: "nature",
+        timeOfDay: "Morning"
+      }
+    };
+  }
+  return {
+    season,
+    label: `${season} Seasonal Journey`,
+    weatherOverview: `Comfortable seasonal conditions tailored for walking, sightseeing, and dining.`,
+    tempRange: "14\xB0C \u2013 24\xB0C",
+    seasonalHighlights: [
+      `Iconic landmark discovery during optimal seasonal daylight`,
+      `Local seasonal cuisine and farm-to-table culinary tastings`,
+      `Scenic walking routes through historic quarters and panoramic viewpoints`
+    ],
+    signatureFoods: ["Regional farm-to-table dishes", "Artisanal local roaster coffee", "Seasonal pastries and desserts"],
+    packingAdvice: ["Versatile seasonal layers", "Comfortable broken-in walking shoes", "Weather-appropriate outer layer"],
+    culturalAdvisory: "Check 5-day local weather forecasts before departure to optimize morning and afternoon outdoor timings.",
+    suggestedActivity: {
+      title: `${season} Landmark & Cultural Stroll`,
+      description: `Discover premier historic sites during the most comfortable daylight hours with local caf\xE9 stops.`,
+      category: "sightseeing",
+      timeOfDay: "Morning"
+    }
+  };
+}
+
 // src/types/travel.ts
 import { z } from "zod";
 var ActivitySchema = z.object({
   id: z.string(),
-  timeOfDay: z.enum(["Morning", "Afternoon", "Evening"]),
+  timeOfDay: z.enum(["Morning", "Afternoon", "Late Afternoon", "Evening"]),
   title: z.string(),
   description: z.string(),
   location: z.string(),
@@ -3052,6 +3939,11 @@ var ItinerarySchema = z.object({
   estimatedTotal: z.number().nonnegative(),
   targetBudget: z.number().nonnegative(),
   travelMonth: z.string().optional(),
+  season: z.string().optional(),
+  seasonalHighlights: z.array(z.string()).optional(),
+  signatureFoods: z.array(z.string()).optional(),
+  packingAdvice: z.array(z.string()).optional(),
+  coordinates: z.object({ lat: z.number(), lng: z.number() }).optional(),
   pace: z.enum(["relaxed", "balanced", "active"]).default("balanced"),
   interests: z.array(z.string()),
   days: z.array(TripDaySchema),
@@ -3280,14 +4172,19 @@ function buildDeterministicItinerary(req, tripId) {
     activities: toTarget(breakdownInr.activities),
     emergencyReserve: toTarget(breakdownInr.emergencyReserve)
   };
+  const season = resolveSeason(req.travelMonth, dest.coordinates.lat);
+  const seasonalProfile = getSeasonalProfile(dest.name, season);
   const placesPool = req.avoidCrowds ? [...dest.places].sort((a, b) => a.crowdLevel === "Quiet" ? -1 : b.crowdLevel === "Quiet" ? 1 : 0) : dest.places;
   const nonAirportPlaces = placesPool.filter((p) => p.type !== "Airport");
   const airport = dest.places.find((p) => p.type === "Airport") || dest.places[0];
   const transportCatalog = getTransportOptions(dest.id);
   const days = Array.from({ length: req.durationDays }, (_, idx) => {
     const dayNum = idx + 1;
-    const p1 = nonAirportPlaces[idx % nonAirportPlaces.length] || airport;
-    const p2 = nonAirportPlaces[(idx + 1) % nonAirportPlaces.length] || airport;
+    const basePlaceIdx = idx * 2;
+    const p1 = nonAirportPlaces[basePlaceIdx % nonAirportPlaces.length] || airport;
+    const p2 = nonAirportPlaces[(basePlaceIdx + 1) % nonAirportPlaces.length] || airport;
+    const p3 = nonAirportPlaces[(basePlaceIdx + 2) % nonAirportPlaces.length] || airport;
+    const seasonalFood = seasonalProfile.signatureFoods[idx % seasonalProfile.signatureFoods.length];
     if (dayNum === 1) {
       const day1Activities = [
         {
@@ -3306,21 +4203,21 @@ function buildDeterministicItinerary(req, tripId) {
         {
           id: "d1-a2",
           timeOfDay: "Afternoon",
-          title: `Neighborhood Coffee & Walk near ${p1.name}`,
+          title: `Iconic Stroll: ${p1.name}`,
           description: p1.description,
           location: p1.name,
           lat: p1.lat,
           lng: p1.lng,
           estimatedCost: toTarget(p1.estimatedEntryInr || 800),
           durationHours: 2.5,
-          category: "food",
+          category: p1.type === "Cafe & Food" ? "food" : "sightseeing",
           crowdLevel: p1.crowdLevel
         },
         {
           id: "d1-a3",
           timeOfDay: "Evening",
-          title: "Sunset Local Dining & Early Rest",
-          description: `Relaxed regional dinner showcasing fresh ${dest.name} flavors.`,
+          title: `Welcome Dinner: Savoring ${seasonalFood}`,
+          description: `Relaxed regional dinner showcasing authentic ${dest.name} flavors, including seasonal ${seasonalFood}.`,
           location: selectedHotel?.area || dest.name,
           lat: selectedHotel?.lat || dest.coordinates.lat,
           lng: selectedHotel?.lng || dest.coordinates.lng,
@@ -3332,8 +4229,8 @@ function buildDeterministicItinerary(req, tripId) {
       ];
       return {
         day: 1,
-        title: `Arrival in ${dest.name} & Unhurried Settling In`,
-        summary: `Touch down from ${req.origin}, transfer to ${selectedHotel?.area || dest.name}, and enjoy a calm evening walk.`,
+        title: `Arrival in ${dest.name} & Iconic Immersion`,
+        summary: `Touch down from ${req.origin}, transfer to ${selectedHotel?.area || dest.name}, and enjoy an unhurried walk near ${p1.name}.`,
         hotelName: selectedHotel?.name || `${dest.name} Sanctuary`,
         transport: [transportCatalog[0]].filter(Boolean),
         estimatedCost: toTarget(2800 + (selectedHotel?.pricePerNightInr || 5e3)),
@@ -3343,8 +4240,8 @@ function buildDeterministicItinerary(req, tripId) {
     if (dayNum === req.durationDays) {
       return {
         day: dayNum,
-        title: `Morning Reflections & Departure to ${req.origin}`,
-        summary: "Slow breakfast, local artisan market stop, and stress-free airport transfer.",
+        title: `Morning Farewell Reflections & Departure to ${req.origin}`,
+        summary: `Slow breakfast, quiet artisan market stop in ${selectedHotel?.area || dest.name}, and stress-free airport transfer.`,
         hotelName: "Departure Day",
         transport: [transportCatalog[0]].filter(Boolean),
         estimatedCost: toTarget(2200),
@@ -3352,11 +4249,11 @@ function buildDeterministicItinerary(req, tripId) {
           {
             id: `d${dayNum}-a1`,
             timeOfDay: "Morning",
-            title: "Quiet Sunrise Coffee & Packing",
-            description: `Enjoy your final morning in ${selectedHotel?.area || dest.name} before checkout.`,
-            location: selectedHotel?.name || dest.name,
-            lat: selectedHotel?.lat || dest.coordinates.lat,
-            lng: selectedHotel?.lng || dest.coordinates.lng,
+            title: `Artisan Souvenirs & Farewell Stroll near ${p1.name}`,
+            description: `Pick up authentic handcrafted mementos and enjoy a slow morning coffee in ${selectedHotel?.area || dest.name} before checkout.`,
+            location: p1.name,
+            lat: p1.lat,
+            lng: p1.lng,
             estimatedCost: toTarget(650),
             durationHours: 2,
             category: "wellness",
@@ -3381,7 +4278,7 @@ function buildDeterministicItinerary(req, tripId) {
     return {
       day: dayNum,
       title: `Exploring ${p1.name} & ${p2.name}`,
-      summary: req.avoidCrowds ? `Early-morning pacing to experience ${p1.name} before mid-day visitors arrive.` : `Balanced discovery combining ${p1.name} and local culinary stops.`,
+      summary: req.avoidCrowds ? `Early-morning pacing to experience ${p1.name} before mid-day visitors arrive, followed by ${p2.name}.` : `Balanced full-day discovery combining iconic ${p1.name}, ${p2.name}, and local culinary stops.`,
       hotelName: selectedHotel?.name || `${dest.name} Sanctuary`,
       transport: transportCatalog.slice(1, 2),
       estimatedCost: toTarget((selectedHotel?.pricePerNightInr || 5e3) + 2900),
@@ -3414,15 +4311,28 @@ function buildDeterministicItinerary(req, tripId) {
         },
         {
           id: `d${dayNum}-a3`,
+          timeOfDay: "Late Afternoon",
+          title: `Scenic Panorama: ${p3.name}`,
+          description: p3.description,
+          location: p3.name,
+          lat: p3.lat,
+          lng: p3.lng,
+          estimatedCost: toTarget(p3.estimatedEntryInr || 350),
+          durationHours: 2,
+          category: "nature",
+          crowdLevel: p3.crowdLevel
+        },
+        {
+          id: `d${dayNum}-a4`,
           timeOfDay: "Evening",
-          title: req.pace === "relaxed" ? "Quiet Evening & Local Cafe" : "Neighborhood Evening Market",
-          description: `Unwind around ${selectedHotel?.area || dest.name} with regional tea or dinner.`,
+          title: `Seasonal Dining: ${seasonalFood}`,
+          description: `Unwind at a renowned neighborhood dining spot in ${selectedHotel?.area || dest.name} to savor signature ${seasonalFood}.`,
           location: selectedHotel?.area || dest.name,
           lat: (selectedHotel?.lat || dest.coordinates.lat) + 8e-3,
           lng: (selectedHotel?.lng || dest.coordinates.lng) - 6e-3,
-          estimatedCost: toTarget(1550),
+          estimatedCost: toTarget(1650),
           durationHours: 2,
-          category: "culture",
+          category: "food",
           crowdLevel: req.avoidCrowds ? "Quiet" : "Moderate"
         }
       ]
@@ -3432,7 +4342,7 @@ function buildDeterministicItinerary(req, tripId) {
   const now = (/* @__PURE__ */ new Date()).toISOString();
   const candidate = {
     id: tripId || `trip-${dest.id}-${Date.now().toString(36)}`,
-    tripName: `${dest.name} ${req.avoidCrowds ? "Quiet" : "Curated"} Escape`,
+    tripName: `${dest.name} ${seasonalProfile.label} & Iconic Discovery`,
     origin: req.origin,
     destination: dest.name,
     destinationId: dest.id,
@@ -3441,17 +4351,27 @@ function buildDeterministicItinerary(req, tripId) {
     currency: req.currency,
     estimatedTotal,
     targetBudget: req.budget,
-    travelMonth: req.travelMonth || dest.bestSeason.split("&")[0].trim(),
+    travelMonth: req.travelMonth || seasonalProfile.label,
+    season: seasonalProfile.season,
+    seasonalHighlights: seasonalProfile.seasonalHighlights,
+    signatureFoods: seasonalProfile.signatureFoods,
+    packingAdvice: seasonalProfile.packingAdvice,
+    coordinates: dest.coordinates,
     pace: req.pace,
     interests: req.interests,
     days,
     selectedHotel,
     recommendations: [
-      selectedHotel?.recommendationReason || `Stay near ${selectedHotel?.area || dest.name} for calm mornings.`,
-      `Best visited in ${req.travelMonth || dest.bestSeason}; start scenic visits before 08:30.`,
-      `Keep local currency (${dest.currencyCode}) handy for neighborhood caf\xE9s and transport.`
+      `Seasonal Highlight (${seasonalProfile.label}, ${seasonalProfile.tempRange}): ${seasonalProfile.seasonalHighlights[0]}.`,
+      `Signature Seasonal Cuisine: Don\u2019t miss authentic ${seasonalProfile.signatureFoods.slice(0, 3).join(", ")}.`,
+      `Packing Essentials: ${seasonalProfile.packingAdvice.join(". ")}.`,
+      selectedHotel?.recommendationReason || `Base yourself at ${selectedHotel?.name} in ${selectedHotel?.area}.`
     ],
-    travelTips: [...dest.culturalTips.slice(0, 2), ...dest.safetyNotes.slice(0, 1)],
+    travelTips: [
+      seasonalProfile.culturalAdvisory,
+      ...dest.culturalTips.slice(0, 2),
+      ...dest.safetyNotes.slice(0, 1)
+    ],
     budgetBreakdown,
     provenanceNote: "Itinerary budgets and transport fares combine indicative local estimates with simulated demo adapter rates.",
     createdAt: now,
@@ -3517,7 +4437,6 @@ function optimizeItineraryForBudget(itinerary, newBudget) {
 
 // server/ai/agent.ts
 import {
-  ThinkingLevel,
   Type
 } from "@google/genai";
 
@@ -3543,6 +4462,7 @@ function getGeminiClient() {
     cachedClient = new GoogleGenAI({
       apiKey: process.env.GEMINI_API_KEY,
       httpOptions: {
+        apiVersion: "v1beta",
         headers: {
           "User-Agent": "aistudio-build"
         }
@@ -3551,7 +4471,7 @@ function getGeminiClient() {
   }
   return cachedClient;
 }
-var GEMINI_MODEL = "gemini-4-hydrogen";
+var GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
 // server/ai/tavilyFallback.ts
 function isGeminiQuotaError(err) {
@@ -3569,7 +4489,7 @@ function cleanWebSnippet(raw, maxLen = 145) {
   const trimmed = lastSpace > maxLen * 0.6 ? sliced.slice(0, lastSpace) : sliced;
   return `${trimmed.replace(/[.,;:\-·]+$/, "").trim()}\u2026`;
 }
-function cleanChatReply(raw, maxLen = 1100) {
+function cleanChatReply(raw, maxLen = 3800) {
   const lines = raw.replace(/\r/g, "").split("\n").map(
     (line) => line.replace(/^#{1,6}\s*/, "").replace(/\*\*|__|`/g, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/^\s*[-*]\s+/, "\u2022 ").trim()
   );
@@ -3647,8 +4567,24 @@ function buildTavilyChatReply(params) {
       bullets.push(...budgetChanges.map((c) => `\u2022 ${c}`));
     } else {
       bullets.push(
-        `\u2022 Route & Pace: ${itinerary.durationDays}-day ${itinerary.destination} itinerary from ${itinerary.origin} for ${itinerary.travellers} travellers (${itinerary.pace} pace).`
+        `\u2022 Route & Pace: ${itinerary.durationDays}-day ${itinerary.destination} journey from ${itinerary.origin} for ${itinerary.travellers} travellers (${itinerary.pace} pace).`
       );
+      if (itinerary.season || itinerary.travelMonth) {
+        bullets.push(
+          `\u2022 Seasonal Character: ${itinerary.season || "Current Season"}${itinerary.travelMonth ? ` (${itinerary.travelMonth})` : ""} \xB7 Tailored for optimal seasonal weather and local vibrancy.`
+        );
+      }
+      const landmarkNames = Array.from(
+        new Set(
+          itinerary.days.flatMap((d) => d.activities).filter((a) => a.category !== "transit" && !a.title.startsWith("Seasonal Dining:")).map((a) => a.title.replace(/^Scenic Panorama:\s*/, ""))
+        )
+      ).slice(0, 5);
+      if (landmarkNames.length > 0) {
+        bullets.push(`\u2022 Iconic Sights Featured: ${landmarkNames.join(", ")}.`);
+      }
+      if (itinerary.signatureFoods && itinerary.signatureFoods.length > 0) {
+        bullets.push(`\u2022 Signature Seasonal Cuisine: ${itinerary.signatureFoods.slice(0, 4).join(", ")}.`);
+      }
       if (itinerary.selectedHotel) {
         bullets.push(
           `\u2022 Recommended Stay: ${itinerary.selectedHotel.name} (${itinerary.selectedHotel.area}).`
@@ -3658,6 +4594,9 @@ function buildTavilyChatReply(params) {
     bullets.push(
       `\u2022 Indicative Budget: ${itinerary.currency} ${itinerary.estimatedTotal.toLocaleString()} total across flights, stays, transit, and dining.`
     );
+    if (itinerary.packingAdvice && itinerary.packingAdvice.length > 0) {
+      bullets.push(`\u2022 Packing & Transit Essentials: ${itinerary.packingAdvice.slice(0, 2).join("; ")}.`);
+    }
   }
   const sections = [];
   if (liveInsights) {
@@ -3671,9 +4610,9 @@ function buildTavilyChatReply(params) {
     sections.push(bullets.join("\n"));
   }
   sections.push(
-    "Live route timing, stays, and direct partner booking links are ready below (indicative estimates)."
+    "Live route timing, day-by-day experiences, hotel options, and direct partner booking links are ready below."
   );
-  return cleanChatReply(sections.join("\n\n"), 1100);
+  return cleanChatReply(sections.join("\n\n"), 2800);
 }
 
 // server/ai/agent.ts
@@ -3943,6 +4882,11 @@ async function runTravelAgent(input) {
         return {
           status: "generated",
           tripName: itinerary.tripName,
+          season: itinerary.season,
+          seasonalHighlights: itinerary.seasonalHighlights,
+          signatureFoods: itinerary.signatureFoods,
+          packingAdvice: itinerary.packingAdvice,
+          famousPlacesIncluded: Array.from(new Set(itinerary.days.flatMap((d) => d.activities.map((a) => a.title)))).slice(0, 10),
           estimatedTotal: itinerary.estimatedTotal,
           currency: itinerary.currency,
           selectedHotel: itinerary.selectedHotel?.name,
@@ -3973,17 +4917,42 @@ async function runTravelAgent(input) {
   }
   try {
     const ai = getGeminiClient();
-    const systemInstruction = `You are Unseen Miles, an attentive, seasoned private travel concierge.
+    const extractedPre = extractRequirementsFromText(input.message, {
+      ...defaults,
+      origin: input.currentItinerary?.origin || defaults?.origin,
+      destination: input.currentItinerary?.destination || defaults?.destination,
+      durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
+      travellers: input.currentItinerary?.travellers || defaults?.travellers
+    });
+    const targetDest = extractedPre.destination || input.currentItinerary?.destination || "Japan";
+    const destContext = resolveOrSynthesizeDestination(targetDest);
+    const targetSeason = resolveSeason(extractedPre.travelMonth || input.message, destContext.coordinates.lat);
+    const seasonalContext = getSeasonalProfile(destContext.name, targetSeason);
+    const systemInstruction = `You are Unseen Miles, an attentive, seasoned, and deeply knowledgeable private travel concierge.
 Tagline: "Every mile planned, even the unseen ones."
 Traveller saved preferences: ${JSON.stringify(input.preferences || {})}
 Current active itinerary summary: ${generatedItinerary ? `${generatedItinerary.tripName} (${generatedItinerary.origin} -> ${generatedItinerary.destination}, ${generatedItinerary.durationDays} days, ${generatedItinerary.currency} ${generatedItinerary.estimatedTotal})` : "None yet"}
 
-Rules:
-1. You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, New York, Rome, Bali, or any location on earth). Never restrict the user to pre-set locations. Always generate plans and search stays for the exact destination requested.
-2. Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
-3. Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or simulated catalog estimates.
-4. Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (\u2022). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
-5. Keep your response concise (under 115 words) and end with 1\u20132 thoughtful follow-up questions.`;
+Target Destination: ${destContext.name} (${destContext.country})
+Detected Season & Travel Timing: ${seasonalContext.season} (${seasonalContext.label})
+Weather & Climate: ${seasonalContext.weatherOverview} (Typical: ${seasonalContext.tempRange})
+Seasonal Highlights: ${seasonalContext.seasonalHighlights.join("; ")}
+Signature Seasonal Cuisine: ${seasonalContext.signatureFoods.join(", ")}
+Packing & Attire: ${seasonalContext.packingAdvice.join("; ")}
+Cultural & Practical Advisory: ${seasonalContext.culturalAdvisory}
+Key Sights & Landmarks in ${destContext.name}: ${destContext.places.slice(0, 10).map((p) => `${p.name} (${p.description})`).join("; ")}
+
+Rules & Guidelines:
+1. Universal Worldwide Coverage: You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, Kyoto, New York, Rome, Bali, or anywhere globally). Never restrict the user to preset locations. Always generate plans and search stays for the exact destination requested.
+2. Rich, Comprehensive & Seasonal Intelligence: The user expects thorough, high-value, and seasonal advice. Provide 220\u2013340 words of rich, beautifully structured intelligence covering:
+   \u2022 Seasonal Climate & Character: Explain what makes ${seasonalContext.season} special in ${destContext.name}, temperature (${seasonalContext.tempRange}), and seasonal highlights (e.g. cherry blossom hanami, autumn koyo foliage, winter onsens & illuminations, or summer festivals).
+   \u2022 Must-See Iconic Landmarks & Hidden Gems: Always highlight famous must-see landmarks (e.g. for Japan, highlight both Tokyo's iconic hubs like Senso-ji, Shibuya Crossing, and Shinjuku, and Kyoto's Fushimi Inari and Arashiyama; for London, Big Ben, Tower Bridge, and British Museum; for Paris, Eiffel Tower and Louvre). Balance iconic landmarks with mindful, uncrowded moments.
+   \u2022 Seasonal Cuisine & Dining: Mention signature seasonal dishes and culinary experiences to savor during this time of year (e.g. ${seasonalContext.signatureFoods.slice(0, 3).join(", ")}).
+   \u2022 Smart Transit & Packing Essentials: Provide practical transit tips (e.g. Suica/Pasmo/JR Pass in Japan, Oyster card in London) and essential seasonal attire (${seasonalContext.packingAdvice.slice(0, 2).join(", ")}).
+3. Tools: Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
+4. Transparency: Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or catalog estimates.
+5. Formatting: Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (\u2022). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
+6. Closing: End with 1\u20132 thoughtful follow-up questions tailored to their season, pace, and interests.`;
     const contents = [
       ...input.history.slice(-8).map((m) => ({
         role: m.role === "assistant" ? "model" : "user",
@@ -3996,8 +4965,7 @@ Rules:
       contents,
       config: {
         systemInstruction,
-        tools: [{ functionDeclarations: travelToolDeclarations }],
-        thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }
+        tools: [{ functionDeclarations: travelToolDeclarations }]
       }
     });
     for (let step = 0; step < 2; step++) {
@@ -4024,13 +4992,12 @@ Rules:
         contents,
         config: {
           systemInstruction,
-          tools: [{ functionDeclarations: travelToolDeclarations }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }
+          tools: [{ functionDeclarations: travelToolDeclarations }]
         }
       });
     }
     const rawReply = response.text?.trim() || "I have crafted an updated travel plan with curated stays, route timing, and live booking links below.";
-    const replyText = cleanChatReply(rawReply, 1100);
+    const replyText = cleanChatReply(rawReply, 3800);
     if (!generatedItinerary && /\b(plan|trip|days|itinerary|budget|travel|cheaper|crowd)\b/i.test(input.message)) {
       const extracted = extractRequirementsFromText(input.message, defaults);
       generatedItinerary = buildDeterministicItinerary(extracted);
@@ -4190,13 +5157,22 @@ Note: Stay and transport figures reflect indicative estimates alongside direct p
     preferredTier: extracted.hotelTier,
     avoidCrowds: extracted.avoidCrowds
   }).slice(0, 3);
+  const season = resolveSeason(extracted.travelMonth || input.message, itinerary.coordinates?.lat || 35);
+  const seasonalProfile = getSeasonalProfile(itinerary.destination, season);
+  const destObj = resolveOrSynthesizeDestination(itinerary.destination);
+  const topLandmarks = destObj.places.slice(0, 6).map((p) => p.name).join(", ");
+  const replyLines = [
+    `I have prepared a detailed ${itinerary.durationDays}-day ${itinerary.destination} journey from ${itinerary.origin} for ${itinerary.travellers} travellers, crafted specifically for the ${seasonalProfile.label}.`,
+    `\u2022 Season & Weather (${seasonalProfile.season}): ${seasonalProfile.weatherOverview} Typical daytime temperatures hover around ${seasonalProfile.tempRange}.`,
+    `\u2022 Iconic Landmarks Featured: ${topLandmarks}.`,
+    `\u2022 Signature Seasonal Cuisine: Don\u2019t miss authentic ${seasonalProfile.signatureFoods.slice(0, 4).join(", ")}.`,
+    `\u2022 Selected Stay: ${itinerary.selectedHotel?.name} in ${itinerary.selectedHotel?.area} (${itinerary.currency} ${itinerary.selectedHotel?.pricePerNightInr.toLocaleString()}/night).`,
+    `\u2022 Estimated Total Budget: ${itinerary.currency} ${itinerary.estimatedTotal.toLocaleString()} across return flights, stays, transit, and curated meals.`,
+    `\u2022 Smart Essentials & Attire: ${seasonalProfile.packingAdvice.join("; ")}.`,
+    `Your complete day-by-day itinerary with morning, afternoon, sunset, and evening experiences, hotel comparisons, and interactive maps is detailed below. Use the direct partner links to check live availability and locked rates.`
+  ];
   return {
-    reply: `I have prepared your ${itinerary.durationDays}-day ${itinerary.destination} journey from ${itinerary.origin} for ${itinerary.travellers} travellers.
-
-\u2022 Selected Stay: ${itinerary.selectedHotel?.name} (${itinerary.selectedHotel?.area})
-\u2022 Estimated Total: ${itinerary.currency} ${itinerary.estimatedTotal.toLocaleString()}
-
-Use the direct booking links below to verify live partner availability and fares.`,
+    reply: replyLines.join("\n\n"),
     itinerary,
     hotels,
     toolsUsed: ["extract_requirements", "search_hotels", "calculate_trip_budget", "generate_itinerary"],
@@ -4267,8 +5243,7 @@ async function runDestinationResearch(destination, focus) {
         model: GEMINI_MODEL,
         contents: `Provide a concise, practical travel brief for ${destination} covering ${focus || "best peaceful spots, caf\xE9s, local transport tips, and safety"}.`,
         config: {
-          tools: [{ googleSearch: {} }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }
+          tools: [{ googleSearch: {} }]
         }
       });
       const chunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks || [];
@@ -4305,7 +5280,6 @@ async function translateTravelPhrase(phrase, targetLanguage) {
         model: GEMINI_MODEL,
         contents: `Translate this short travel phrase into ${targetLanguage} and provide phonetic pronunciation and a 1-sentence politeness note: "${phrase}"`,
         config: {
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,
@@ -4498,8 +5472,7 @@ Respond clearly in plain text with:
 2. Three concrete options formatted as:
 OPTION: <Name or Route> | <Key detail, neighborhood or duration> | <Typical indicative price range>`,
         config: {
-          tools: [{ googleSearch: {} }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW }
+          tools: [{ googleSearch: {} }]
         }
       });
       const parsed = parseOptionHighlights(response.text || "");
@@ -4570,7 +5543,6 @@ ${digest}
 
 Recommend 3 distinct, specific real-world travel places or neighborhoods matching this search. Include best season, 2 specific hidden gems/spots, and indicative daily budget in INR.`,
               config: {
-                thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
                 responseMimeType: "application/json",
                 responseSchema: {
                   type: Type.OBJECT,
@@ -4655,7 +5627,6 @@ Recommend 3 distinct, specific real-world travel places or neighborhoods matchin
 Suggest 3 specific, calm, high-craft travel destinations or neighborhoods anywhere in the world matching this query, with hidden gems, best season, and realistic daily budget in INR.`,
         config: {
           tools: [{ googleSearch: {} }],
-          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
           responseMimeType: "application/json",
           responseSchema: {
             type: Type.OBJECT,

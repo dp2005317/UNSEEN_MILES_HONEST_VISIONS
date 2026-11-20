@@ -13,7 +13,7 @@ export type MediaKey =
 
 export const ActivitySchema = z.object({
   id: z.string(),
-  timeOfDay: z.enum(['Morning', 'Afternoon', 'Evening']),
+  timeOfDay: z.enum(['Morning', 'Afternoon', 'Late Afternoon', 'Evening']),
   title: z.string(),
   description: z.string(),
   location: z.string(),
@@ -94,6 +94,11 @@ export const ItinerarySchema = z.object({
   estimatedTotal: z.number().nonnegative(),
   targetBudget: z.number().nonnegative(),
   travelMonth: z.string().optional(),
+  season: z.string().optional(),
+  seasonalHighlights: z.array(z.string()).optional(),
+  signatureFoods: z.array(z.string()).optional(),
+  packingAdvice: z.array(z.string()).optional(),
+  coordinates: z.object({ lat: z.number(), lng: z.number() }).optional(),
   pace: z.enum(['relaxed', 'balanced', 'active']).default('balanced'),
   interests: z.array(z.string()),
   days: z.array(TripDaySchema),

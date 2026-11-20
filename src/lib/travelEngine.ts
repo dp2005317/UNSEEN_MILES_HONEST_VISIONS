@@ -10,6 +10,7 @@ import {
   resolveOrSynthesizeDestination,
   synthesizeHotelsForDestination,
 } from './worldwideDestinations';
+import { getSeasonalProfile, resolveSeason } from './seasonalIntelligence';
 import {
   ItinerarySchema,
   type BudgetBreakdown,
@@ -328,6 +329,9 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
     emergencyReserve: toTarget(breakdownInr.emergencyReserve),
   };
 
+  const season = resolveSeason(req.travelMonth, dest.coordinates.lat);
+  const seasonalProfile = getSeasonalProfile(dest.name, season);
+
   const placesPool = req.avoidCrowds
     ? [...dest.places].sort((a, b) => (a.crowdLevel === 'Quiet' ? -1 : b.crowdLevel === 'Quiet' ? 1 : 0))
     : dest.places;
@@ -337,8 +341,11 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
 
   const days: TripDay[] = Array.from({ length: req.durationDays }, (_, idx): TripDay => {
     const dayNum = idx + 1;
-    const p1 = nonAirportPlaces[idx % nonAirportPlaces.length] || airport;
-    const p2 = nonAirportPlaces[(idx + 1) % nonAirportPlaces.length] || airport;
+    const basePlaceIdx = idx * 2;
+    const p1 = nonAirportPlaces[basePlaceIdx % nonAirportPlaces.length] || airport;
+    const p2 = nonAirportPlaces[(basePlaceIdx + 1) % nonAirportPlaces.length] || airport;
+    const p3 = nonAirportPlaces[(basePlaceIdx + 2) % nonAirportPlaces.length] || airport;
+    const seasonalFood = seasonalProfile.signatureFoods[idx % seasonalProfile.signatureFoods.length];
 
     if (dayNum === 1) {
       const day1Activities: TripDay['activities'] = [
@@ -358,21 +365,21 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
         {
           id: 'd1-a2',
           timeOfDay: 'Afternoon',
-          title: `Neighborhood Coffee & Walk near ${p1.name}`,
+          title: `Iconic Stroll: ${p1.name}`,
           description: p1.description,
           location: p1.name,
           lat: p1.lat,
           lng: p1.lng,
           estimatedCost: toTarget(p1.estimatedEntryInr || 800),
           durationHours: 2.5,
-          category: 'food',
+          category: p1.type === 'Cafe & Food' ? 'food' : 'sightseeing',
           crowdLevel: p1.crowdLevel,
         },
         {
           id: 'd1-a3',
           timeOfDay: 'Evening',
-          title: 'Sunset Local Dining & Early Rest',
-          description: `Relaxed regional dinner showcasing fresh ${dest.name} flavors.`,
+          title: `Welcome Dinner: Savoring ${seasonalFood}`,
+          description: `Relaxed regional dinner showcasing authentic ${dest.name} flavors, including seasonal ${seasonalFood}.`,
           location: selectedHotel?.area || dest.name,
           lat: selectedHotel?.lat || dest.coordinates.lat,
           lng: selectedHotel?.lng || dest.coordinates.lng,
@@ -384,8 +391,8 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
       ];
       return {
         day: 1,
-        title: `Arrival in ${dest.name} & Unhurried Settling In`,
-        summary: `Touch down from ${req.origin}, transfer to ${selectedHotel?.area || dest.name}, and enjoy a calm evening walk.`,
+        title: `Arrival in ${dest.name} & Iconic Immersion`,
+        summary: `Touch down from ${req.origin}, transfer to ${selectedHotel?.area || dest.name}, and enjoy an unhurried walk near ${p1.name}.`,
         hotelName: selectedHotel?.name || `${dest.name} Sanctuary`,
         transport: [transportCatalog[0]].filter(Boolean),
         estimatedCost: toTarget(2800 + (selectedHotel?.pricePerNightInr || 5000)),
@@ -396,8 +403,8 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
     if (dayNum === req.durationDays) {
       return {
         day: dayNum,
-        title: `Morning Reflections & Departure to ${req.origin}`,
-        summary: 'Slow breakfast, local artisan market stop, and stress-free airport transfer.',
+        title: `Morning Farewell Reflections & Departure to ${req.origin}`,
+        summary: `Slow breakfast, quiet artisan market stop in ${selectedHotel?.area || dest.name}, and stress-free airport transfer.`,
         hotelName: 'Departure Day',
         transport: [transportCatalog[0]].filter(Boolean),
         estimatedCost: toTarget(2200),
@@ -405,11 +412,11 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
           {
             id: `d${dayNum}-a1`,
             timeOfDay: 'Morning',
-            title: 'Quiet Sunrise Coffee & Packing',
-            description: `Enjoy your final morning in ${selectedHotel?.area || dest.name} before checkout.`,
-            location: selectedHotel?.name || dest.name,
-            lat: selectedHotel?.lat || dest.coordinates.lat,
-            lng: selectedHotel?.lng || dest.coordinates.lng,
+            title: `Artisan Souvenirs & Farewell Stroll near ${p1.name}`,
+            description: `Pick up authentic handcrafted mementos and enjoy a slow morning coffee in ${selectedHotel?.area || dest.name} before checkout.`,
+            location: p1.name,
+            lat: p1.lat,
+            lng: p1.lng,
             estimatedCost: toTarget(650),
             durationHours: 2,
             category: 'wellness',
@@ -436,8 +443,8 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
       day: dayNum,
       title: `Exploring ${p1.name} & ${p2.name}`,
       summary: req.avoidCrowds
-        ? `Early-morning pacing to experience ${p1.name} before mid-day visitors arrive.`
-        : `Balanced discovery combining ${p1.name} and local culinary stops.`,
+        ? `Early-morning pacing to experience ${p1.name} before mid-day visitors arrive, followed by ${p2.name}.`
+        : `Balanced full-day discovery combining iconic ${p1.name}, ${p2.name}, and local culinary stops.`,
       hotelName: selectedHotel?.name || `${dest.name} Sanctuary`,
       transport: transportCatalog.slice(1, 2),
       estimatedCost: toTarget((selectedHotel?.pricePerNightInr || 5000) + 2900),
@@ -470,15 +477,28 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
         },
         {
           id: `d${dayNum}-a3`,
+          timeOfDay: 'Late Afternoon',
+          title: `Scenic Panorama: ${p3.name}`,
+          description: p3.description,
+          location: p3.name,
+          lat: p3.lat,
+          lng: p3.lng,
+          estimatedCost: toTarget(p3.estimatedEntryInr || 350),
+          durationHours: 2,
+          category: 'nature',
+          crowdLevel: p3.crowdLevel,
+        },
+        {
+          id: `d${dayNum}-a4`,
           timeOfDay: 'Evening',
-          title: req.pace === 'relaxed' ? 'Quiet Evening & Local Cafe' : 'Neighborhood Evening Market',
-          description: `Unwind around ${selectedHotel?.area || dest.name} with regional tea or dinner.`,
+          title: `Seasonal Dining: ${seasonalFood}`,
+          description: `Unwind at a renowned neighborhood dining spot in ${selectedHotel?.area || dest.name} to savor signature ${seasonalFood}.`,
           location: selectedHotel?.area || dest.name,
           lat: (selectedHotel?.lat || dest.coordinates.lat) + 0.008,
           lng: (selectedHotel?.lng || dest.coordinates.lng) - 0.006,
-          estimatedCost: toTarget(1550),
+          estimatedCost: toTarget(1650),
           durationHours: 2,
-          category: 'culture',
+          category: 'food',
           crowdLevel: req.avoidCrowds ? 'Quiet' : 'Moderate',
         },
       ],
@@ -490,7 +510,7 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
 
   const candidate: Itinerary = {
     id: tripId || `trip-${dest.id}-${Date.now().toString(36)}`,
-    tripName: `${dest.name} ${req.avoidCrowds ? 'Quiet' : 'Curated'} Escape`,
+    tripName: `${dest.name} ${seasonalProfile.label} & Iconic Discovery`,
     origin: req.origin,
     destination: dest.name,
     destinationId: dest.id,
@@ -499,17 +519,27 @@ export function buildDeterministicItinerary(req: ExtractedRequirements, tripId?:
     currency: req.currency,
     estimatedTotal,
     targetBudget: req.budget,
-    travelMonth: req.travelMonth || dest.bestSeason.split('&')[0].trim(),
+    travelMonth: req.travelMonth || seasonalProfile.label,
+    season: seasonalProfile.season,
+    seasonalHighlights: seasonalProfile.seasonalHighlights,
+    signatureFoods: seasonalProfile.signatureFoods,
+    packingAdvice: seasonalProfile.packingAdvice,
+    coordinates: dest.coordinates,
     pace: req.pace,
     interests: req.interests,
     days,
     selectedHotel,
     recommendations: [
-      selectedHotel?.recommendationReason || `Stay near ${selectedHotel?.area || dest.name} for calm mornings.`,
-      `Best visited in ${req.travelMonth || dest.bestSeason}; start scenic visits before 08:30.`,
-      `Keep local currency (${dest.currencyCode}) handy for neighborhood cafés and transport.`,
+      `Seasonal Highlight (${seasonalProfile.label}, ${seasonalProfile.tempRange}): ${seasonalProfile.seasonalHighlights[0]}.`,
+      `Signature Seasonal Cuisine: Don’t miss authentic ${seasonalProfile.signatureFoods.slice(0, 3).join(', ')}.`,
+      `Packing Essentials: ${seasonalProfile.packingAdvice.join('. ')}.`,
+      selectedHotel?.recommendationReason || `Base yourself at ${selectedHotel?.name} in ${selectedHotel?.area}.`,
     ],
-    travelTips: [...dest.culturalTips.slice(0, 2), ...dest.safetyNotes.slice(0, 1)],
+    travelTips: [
+      seasonalProfile.culturalAdvisory,
+      ...dest.culturalTips.slice(0, 2),
+      ...dest.safetyNotes.slice(0, 1),
+    ],
     budgetBreakdown,
     provenanceNote:
       'Itinerary budgets and transport fares combine indicative local estimates with simulated demo adapter rates.',

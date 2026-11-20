@@ -54,7 +54,7 @@ export function cleanWebSnippet(raw: string, maxLen = 145): string {
   return `${trimmed.replace(/[.,;:\-·]+$/, '').trim()}…`;
 }
 
-export function cleanChatReply(raw: string, maxLen = 1100): string {
+export function cleanChatReply(raw: string, maxLen = 3800): string {
   const lines = raw
     .replace(/\r/g, '')
     .split('\n')
@@ -167,8 +167,27 @@ export function buildTavilyChatReply(params: {
       bullets.push(...budgetChanges.map((c) => `• ${c}`));
     } else {
       bullets.push(
-        `• Route & Pace: ${itinerary.durationDays}-day ${itinerary.destination} itinerary from ${itinerary.origin} for ${itinerary.travellers} travellers (${itinerary.pace} pace).`
+        `• Route & Pace: ${itinerary.durationDays}-day ${itinerary.destination} journey from ${itinerary.origin} for ${itinerary.travellers} travellers (${itinerary.pace} pace).`
       );
+      if (itinerary.season || itinerary.travelMonth) {
+        bullets.push(
+          `• Seasonal Character: ${itinerary.season || 'Current Season'}${itinerary.travelMonth ? ` (${itinerary.travelMonth})` : ''} · Tailored for optimal seasonal weather and local vibrancy.`
+        );
+      }
+      const landmarkNames = Array.from(
+        new Set(
+          itinerary.days
+            .flatMap((d) => d.activities)
+            .filter((a) => a.category !== 'transit' && !a.title.startsWith('Seasonal Dining:'))
+            .map((a) => a.title.replace(/^Scenic Panorama:\s*/, ''))
+        )
+      ).slice(0, 5);
+      if (landmarkNames.length > 0) {
+        bullets.push(`• Iconic Sights Featured: ${landmarkNames.join(', ')}.`);
+      }
+      if (itinerary.signatureFoods && itinerary.signatureFoods.length > 0) {
+        bullets.push(`• Signature Seasonal Cuisine: ${itinerary.signatureFoods.slice(0, 4).join(', ')}.`);
+      }
       if (itinerary.selectedHotel) {
         bullets.push(
           `• Recommended Stay: ${itinerary.selectedHotel.name} (${itinerary.selectedHotel.area}).`
@@ -178,6 +197,9 @@ export function buildTavilyChatReply(params: {
     bullets.push(
       `• Indicative Budget: ${itinerary.currency} ${itinerary.estimatedTotal.toLocaleString()} total across flights, stays, transit, and dining.`
     );
+    if (itinerary.packingAdvice && itinerary.packingAdvice.length > 0) {
+      bullets.push(`• Packing & Transit Essentials: ${itinerary.packingAdvice.slice(0, 2).join('; ')}.`);
+    }
   }
 
   const sections: string[] = [];
@@ -194,8 +216,8 @@ export function buildTavilyChatReply(params: {
   }
 
   sections.push(
-    'Live route timing, stays, and direct partner booking links are ready below (indicative estimates).'
+    'Live route timing, day-by-day experiences, hotel options, and direct partner booking links are ready below.'
   );
 
-  return cleanChatReply(sections.join('\n\n'), 1100);
+  return cleanChatReply(sections.join('\n\n'), 2800);
 }

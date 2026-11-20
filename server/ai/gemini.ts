@@ -28,6 +28,7 @@ export function getGeminiClient(): GoogleGenAI {
     cachedClient = new GoogleGenAI({
       apiKey: process.env.GEMINI_API_KEY,
       httpOptions: {
+        apiVersion: 'v1beta',
         headers: {
           'User-Agent': 'aistudio-build',
         },
@@ -37,4 +38,4 @@ export function getGeminiClient(): GoogleGenAI {
   return cachedClient;
 }
 
-export const GEMINI_MODEL = 'gemini-4-hydrogen';
+export const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
