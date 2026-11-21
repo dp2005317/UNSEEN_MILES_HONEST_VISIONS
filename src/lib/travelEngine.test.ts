@@ -110,3 +110,22 @@ test('buildDeterministicItinerary supports any custom city anywhere in the world
   assert.ok(itinerary.selectedHotel?.name.includes('Barcelona'));
   assert.ok(itinerary.estimatedTotal > 0);
 });
+
+test('extractRequirementsFromText parses Alaska Northern Lights prompt with 1 month and 10 lakhs budget', () => {
+  const prompt = 'i want to go to alaska to view northern lights like a 1 month tour budget is 10 lakhs plus 2 person me and my wife';
+  const req = extractRequirementsFromText(prompt);
+
+  assert.equal(req.destination, 'Alaska');
+  assert.equal(req.durationDays, 30);
+  assert.equal(req.travellers, 2);
+  assert.equal(req.budget, 1000000);
+  assert.equal(req.currency, 'INR');
+  assert.ok(req.interests.includes('Northern Lights'));
+
+  const itinerary = buildDeterministicItinerary(req, 'alaska-aurora-trip');
+  assert.equal(itinerary.destination, 'Alaska');
+  assert.equal(itinerary.days.length, 30);
+  assert.ok(itinerary.selectedHotel?.destinationId === 'alaska');
+  assert.ok(itinerary.tripName.includes('Alaska'));
+  assert.ok(itinerary.days.flatMap((d) => d.activities).some((a) => a.title.includes('Aurora') || a.title.includes('Hot Springs') || a.title.includes('Denali')));
+});

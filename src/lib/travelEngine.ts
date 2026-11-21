@@ -58,6 +58,19 @@ export function resolveCatalogDestination(query: string): Destination | undefine
   return undefined;
 }
 
+function cleanDestName(raw?: string): string {
+  if (!raw) return '';
+  const cleaned = raw
+    .replace(/\b(?:northern lights|aurora|tour|trip|vacation|holiday|itinerary|journey|travel|explore|visit|planning|plan)\b/gi, '')
+    .replace(/[,\.?!]/g, '')
+    .trim();
+  if (cleaned.length < 2) return '';
+  return cleaned
+    .split(/\s+/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(' ');
+}
+
 export function extractRequirementsFromText(
   input: string,
   defaults?: Partial<ExtractedRequirements>
@@ -69,70 +82,148 @@ export function extractRequirementsFromText(
     .toLowerCase();
 
   // Origin detection: "from <City>"
-  const fromMatch = text.match(/\bfrom\s+([A-Za-z\s]{2,28}?)(?=\s+(?:to|for|in|with|on|,|\.)|$)/i);
+  const fromMatch = text.match(/\bfrom\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to|for|in|with|on|,|\.)|$)/i);
   const origin = fromMatch?.[1]?.trim() || defaults?.origin || 'Kolkata';
 
-  // Destination detection: prioritize exact world city matches, then catalog destinations, then regex
+  // Destination detection:
+  // 1. Check known world cities and catalog destinations
   const knownCity = findKnownCity(lower);
   const matchedDest = resolveCatalogDestination(lower);
 
-  const toMatch = text.match(/\b(?:to|visit|in|exploring|explore)\s+([A-Za-z\s]{2,28}?)(?=\s+(?:for|in|with|on|from|,|\.)|$)/i);
+  let rawDest = knownCity?.name || matchedDest?.name;
 
-  let rawDest = knownCity?.name || matchedDest?.name || toMatch?.[1]?.trim();
-
-  // If still not found and input is concise or specifies a direct place name
+  // 2. From X to Y
   if (!rawDest) {
-    const stripped = text
-      .replace(/\b(?:plan|a|trip|itinerary|travel|vacation|holiday|days?|nights?|for|with|couple|solo|family|\d+)\b/gi, '')
-      .replace(/[,\.?!]/g, '')
-      .trim();
-    if (stripped.length >= 3 && stripped.length <= 40) {
-      rawDest = stripped;
+    const fromToMatch = text.match(
+      /\bfrom\s+[A-Za-z\x7f-\xff\s]{2,25}?\s+to\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to\s+(?:see|view|watch|catch|experience|witness|visit|explore|hike|do)|for|with|in|on|from|like|around|during|budget|\d|,|\.|\?|!|$)|$)/i
+    );
+    if (fromToMatch?.[1]) {
+      const d = cleanDestName(fromToMatch[1]);
+      if (d) rawDest = d;
     }
   }
 
-  const destination = rawDest || defaults?.destination || 'London';
+  // 3. Action verbs: want to go to / trip to / visit / explore / etc.
+  if (!rawDest) {
+    const actionMatch = text.match(
+      /\b(?:want to go to|going to|head to|heading to|travel to|fly to|trip to|tour to|take me to|can we go to|plan(?:\s+a)?\s+trip\s+to|planning\s+(?:a\s+trip\s+)?(?:to|for)|visit|visiting|exploring|explore|vacation in|holiday in)\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to\s+(?:see|view|watch|catch|experience|witness|visit|explore|hike|do)|for|with|in|on|from|like|around|during|budget|\d|,|\.|\?|!|$)|$)/i
+    );
+    if (actionMatch?.[1]) {
+      const d = cleanDestName(actionMatch[1]);
+      if (d) rawDest = d;
+    }
+  }
 
-  // Duration days
-  const daysMatch = text.match(/(\d{1,2})\s*[-–]?\s*(?:days?|nights?)/i);
-  const durationDays = daysMatch ? Math.min(21, Math.max(1, Number(daysMatch[1]))) : defaults?.durationDays || 5;
+  // 4. Standalone "to <Dest>" avoiding "want to", "like to", "need to"
+  if (!rawDest) {
+    const toMatch = text.match(
+      /(?<!\b(?:want|like|prefer|hope|wish|need|used)\s+)\bto\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to\s+(?:see|view|watch|catch|experience|witness|visit|explore|hike|do)|for|with|in|on|from|like|around|during|budget|\d|,|\.|\?|!|$)|$)/i
+    );
+    if (toMatch?.[1]) {
+      const d = cleanDestName(toMatch[1]);
+      if (d) rawDest = d;
+    }
+  }
+
+  // 5. Leading destination pattern: "<Dest> for X days" or "<Dest> 10 days"
+  if (!rawDest) {
+    const leadMatch = text.match(
+      /^([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:for\s+\d|\d+\s*(?:days?|nights?|weeks?|months?)|trip|tour|holiday|vacation))/i
+    );
+    if (leadMatch?.[1]) {
+      const d = cleanDestName(leadMatch[1]);
+      if (d) rawDest = d;
+    }
+  }
+
+  // 6. Direct concise query: e.g. "Alaska" or "Tokyo Japan"
+  if (!rawDest) {
+    const stripped = text
+      .replace(/\b(?:plan|a|trip|itinerary|travel|vacation|holiday|days?|nights?|weeks?|months?|for|with|couple|solo|family|\d+)\b/gi, '')
+      .replace(/[,\.?!]/g, '')
+      .trim();
+    if (stripped.length >= 2 && stripped.length <= 35) {
+      const d = cleanDestName(stripped);
+      if (d) rawDest = d;
+    }
+  }
+
+  const destination = rawDest || defaults?.destination || 'Alaska';
+
+  // Duration days (supports months, weeks, days)
+  let durationDays = defaults?.durationDays || 5;
+  const durationMonthMatch = text.match(/(\d{1,2}|one|two|three)\s*(?:[-–]?\s*months?)/i);
+  if (durationMonthMatch) {
+    const wordMap: Record<string, number> = { one: 1, two: 2, three: 3 };
+    const num = wordMap[durationMonthMatch[1].toLowerCase()] || Number(durationMonthMatch[1]);
+    durationDays = Math.min(30, num * 30);
+  } else {
+    const weekMatch = text.match(/(\d{1,2}|one|two|three|a)\s*(?:[-–]?\s*weeks?)/i);
+    if (weekMatch) {
+      const wordMap: Record<string, number> = { a: 1, one: 1, two: 2, three: 3 };
+      const num = wordMap[weekMatch[1].toLowerCase()] || Number(weekMatch[1]);
+      durationDays = Math.min(30, num * 7);
+    } else {
+      const daysMatch = text.match(/(\d{1,2})\s*[-–]?\s*(?:days?|nights?)/i);
+      if (daysMatch) {
+        durationDays = Math.min(30, Math.max(1, Number(daysMatch[1])));
+      }
+    }
+  }
 
   // Travellers
   let travellers = defaults?.travellers || 2;
-  const travNumMatch = text.match(/(\d{1,2})\s*(?:people|persons|travellers|travelers|guests|adults)/i);
+  const travNumMatch = text.match(/(\d{1,2})\s*(?:people|persons?|travellers?|travelers?|guests?|adults?)/i);
   if (travNumMatch) {
     travellers = Math.min(12, Math.max(1, Number(travNumMatch[1])));
-  } else if (/\b(?:two|couple|2)\b/i.test(lower)) {
+  } else if (/\b(?:two|couple|2\s*person|2\s*people|me\s+and\s+my\s+(?:wife|husband|partner|friend))\b/i.test(lower)) {
     travellers = 2;
-  } else if (/\bsolo\b|\balone\b|\b1 person\b/i.test(lower)) {
+  } else if (/\bsolo\b|\balone\b|\b1\s*(?:person|traveller)\b/i.test(lower)) {
     travellers = 1;
   } else if (/\bfamily\b|\bfour\b/i.test(lower)) {
     travellers = 4;
   }
 
-  // Currency & Budget
+  // Currency & Budget (supports Lakhs, Crores, K, etc.)
   let currency = defaults?.currency || 'INR';
   if (/\$|usd|dollars?/i.test(lower)) currency = 'USD';
   else if (/€|eur|euros?/i.test(lower)) currency = 'EUR';
   else if (/₹|rs\.?|inr|rupees?/i.test(lower)) currency = 'INR';
 
-  const budgetMatch = text.match(/(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{3,9})(?:\s*(?:k|thousand))?/i);
   let budget = defaults?.budget || 80000;
-  // Avoid matching day count or traveller count as budget
-  const explicitBudgetMatch = text.match(
-    /(?:budget(?:\s+is|\s+of)?|around|under|max|for)\s*(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{2,9})(\s*k)?|(?:₹|\$|€)\s*([\d,]{2,9})(\s*k)?/i
-  );
-  if (explicitBudgetMatch) {
-    const raw = (explicitBudgetMatch[1] || explicitBudgetMatch[3] || '').replace(/,/g, '');
-    const hasK = Boolean(explicitBudgetMatch[2] || explicitBudgetMatch[4]);
-    const parsed = Number(raw);
+  const lakhMatch = text.match(/([\d\.]+)\s*(?:lakhs?|lacs?|lac|l\b)/i);
+  if (lakhMatch) {
+    const parsed = parseFloat(lakhMatch[1]);
     if (!Number.isNaN(parsed) && parsed > 0) {
-      budget = hasK ? parsed * 1000 : parsed;
+      budget = Math.round(parsed * 100000);
     }
-  } else if (budgetMatch) {
-    const raw = Number(budgetMatch[1].replace(/,/g, ''));
-    if (raw >= 500) {
-      budget = /k\b/i.test(budgetMatch[0]) ? raw * 1000 : raw;
+  } else {
+    const crMatch = text.match(/([\d\.]+)\s*(?:crores?|cr\b)/i);
+    if (crMatch) {
+      const parsed = parseFloat(crMatch[1]);
+      if (!Number.isNaN(parsed) && parsed > 0) {
+        budget = Math.round(parsed * 10000000);
+      }
+    } else {
+      const explicitBudgetMatch = text.match(
+        /(?:budget(?:\s+is|\s+of)?|around|under|max|for)\s*(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{2,9})(\s*k)?|(?:₹|\$|€)\s*([\d,]{2,9})(\s*k)?/i
+      );
+      if (explicitBudgetMatch) {
+        const raw = (explicitBudgetMatch[1] || explicitBudgetMatch[3] || '').replace(/,/g, '');
+        const hasK = Boolean(explicitBudgetMatch[2] || explicitBudgetMatch[4]);
+        const parsed = Number(raw);
+        if (!Number.isNaN(parsed) && parsed > 0) {
+          budget = hasK ? parsed * 1000 : parsed;
+        }
+      } else {
+        const budgetMatch = text.match(/(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{3,9})(?:\s*(?:k|thousand))?/i);
+        if (budgetMatch) {
+          const raw = Number(budgetMatch[1].replace(/,/g, ''));
+          if (raw >= 500) {
+            budget = /k\b/i.test(budgetMatch[0]) ? raw * 1000 : raw;
+          }
+        }
+      }
     }
   }
 
@@ -140,17 +231,21 @@ export function extractRequirementsFromText(
   const monthMatch = text.match(
     /\b(january|february|march|april|may|june|july|august|september|october|november|december)\b/i
   );
-  const travelMonth = monthMatch ? monthMatch[1][0].toUpperCase() + monthMatch[1].slice(1).toLowerCase() : defaults?.travelMonth;
+  const travelMonth = monthMatch
+    ? monthMatch[1][0].toUpperCase() + monthMatch[1].slice(1).toLowerCase()
+    : defaults?.travelMonth;
 
   // Interests
   const keywordInterests: Array<[RegExp, string]> = [
+    [/northern lights|aurora|auroral|borealis|stargazing/i, 'Northern Lights'],
     [/beach|coast|sea|ocean|island/i, 'Beaches'],
     [/cafe|coffee|bakery|food|dining|restaurant/i, 'Cafes'],
     [/peaceful|quiet|calm|serene|relax|crowd/i, 'Peaceful Places'],
     [/mountain|hike|trek|alpine|ridge/i, 'Mountains'],
+    [/glacier|ice|fjord|wildlife|polar|arctic/i, 'Wilderness & Glaciers'],
     [/temple|culture|history|heritage|museum/i, 'Culture'],
-    [/adventure|surf|raft|climb/i, 'Adventure'],
-    [/wellness|spa|yoga/i, 'Wellness'],
+    [/adventure|surf|raft|climb|mushing|dog sled/i, 'Adventure'],
+    [/wellness|spa|yoga|hot spring|thermal/i, 'Wellness & Hot Springs'],
   ];
   const interests = keywordInterests.filter(([rx]) => rx.test(lower)).map(([, label]) => label);
 

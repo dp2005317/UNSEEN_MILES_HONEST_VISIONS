@@ -28,7 +28,7 @@ export function resolveSeason(input?: string, lat = 35.0): Season {
 
   let northernSeason: Season = 'Spring';
 
-  if (/\b(december|january|february|winter|snow|festive|christmas|cold)\b/i.test(clean)) {
+  if (/\b(december|january|february|winter|snow|festive|christmas|cold|northern lights|aurora|auroral|borealis)\b/i.test(clean)) {
     northernSeason = 'Winter';
   } else if (/\b(march|april|may|spring|sakura|blossom|bloom)\b/i.test(clean)) {
     northernSeason = 'Spring';
@@ -275,6 +275,60 @@ export function getSeasonalProfile(destinationName: string, season: Season): Sea
         description: 'Explore misty green terraces in early morning tranquility followed by sunset prayers overlooking crashing waves.',
         category: 'nature',
         timeOfDay: 'Morning',
+      },
+    };
+  }
+
+  // Arctic & Aurora Destinations (Alaska, Iceland, Northern Lights)
+  if (
+    destLower.includes('alaska') ||
+    destLower.includes('fairbanks') ||
+    destLower.includes('anchorage') ||
+    destLower.includes('northern lights') ||
+    destLower.includes('aurora')
+  ) {
+    const isSummer = season === 'Summer';
+    if (isSummer) {
+      return {
+        season: 'Summer',
+        label: 'Midnight Sun & Coastal Fjords Wilderness Season',
+        weatherOverview: 'Mild endless daylight (13°C – 23°C) with 20+ hours of sun for glacier cruising, alpine hiking, and wildlife viewing.',
+        tempRange: '13°C – 23°C',
+        seasonalHighlights: [
+          'Catamaran glacier cruises through Kenai Fjords past breaching humpback whales and calving ice walls',
+          'Wildlife safaris in Denali National Park spotting wild grizzly bears, moose, and caribou',
+          'Midnight Sun strolls along the Anchorage coastal trail with 22:00 sunset golden hour',
+        ],
+        signatureFoods: ['Wild Copper River King Salmon', 'Fresh Alaskan King Crab Legs', 'Smoked Halibut Chowder', 'Wild Blueberry Sourdough Pancakes'],
+        packingAdvice: ['Layerable fleece and waterproof rain shell', 'Insect repellent and headnet for tundra trails', 'Eye mask for sleeping under the midnight sun'],
+        culturalAdvisory: 'Peak season for national park shuttles and marine cruises; reserve boat trips and Denali bus passes well in advance.',
+        suggestedActivity: {
+          title: 'Kenai Fjords Wildlife & Tidewater Glacier Cruise',
+          description: 'Sail through protected glacial waterways past seabird rookeries and thunderous calving ice.',
+          category: 'nature',
+          timeOfDay: 'Morning',
+        },
+      };
+    }
+    return {
+      season: 'Winter',
+      label: 'Aurora Borealis & Arctic Wilderness Season',
+      weatherOverview: 'Crisp, sub-zero arctic air (-18°C to -4°C) under crystal-clear dark skies perfectly positioned under the auroral oval.',
+      tempRange: '-18°C – -2°C (Fairbanks / Interior)',
+      seasonalHighlights: [
+        'Vivid emerald, violet, and ruby Aurora Borealis ribbons dancing across the dark night sky in Fairbanks',
+        'Soaking in 40°C mineral-rich natural geothermal waters surrounded by snow at Chena Hot Springs',
+        'Dog sledding (mushing) through snow-draped boreal forests and over frozen river trails',
+        'Scenic winter journey on the Alaska Railroad Aurora Winter Train through dramatic snowy passes',
+      ],
+      signatureFoods: ['Steaming Halibut Chowder in Sourdough Bread Bowls', 'Reindeer Sausage Breakfast Hash', 'Wild Smoked Salmon Chowder', 'Warm Berry Cobbler with Vanilla Cream'],
+      packingAdvice: ['Heavy thermal Merino base layers (top & bottom)', 'Insulated sub-zero winter parka (-20°C rated)', 'Arctic winter snow boots (Sorel/Baffin)', 'Chemical hand & toe warmers, balaclava, and windproof mittens'],
+      culturalAdvisory: 'Prime aurora viewing window is 22:00–03:00 on clear dark nights; Fairbanks has over an 80% success rate across 3+ night stays.',
+      suggestedActivity: {
+        title: 'Midnight Aurora Borealis Watch & Chena Geothermal Soak',
+        description: 'Soak in natural steaming mineral rock pools while watching brilliant celestial aurora displays overhead.',
+        category: 'nature',
+        timeOfDay: 'Evening',
       },
     };
   }

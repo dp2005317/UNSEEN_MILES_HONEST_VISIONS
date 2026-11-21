@@ -1615,6 +1615,94 @@ var DESTINATIONS = [
 ];
 var HOTELS = [
   {
+    id: "ht-alaska-chena",
+    name: "Chena Hot Springs Aurora Resort & Yurts",
+    destinationId: "alaska",
+    area: "Chena Hot Springs, Fairbanks North Star Borough",
+    rating: 4.9,
+    reviewCount: 420,
+    pricePerNightInr: 18500,
+    tier: "boutique",
+    roomTypes: ["Thermal Springs Lodge Room", "Aurora Moose Cabin"],
+    distanceToCenterKm: 1,
+    amenities: ["Natural 40\xB0C mineral hot springs", "Aurora Ice Museum entry", "Nightly aurora wake-up calls", "Geothermal greenhouse dining"],
+    cancellationPolicy: "Free cancellation up to 72 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 65.0531,
+    lng: -146.0567,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Direct thermal soaking in natural outdoor hot springs surrounded by snow under dancing Northern Lights.",
+    matchScore: 98
+  },
+  {
+    id: "ht-alaska-borealis",
+    name: "Borealis Basecamp Geodesic Domes",
+    destinationId: "alaska",
+    area: "Wickersham Dome, Fairbanks",
+    rating: 4.9,
+    reviewCount: 310,
+    pricePerNightInr: 28e3,
+    tier: "luxury",
+    roomTypes: ["Clear-Roof Aurora Dome", "Boreal Forest Cube"],
+    distanceToCenterKm: 18,
+    amenities: ["16-foot curved transparent ceiling", "Heated polar beds", "Private dog mushing trails", "Chef-prepared Alaskan tasting menu"],
+    cancellationPolicy: "Free cancellation up to 7 days prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 65.1782,
+    lng: -147.8542,
+    mediaKey: "hero_alpine",
+    recommendationReason: "Sleep under panoramic glass ceilings watching emerald aurora ribbons from bed without stepping out into sub-zero weather.",
+    matchScore: 99
+  },
+  {
+    id: "ht-alaska-alyeska",
+    name: "Alyeska Nordic Spa & Glacial Retreat",
+    destinationId: "alaska",
+    area: "Girdwood, Chugach Valley",
+    rating: 4.8,
+    reviewCount: 512,
+    pricePerNightInr: 22500,
+    tier: "luxury",
+    roomTypes: ["Mountain View Deluxe Room", "Glacier Valley Suite"],
+    distanceToCenterKm: 2.5,
+    amenities: ["Outdoor Nordic hydrotherapy circuit", "Mountain aerial tramway", "Seven Glaciers fine dining", "Forest hot tubs"],
+    cancellationPolicy: "Free cancellation up to 48 hours prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 60.9705,
+    lng: -149.0982,
+    mediaKey: "boutique_villa",
+    recommendationReason: "Alpine hydrotherapy pools and aerial tram surrounded by seven hanging glaciers and snow-capped peaks.",
+    matchScore: 95
+  },
+  {
+    id: "ht-alaska-denali",
+    name: "Denali Backcountry Wilderness Lodge",
+    destinationId: "alaska",
+    area: "Kantishna, Deep Denali Wilderness",
+    rating: 4.7,
+    reviewCount: 185,
+    pricePerNightInr: 12500,
+    tier: "budget",
+    roomTypes: ["Riverside Cedar Cabin", "Tundra Queen Room"],
+    distanceToCenterKm: 4,
+    amenities: ["Complimentary naturalist guided hikes", "Moose Pond canoeing", "Hearty sourdough breakfasts", "Wood-burning stoves"],
+    cancellationPolicy: "Free cancellation up to 5 days prior",
+    provider: "Unseen Stays Catalog",
+    availabilityStatus: "Simulated Demo Inventory",
+    provenance: "demo_adapter",
+    lat: 63.5281,
+    lng: -150.9632,
+    mediaKey: "hero_alpine",
+    recommendationReason: "Peaceful off-grid cedar cabins deep within Denali with zero light pollution for pristine night skies.",
+    matchScore: 94
+  },
+  {
     id: "ht-london-bloomsbury",
     name: "The Bloomsbury Townhouse",
     destinationId: "london",
@@ -2574,6 +2662,95 @@ var INDICATIVE_CURRENCY_RATES_FROM_INR = {
 
 // src/lib/worldwideDestinations.ts
 var KNOWN_WORLD_CITIES = {
+  alaska: {
+    name: "Alaska",
+    country: "United States",
+    region: "North America / Arctic",
+    tagline: "Dancing Aurora Borealis, wild glacial fjords, towering peaks, and pristine wilderness.",
+    description: "Immerse in the untamed grandeur of Alaska: world-class Northern Lights viewing in Fairbanks and Chena Hot Springs, scenic glacier cruises through Kenai Fjords, dog sledding through snowbound boreal forests, and the towering silhouette of Mount Denali.",
+    mediaKey: "hero_alpine",
+    currencyCode: "USD",
+    currencySymbol: "$",
+    languageName: "English & Native Alaskan Languages",
+    bestSeason: "September \u2013 April (Northern Lights Season) & June \u2013 August (Midnight Sun)",
+    recommendedDays: 7,
+    dailyBudgetInr: { budget: 11e3, balanced: 21e3, luxury: 42e3 },
+    coordinates: { lat: 64.8378, lng: -147.7164 },
+    tags: ["Nature", "Peaceful Places", "Adventure", "Scenic Viewpoints"],
+    airport: { name: "Fairbanks International Airport (FAI) / Ted Stevens Anchorage (ANC)", lat: 64.8151, lng: -147.8597 },
+    places: [
+      {
+        name: "Fairbanks Aurora Sky Dome & Night Watch",
+        type: "Attraction",
+        description: "World-renowned aurora viewing vantage directly under the auroral oval with 360-degree dark sky vistas.",
+        bestTime: "22:00 \u2013 03:00",
+        lat: 64.8378,
+        lng: -147.7164,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Chena Hot Springs Geothermal Pools",
+        type: "Hidden Gem",
+        description: "Natural 40\xB0C outdoor rock pools surrounded by snowdrifts, ideal for soaking under dancing northern lights.",
+        bestTime: "20:00 \u2013 01:00",
+        lat: 65.0531,
+        lng: -146.0567,
+        estimatedEntryInr: 1600,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Denali National Park & Mount Denali Vista",
+        type: "Attraction",
+        description: "Six million acres of wild tundra crowned by North America\u2019s tallest peak (20,310 ft) and roaming wildlife.",
+        bestTime: "08:00 \u2013 14:00",
+        lat: 63.1148,
+        lng: -151.1926,
+        estimatedEntryInr: 1250,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Kenai Fjords & Resurrection Bay Glacial Cruise",
+        type: "Attraction",
+        description: "Catamaran cruise past calving tidewater glaciers, sea otters, puffins, harbor seals, and orcas.",
+        bestTime: "09:30 \u2013 15:30",
+        lat: 60.1042,
+        lng: -149.4422,
+        estimatedEntryInr: 14500,
+        crowdLevel: "Moderate"
+      },
+      {
+        name: "Castner Glacier Ice Cave & Delta Junction",
+        type: "Hidden Gem",
+        description: "Mesmerizing cathedral of blue glacial ice and frozen meltwater streams reachable by winter snowshoeing.",
+        bestTime: "10:00 \u2013 13:30",
+        lat: 63.4011,
+        lng: -145.7322,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Talkeetna Historic Pioneer Town & Sourdough Bakeries",
+        type: "Cafe & Food",
+        description: "Quirky mountaineer outpost with artisanal sourdough bakeries, craft breweries, and Denali flightseeing.",
+        bestTime: "11:00 \u2013 15:00",
+        lat: 62.3209,
+        lng: -150.1097,
+        estimatedEntryInr: 900,
+        crowdLevel: "Quiet"
+      },
+      {
+        name: "Tony Knowles Coastal Trail & Chugach Mountains",
+        type: "Hidden Gem",
+        description: "Pristine 11-mile coastal pathway overlooking Cook Inlet with frequent moose sightings and alpine backdrops.",
+        bestTime: "08:30 \u2013 11:30",
+        lat: 61.2181,
+        lng: -149.9003,
+        estimatedEntryInr: 0,
+        crowdLevel: "Quiet"
+      }
+    ]
+  },
   london: {
     name: "London",
     country: "United Kingdom",
@@ -3607,7 +3784,7 @@ function synthesizeHotelsForDestination(dest) {
 function resolveSeason(input, lat = 35) {
   const clean = (input || "").toLowerCase();
   let northernSeason = "Spring";
-  if (/\b(december|january|february|winter|snow|festive|christmas|cold)\b/i.test(clean)) {
+  if (/\b(december|january|february|winter|snow|festive|christmas|cold|northern lights|aurora|auroral|borealis)\b/i.test(clean)) {
     northernSeason = "Winter";
   } else if (/\b(march|april|may|spring|sakura|blossom|bloom)\b/i.test(clean)) {
     northernSeason = "Spring";
@@ -3837,6 +4014,52 @@ function getSeasonalProfile(destinationName, season) {
       }
     };
   }
+  if (destLower.includes("alaska") || destLower.includes("fairbanks") || destLower.includes("anchorage") || destLower.includes("northern lights") || destLower.includes("aurora")) {
+    const isSummer = season === "Summer";
+    if (isSummer) {
+      return {
+        season: "Summer",
+        label: "Midnight Sun & Coastal Fjords Wilderness Season",
+        weatherOverview: "Mild endless daylight (13\xB0C \u2013 23\xB0C) with 20+ hours of sun for glacier cruising, alpine hiking, and wildlife viewing.",
+        tempRange: "13\xB0C \u2013 23\xB0C",
+        seasonalHighlights: [
+          "Catamaran glacier cruises through Kenai Fjords past breaching humpback whales and calving ice walls",
+          "Wildlife safaris in Denali National Park spotting wild grizzly bears, moose, and caribou",
+          "Midnight Sun strolls along the Anchorage coastal trail with 22:00 sunset golden hour"
+        ],
+        signatureFoods: ["Wild Copper River King Salmon", "Fresh Alaskan King Crab Legs", "Smoked Halibut Chowder", "Wild Blueberry Sourdough Pancakes"],
+        packingAdvice: ["Layerable fleece and waterproof rain shell", "Insect repellent and headnet for tundra trails", "Eye mask for sleeping under the midnight sun"],
+        culturalAdvisory: "Peak season for national park shuttles and marine cruises; reserve boat trips and Denali bus passes well in advance.",
+        suggestedActivity: {
+          title: "Kenai Fjords Wildlife & Tidewater Glacier Cruise",
+          description: "Sail through protected glacial waterways past seabird rookeries and thunderous calving ice.",
+          category: "nature",
+          timeOfDay: "Morning"
+        }
+      };
+    }
+    return {
+      season: "Winter",
+      label: "Aurora Borealis & Arctic Wilderness Season",
+      weatherOverview: "Crisp, sub-zero arctic air (-18\xB0C to -4\xB0C) under crystal-clear dark skies perfectly positioned under the auroral oval.",
+      tempRange: "-18\xB0C \u2013 -2\xB0C (Fairbanks / Interior)",
+      seasonalHighlights: [
+        "Vivid emerald, violet, and ruby Aurora Borealis ribbons dancing across the dark night sky in Fairbanks",
+        "Soaking in 40\xB0C mineral-rich natural geothermal waters surrounded by snow at Chena Hot Springs",
+        "Dog sledding (mushing) through snow-draped boreal forests and over frozen river trails",
+        "Scenic winter journey on the Alaska Railroad Aurora Winter Train through dramatic snowy passes"
+      ],
+      signatureFoods: ["Steaming Halibut Chowder in Sourdough Bread Bowls", "Reindeer Sausage Breakfast Hash", "Wild Smoked Salmon Chowder", "Warm Berry Cobbler with Vanilla Cream"],
+      packingAdvice: ["Heavy thermal Merino base layers (top & bottom)", "Insulated sub-zero winter parka (-20\xB0C rated)", "Arctic winter snow boots (Sorel/Baffin)", "Chemical hand & toe warmers, balaclava, and windproof mittens"],
+      culturalAdvisory: "Prime aurora viewing window is 22:00\u201303:00 on clear dark nights; Fairbanks has over an 80% success rate across 3+ night stays.",
+      suggestedActivity: {
+        title: "Midnight Aurora Borealis Watch & Chena Geothermal Soak",
+        description: "Soak in natural steaming mineral rock pools while watching brilliant celestial aurora displays overhead.",
+        category: "nature",
+        timeOfDay: "Evening"
+      }
+    };
+  }
   return {
     season,
     label: `${season} Seasonal Journey`,
@@ -3984,31 +4207,90 @@ function resolveCatalogDestination(query) {
   }
   return void 0;
 }
+function cleanDestName(raw) {
+  if (!raw) return "";
+  const cleaned = raw.replace(/\b(?:northern lights|aurora|tour|trip|vacation|holiday|itinerary|journey|travel|explore|visit|planning|plan)\b/gi, "").replace(/[,\.?!]/g, "").trim();
+  if (cleaned.length < 2) return "";
+  return cleaned.split(/\s+/).map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(" ");
+}
 function extractRequirementsFromText(input, defaults) {
   const text = input.trim();
   const lower = text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-  const fromMatch = text.match(/\bfrom\s+([A-Za-z\s]{2,28}?)(?=\s+(?:to|for|in|with|on|,|\.)|$)/i);
+  const fromMatch = text.match(/\bfrom\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to|for|in|with|on|,|\.)|$)/i);
   const origin = fromMatch?.[1]?.trim() || defaults?.origin || "Kolkata";
   const knownCity = findKnownCity(lower);
   const matchedDest = resolveCatalogDestination(lower);
-  const toMatch = text.match(/\b(?:to|visit|in|exploring|explore)\s+([A-Za-z\s]{2,28}?)(?=\s+(?:for|in|with|on|from|,|\.)|$)/i);
-  let rawDest = knownCity?.name || matchedDest?.name || toMatch?.[1]?.trim();
+  let rawDest = knownCity?.name || matchedDest?.name;
   if (!rawDest) {
-    const stripped = text.replace(/\b(?:plan|a|trip|itinerary|travel|vacation|holiday|days?|nights?|for|with|couple|solo|family|\d+)\b/gi, "").replace(/[,\.?!]/g, "").trim();
-    if (stripped.length >= 3 && stripped.length <= 40) {
-      rawDest = stripped;
+    const fromToMatch = text.match(
+      /\bfrom\s+[A-Za-z\x7f-\xff\s]{2,25}?\s+to\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to\s+(?:see|view|watch|catch|experience|witness|visit|explore|hike|do)|for|with|in|on|from|like|around|during|budget|\d|,|\.|\?|!|$)|$)/i
+    );
+    if (fromToMatch?.[1]) {
+      const d = cleanDestName(fromToMatch[1]);
+      if (d) rawDest = d;
     }
   }
-  const destination = rawDest || defaults?.destination || "London";
-  const daysMatch = text.match(/(\d{1,2})\s*[-–]?\s*(?:days?|nights?)/i);
-  const durationDays = daysMatch ? Math.min(21, Math.max(1, Number(daysMatch[1]))) : defaults?.durationDays || 5;
+  if (!rawDest) {
+    const actionMatch = text.match(
+      /\b(?:want to go to|going to|head to|heading to|travel to|fly to|trip to|tour to|take me to|can we go to|plan(?:\s+a)?\s+trip\s+to|planning\s+(?:a\s+trip\s+)?(?:to|for)|visit|visiting|exploring|explore|vacation in|holiday in)\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to\s+(?:see|view|watch|catch|experience|witness|visit|explore|hike|do)|for|with|in|on|from|like|around|during|budget|\d|,|\.|\?|!|$)|$)/i
+    );
+    if (actionMatch?.[1]) {
+      const d = cleanDestName(actionMatch[1]);
+      if (d) rawDest = d;
+    }
+  }
+  if (!rawDest) {
+    const toMatch = text.match(
+      /(?<!\b(?:want|like|prefer|hope|wish|need|used)\s+)\bto\s+([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:to\s+(?:see|view|watch|catch|experience|witness|visit|explore|hike|do)|for|with|in|on|from|like|around|during|budget|\d|,|\.|\?|!|$)|$)/i
+    );
+    if (toMatch?.[1]) {
+      const d = cleanDestName(toMatch[1]);
+      if (d) rawDest = d;
+    }
+  }
+  if (!rawDest) {
+    const leadMatch = text.match(
+      /^([A-Za-z\x7f-\xff\s]{2,28}?)(?=\s+(?:for\s+\d|\d+\s*(?:days?|nights?|weeks?|months?)|trip|tour|holiday|vacation))/i
+    );
+    if (leadMatch?.[1]) {
+      const d = cleanDestName(leadMatch[1]);
+      if (d) rawDest = d;
+    }
+  }
+  if (!rawDest) {
+    const stripped = text.replace(/\b(?:plan|a|trip|itinerary|travel|vacation|holiday|days?|nights?|weeks?|months?|for|with|couple|solo|family|\d+)\b/gi, "").replace(/[,\.?!]/g, "").trim();
+    if (stripped.length >= 2 && stripped.length <= 35) {
+      const d = cleanDestName(stripped);
+      if (d) rawDest = d;
+    }
+  }
+  const destination = rawDest || defaults?.destination || "Alaska";
+  let durationDays = defaults?.durationDays || 5;
+  const durationMonthMatch = text.match(/(\d{1,2}|one|two|three)\s*(?:[-–]?\s*months?)/i);
+  if (durationMonthMatch) {
+    const wordMap = { one: 1, two: 2, three: 3 };
+    const num = wordMap[durationMonthMatch[1].toLowerCase()] || Number(durationMonthMatch[1]);
+    durationDays = Math.min(30, num * 30);
+  } else {
+    const weekMatch = text.match(/(\d{1,2}|one|two|three|a)\s*(?:[-–]?\s*weeks?)/i);
+    if (weekMatch) {
+      const wordMap = { a: 1, one: 1, two: 2, three: 3 };
+      const num = wordMap[weekMatch[1].toLowerCase()] || Number(weekMatch[1]);
+      durationDays = Math.min(30, num * 7);
+    } else {
+      const daysMatch = text.match(/(\d{1,2})\s*[-–]?\s*(?:days?|nights?)/i);
+      if (daysMatch) {
+        durationDays = Math.min(30, Math.max(1, Number(daysMatch[1])));
+      }
+    }
+  }
   let travellers = defaults?.travellers || 2;
-  const travNumMatch = text.match(/(\d{1,2})\s*(?:people|persons|travellers|travelers|guests|adults)/i);
+  const travNumMatch = text.match(/(\d{1,2})\s*(?:people|persons?|travellers?|travelers?|guests?|adults?)/i);
   if (travNumMatch) {
     travellers = Math.min(12, Math.max(1, Number(travNumMatch[1])));
-  } else if (/\b(?:two|couple|2)\b/i.test(lower)) {
+  } else if (/\b(?:two|couple|2\s*person|2\s*people|me\s+and\s+my\s+(?:wife|husband|partner|friend))\b/i.test(lower)) {
     travellers = 2;
-  } else if (/\bsolo\b|\balone\b|\b1 person\b/i.test(lower)) {
+  } else if (/\bsolo\b|\balone\b|\b1\s*(?:person|traveller)\b/i.test(lower)) {
     travellers = 1;
   } else if (/\bfamily\b|\bfour\b/i.test(lower)) {
     travellers = 4;
@@ -4017,22 +4299,40 @@ function extractRequirementsFromText(input, defaults) {
   if (/\$|usd|dollars?/i.test(lower)) currency = "USD";
   else if (/€|eur|euros?/i.test(lower)) currency = "EUR";
   else if (/₹|rs\.?|inr|rupees?/i.test(lower)) currency = "INR";
-  const budgetMatch = text.match(/(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{3,9})(?:\s*(?:k|thousand))?/i);
   let budget = defaults?.budget || 8e4;
-  const explicitBudgetMatch = text.match(
-    /(?:budget(?:\s+is|\s+of)?|around|under|max|for)\s*(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{2,9})(\s*k)?|(?:₹|\$|€)\s*([\d,]{2,9})(\s*k)?/i
-  );
-  if (explicitBudgetMatch) {
-    const raw = (explicitBudgetMatch[1] || explicitBudgetMatch[3] || "").replace(/,/g, "");
-    const hasK = Boolean(explicitBudgetMatch[2] || explicitBudgetMatch[4]);
-    const parsed = Number(raw);
+  const lakhMatch = text.match(/([\d\.]+)\s*(?:lakhs?|lacs?|lac|l\b)/i);
+  if (lakhMatch) {
+    const parsed = parseFloat(lakhMatch[1]);
     if (!Number.isNaN(parsed) && parsed > 0) {
-      budget = hasK ? parsed * 1e3 : parsed;
+      budget = Math.round(parsed * 1e5);
     }
-  } else if (budgetMatch) {
-    const raw = Number(budgetMatch[1].replace(/,/g, ""));
-    if (raw >= 500) {
-      budget = /k\b/i.test(budgetMatch[0]) ? raw * 1e3 : raw;
+  } else {
+    const crMatch = text.match(/([\d\.]+)\s*(?:crores?|cr\b)/i);
+    if (crMatch) {
+      const parsed = parseFloat(crMatch[1]);
+      if (!Number.isNaN(parsed) && parsed > 0) {
+        budget = Math.round(parsed * 1e7);
+      }
+    } else {
+      const explicitBudgetMatch = text.match(
+        /(?:budget(?:\s+is|\s+of)?|around|under|max|for)\s*(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{2,9})(\s*k)?|(?:₹|\$|€)\s*([\d,]{2,9})(\s*k)?/i
+      );
+      if (explicitBudgetMatch) {
+        const raw = (explicitBudgetMatch[1] || explicitBudgetMatch[3] || "").replace(/,/g, "");
+        const hasK = Boolean(explicitBudgetMatch[2] || explicitBudgetMatch[4]);
+        const parsed = Number(raw);
+        if (!Number.isNaN(parsed) && parsed > 0) {
+          budget = hasK ? parsed * 1e3 : parsed;
+        }
+      } else {
+        const budgetMatch = text.match(/(?:₹|\$|€|inr|usd|eur|rs\.?)?\s*([\d,]{3,9})(?:\s*(?:k|thousand))?/i);
+        if (budgetMatch) {
+          const raw = Number(budgetMatch[1].replace(/,/g, ""));
+          if (raw >= 500) {
+            budget = /k\b/i.test(budgetMatch[0]) ? raw * 1e3 : raw;
+          }
+        }
+      }
     }
   }
   const monthMatch = text.match(
@@ -4040,13 +4340,15 @@ function extractRequirementsFromText(input, defaults) {
   );
   const travelMonth = monthMatch ? monthMatch[1][0].toUpperCase() + monthMatch[1].slice(1).toLowerCase() : defaults?.travelMonth;
   const keywordInterests = [
+    [/northern lights|aurora|auroral|borealis|stargazing/i, "Northern Lights"],
     [/beach|coast|sea|ocean|island/i, "Beaches"],
     [/cafe|coffee|bakery|food|dining|restaurant/i, "Cafes"],
     [/peaceful|quiet|calm|serene|relax|crowd/i, "Peaceful Places"],
     [/mountain|hike|trek|alpine|ridge/i, "Mountains"],
+    [/glacier|ice|fjord|wildlife|polar|arctic/i, "Wilderness & Glaciers"],
     [/temple|culture|history|heritage|museum/i, "Culture"],
-    [/adventure|surf|raft|climb/i, "Adventure"],
-    [/wellness|spa|yoga/i, "Wellness"]
+    [/adventure|surf|raft|climb|mushing|dog sled/i, "Adventure"],
+    [/wellness|spa|yoga|hot spring|thermal/i, "Wellness & Hot Springs"]
   ];
   const interests = keywordInterests.filter(([rx]) => rx.test(lower)).map(([, label]) => label);
   const avoidCrowds = /no crowd|not crowded|quiet|peaceful|hidden|less crowded/i.test(lower) || Boolean(defaults?.avoidCrowds);
@@ -4738,9 +5040,6 @@ function buildDirectBookingLinks(origin, destination) {
 }
 async function runTravelAgent(input) {
   const toolsUsed = [];
-  let generatedItinerary = input.currentItinerary || void 0;
-  let recommendedHotels;
-  let collectedSources = [];
   const defaults = input.preferences ? {
     origin: input.preferences.homeCity,
     currency: input.preferences.preferredCurrency,
@@ -4749,6 +5048,13 @@ async function runTravelAgent(input) {
     interests: input.preferences.interests,
     avoidCrowds: input.preferences.avoidCrowds
   } : void 0;
+  const freshReq = extractRequirementsFromText(input.message, defaults);
+  const isDestShift = Boolean(
+    input.currentItinerary && freshReq.destination && freshReq.destination.toLowerCase() !== input.currentItinerary.destination.toLowerCase()
+  );
+  let generatedItinerary = isDestShift ? void 0 : input.currentItinerary || void 0;
+  let recommendedHotels;
+  let collectedSources = [];
   const executeTool = async (name, args) => {
     toolsUsed.push(name);
     switch (name) {
@@ -4917,14 +5223,14 @@ async function runTravelAgent(input) {
   }
   try {
     const ai = getGeminiClient();
-    const extractedPre = extractRequirementsFromText(input.message, {
+    const extractedPre = isDestShift ? freshReq : extractRequirementsFromText(input.message, {
       ...defaults,
       origin: input.currentItinerary?.origin || defaults?.origin,
       destination: input.currentItinerary?.destination || defaults?.destination,
       durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
       travellers: input.currentItinerary?.travellers || defaults?.travellers
     });
-    const targetDest = extractedPre.destination || input.currentItinerary?.destination || "Japan";
+    const targetDest = extractedPre.destination || (isDestShift ? freshReq.destination : input.currentItinerary?.destination) || "Alaska";
     const destContext = resolveOrSynthesizeDestination(targetDest);
     const targetSeason = resolveSeason(extractedPre.travelMonth || input.message, destContext.coordinates.lat);
     const seasonalContext = getSeasonalProfile(destContext.name, targetSeason);
@@ -4943,16 +5249,17 @@ Cultural & Practical Advisory: ${seasonalContext.culturalAdvisory}
 Key Sights & Landmarks in ${destContext.name}: ${destContext.places.slice(0, 10).map((p) => `${p.name} (${p.description})`).join("; ")}
 
 Rules & Guidelines:
-1. Universal Worldwide Coverage: You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, Kyoto, New York, Rome, Bali, or anywhere globally). Never restrict the user to preset locations. Always generate plans and search stays for the exact destination requested.
-2. Rich, Comprehensive & Seasonal Intelligence: The user expects thorough, high-value, and seasonal advice. Provide 220\u2013340 words of rich, beautifully structured intelligence covering:
-   \u2022 Seasonal Climate & Character: Explain what makes ${seasonalContext.season} special in ${destContext.name}, temperature (${seasonalContext.tempRange}), and seasonal highlights (e.g. cherry blossom hanami, autumn koyo foliage, winter onsens & illuminations, or summer festivals).
-   \u2022 Must-See Iconic Landmarks & Hidden Gems: Always highlight famous must-see landmarks (e.g. for Japan, highlight both Tokyo's iconic hubs like Senso-ji, Shibuya Crossing, and Shinjuku, and Kyoto's Fushimi Inari and Arashiyama; for London, Big Ben, Tower Bridge, and British Museum; for Paris, Eiffel Tower and Louvre). Balance iconic landmarks with mindful, uncrowded moments.
+1. Immediate Structured Itinerary Tool Call: Whenever the user mentions or requests a trip to a destination (e.g. "i want to go to alaska to view northern lights", "plan a trip to Tokyo", "visit London"), you MUST call the \`generate_itinerary\` tool immediately with the requested destination (${destContext.name}), duration (${extractedPre.durationDays} days), travellers (${extractedPre.travellers}), and budget. NEVER respond with only clarifying questions without calling \`generate_itinerary\`. The user expects an immediate structured itinerary card for their requested destination. You can still ask any thoughtful follow-up questions in your final conversational response, but the itinerary tool call MUST happen immediately for ${destContext.name}.
+2. Universal Worldwide Coverage: You support ANY destination or city worldwide (e.g. Alaska, London, Paris, Tokyo, Kyoto, New York, Rome, Bali, or anywhere globally). Never restrict the user to preset locations. Always generate plans and search stays for the exact destination requested.
+3. Rich, Comprehensive & Seasonal Intelligence: The user expects thorough, high-value, and seasonal advice. Provide 220\u2013340 words of rich, beautifully structured intelligence covering:
+   \u2022 Seasonal Climate & Character: Explain what makes ${seasonalContext.season} special in ${destContext.name}, temperature (${seasonalContext.tempRange}), and seasonal highlights (e.g. aurora borealis in Alaska, cherry blossoms in Japan, autumn foliage, or summer festivals).
+   \u2022 Must-See Iconic Landmarks & Hidden Gems: Always highlight famous must-see landmarks for ${destContext.name}. Balance iconic landmarks with mindful, uncrowded moments.
    \u2022 Seasonal Cuisine & Dining: Mention signature seasonal dishes and culinary experiences to savor during this time of year (e.g. ${seasonalContext.signatureFoods.slice(0, 3).join(", ")}).
-   \u2022 Smart Transit & Packing Essentials: Provide practical transit tips (e.g. Suica/Pasmo/JR Pass in Japan, Oyster card in London) and essential seasonal attire (${seasonalContext.packingAdvice.slice(0, 2).join(", ")}).
-3. Tools: Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
-4. Transparency: Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or catalog estimates.
-5. Formatting: Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (\u2022). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
-6. Closing: End with 1\u20132 thoughtful follow-up questions tailored to their season, pace, and interests.`;
+   \u2022 Smart Transit & Packing Essentials: Provide practical transit tips and essential seasonal attire (${seasonalContext.packingAdvice.slice(0, 2).join("; ")}).
+4. Tools: Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
+5. Transparency: Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or catalog estimates.
+6. Formatting: Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (\u2022). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
+7. Closing: End with 1\u20132 thoughtful follow-up questions tailored to their season, pace, and interests.`;
     const contents = [
       ...input.history.slice(-8).map((m) => ({
         role: m.role === "assistant" ? "model" : "user",
@@ -4998,13 +5305,15 @@ Rules & Guidelines:
     }
     const rawReply = response.text?.trim() || "I have crafted an updated travel plan with curated stays, route timing, and live booking links below.";
     const replyText = cleanChatReply(rawReply, 3800);
-    if (!generatedItinerary && /\b(plan|trip|days|itinerary|budget|travel|cheaper|crowd)\b/i.test(input.message)) {
-      const extracted = extractRequirementsFromText(input.message, defaults);
-      generatedItinerary = buildDeterministicItinerary(extracted);
-      toolsUsed.push("generate_itinerary");
+    const destMismatch = generatedItinerary && freshReq.destination && generatedItinerary.destination.toLowerCase() !== freshReq.destination.toLowerCase() && /\b(want to go to|going to|trip to|tour to|travel to|fly to|visit|explore|vacation in|holiday in|in|to)\b/i.test(input.message);
+    if (!generatedItinerary || destMismatch) {
+      if (/\b(plan|trip|tour|days|month|weeks?|itinerary|budget|travel|cheaper|crowd|want|go|visit|explore|vacation|holiday|lights|aurora)\b/i.test(input.message)) {
+        generatedItinerary = buildDeterministicItinerary(freshReq);
+        toolsUsed.push("generate_itinerary");
+      }
     }
-    const activeOrigin = generatedItinerary?.origin || defaults?.origin || "Kolkata";
-    const activeDest = generatedItinerary?.destination || extractRequirementsFromText(input.message, defaults).destination || "Bali";
+    const activeOrigin = generatedItinerary?.origin || freshReq.origin || defaults?.origin || "Kolkata";
+    const activeDest = generatedItinerary?.destination || freshReq.destination || "Alaska";
     const uniqueSources = [];
     const seenUrls = /* @__PURE__ */ new Set();
     for (const s of collectedSources) {
@@ -5042,7 +5351,11 @@ Rules & Guidelines:
 }
 async function runTavilyConciergeFallback(input, defaults) {
   const lower = input.message.toLowerCase();
-  const extracted = extractRequirementsFromText(input.message, {
+  const fresh = extractRequirementsFromText(input.message, defaults);
+  const isDestShift = Boolean(
+    input.currentItinerary && fresh.destination && fresh.destination.toLowerCase() !== input.currentItinerary.destination.toLowerCase()
+  );
+  const extracted = isDestShift ? fresh : extractRequirementsFromText(input.message, {
     ...defaults,
     origin: input.currentItinerary?.origin || defaults?.origin,
     destination: input.currentItinerary?.destination || defaults?.destination,
@@ -5053,7 +5366,7 @@ async function runTavilyConciergeFallback(input, defaults) {
   let recommendedHotels;
   let budgetChanges;
   let isBudgetRevision = false;
-  if (input.currentItinerary && /cheaper|lower|reduce|save|under\s*\d/i.test(lower)) {
+  if (!isDestShift && input.currentItinerary && /cheaper|lower|reduce|save|under\s*\d/i.test(lower)) {
     isBudgetRevision = true;
     const targetBudget = extracted.budget !== 8e4 && extracted.budget < input.currentItinerary.targetBudget ? extracted.budget : Math.round(input.currentItinerary.targetBudget * 0.75);
     const res = optimizeItineraryForBudget(input.currentItinerary, targetBudget);
@@ -5098,14 +5411,18 @@ async function runTavilyConciergeFallback(input, defaults) {
 }
 function runDeterministicFallback(input, defaults, prebuiltItinerary, prebuiltHotels, isBudgetRevision = false, budgetChanges) {
   const lower = input.message.toLowerCase();
-  const extracted = extractRequirementsFromText(input.message, {
+  const fresh = extractRequirementsFromText(input.message, defaults);
+  const isDestShift = Boolean(
+    input.currentItinerary && fresh.destination && fresh.destination.toLowerCase() !== input.currentItinerary.destination.toLowerCase()
+  );
+  const extracted = isDestShift ? fresh : extractRequirementsFromText(input.message, {
     ...defaults,
     origin: input.currentItinerary?.origin || defaults?.origin,
     destination: input.currentItinerary?.destination || defaults?.destination,
     durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
     travellers: input.currentItinerary?.travellers || defaults?.travellers
   });
-  if (isBudgetRevision && prebuiltItinerary && budgetChanges) {
+  if (!isDestShift && isBudgetRevision && prebuiltItinerary && budgetChanges) {
     return {
       reply: `I recalculated your ${prebuiltItinerary.destination} journey for ${prebuiltItinerary.currency} ${prebuiltItinerary.estimatedTotal.toLocaleString()}:
 

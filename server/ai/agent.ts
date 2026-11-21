@@ -199,10 +199,6 @@ function buildDirectBookingLinks(origin: string, destination: string) {
 
 export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResult> {
   const toolsUsed: string[] = [];
-  let generatedItinerary: Itinerary | undefined = input.currentItinerary || undefined;
-  let recommendedHotels: HotelOption[] | undefined;
-  let collectedSources: ResearchSource[] = [];
-
   const defaults: Partial<ReturnType<typeof extractRequirementsFromText>> | undefined = input.preferences
     ? {
         origin: input.preferences.homeCity,
@@ -213,6 +209,17 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
         avoidCrowds: input.preferences.avoidCrowds,
       }
     : undefined;
+
+  const freshReq = extractRequirementsFromText(input.message, defaults);
+  const isDestShift = Boolean(
+    input.currentItinerary &&
+    freshReq.destination &&
+    freshReq.destination.toLowerCase() !== input.currentItinerary.destination.toLowerCase()
+  );
+
+  let generatedItinerary: Itinerary | undefined = isDestShift ? undefined : (input.currentItinerary || undefined);
+  let recommendedHotels: HotelOption[] | undefined;
+  let collectedSources: ResearchSource[] = [];
 
   const executeTool = async (name: string, args: Record<string, unknown>) => {
     toolsUsed.push(name);
@@ -397,14 +404,16 @@ export async function runTravelAgent(input: AgentRunInput): Promise<AgentRunResu
 
   try {
     const ai = getGeminiClient();
-    const extractedPre = extractRequirementsFromText(input.message, {
-      ...defaults,
-      origin: input.currentItinerary?.origin || defaults?.origin,
-      destination: input.currentItinerary?.destination || defaults?.destination,
-      durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
-      travellers: input.currentItinerary?.travellers || defaults?.travellers,
-    });
-    const targetDest = extractedPre.destination || input.currentItinerary?.destination || 'Japan';
+    const extractedPre = isDestShift
+      ? freshReq
+      : extractRequirementsFromText(input.message, {
+          ...defaults,
+          origin: input.currentItinerary?.origin || defaults?.origin,
+          destination: input.currentItinerary?.destination || defaults?.destination,
+          durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
+          travellers: input.currentItinerary?.travellers || defaults?.travellers,
+        });
+    const targetDest = extractedPre.destination || (isDestShift ? freshReq.destination : input.currentItinerary?.destination) || 'Alaska';
     const destContext = resolveOrSynthesizeDestination(targetDest);
     const targetSeason = resolveSeason(extractedPre.travelMonth || input.message, destContext.coordinates.lat);
     const seasonalContext = getSeasonalProfile(destContext.name, targetSeason);
@@ -428,16 +437,17 @@ Cultural & Practical Advisory: ${seasonalContext.culturalAdvisory}
 Key Sights & Landmarks in ${destContext.name}: ${destContext.places.slice(0, 10).map((p) => `${p.name} (${p.description})`).join('; ')}
 
 Rules & Guidelines:
-1. Universal Worldwide Coverage: You support ANY destination or city worldwide (e.g. London, Paris, Tokyo, Kyoto, New York, Rome, Bali, or anywhere globally). Never restrict the user to preset locations. Always generate plans and search stays for the exact destination requested.
-2. Rich, Comprehensive & Seasonal Intelligence: The user expects thorough, high-value, and seasonal advice. Provide 220–340 words of rich, beautifully structured intelligence covering:
-   • Seasonal Climate & Character: Explain what makes ${seasonalContext.season} special in ${destContext.name}, temperature (${seasonalContext.tempRange}), and seasonal highlights (e.g. cherry blossom hanami, autumn koyo foliage, winter onsens & illuminations, or summer festivals).
-   • Must-See Iconic Landmarks & Hidden Gems: Always highlight famous must-see landmarks (e.g. for Japan, highlight both Tokyo's iconic hubs like Senso-ji, Shibuya Crossing, and Shinjuku, and Kyoto's Fushimi Inari and Arashiyama; for London, Big Ben, Tower Bridge, and British Museum; for Paris, Eiffel Tower and Louvre). Balance iconic landmarks with mindful, uncrowded moments.
+1. Immediate Structured Itinerary Tool Call: Whenever the user mentions or requests a trip to a destination (e.g. "i want to go to alaska to view northern lights", "plan a trip to Tokyo", "visit London"), you MUST call the \`generate_itinerary\` tool immediately with the requested destination (${destContext.name}), duration (${extractedPre.durationDays} days), travellers (${extractedPre.travellers}), and budget. NEVER respond with only clarifying questions without calling \`generate_itinerary\`. The user expects an immediate structured itinerary card for their requested destination. You can still ask any thoughtful follow-up questions in your final conversational response, but the itinerary tool call MUST happen immediately for ${destContext.name}.
+2. Universal Worldwide Coverage: You support ANY destination or city worldwide (e.g. Alaska, London, Paris, Tokyo, Kyoto, New York, Rome, Bali, or anywhere globally). Never restrict the user to preset locations. Always generate plans and search stays for the exact destination requested.
+3. Rich, Comprehensive & Seasonal Intelligence: The user expects thorough, high-value, and seasonal advice. Provide 220–340 words of rich, beautifully structured intelligence covering:
+   • Seasonal Climate & Character: Explain what makes ${seasonalContext.season} special in ${destContext.name}, temperature (${seasonalContext.tempRange}), and seasonal highlights (e.g. aurora borealis in Alaska, cherry blossoms in Japan, autumn foliage, or summer festivals).
+   • Must-See Iconic Landmarks & Hidden Gems: Always highlight famous must-see landmarks for ${destContext.name}. Balance iconic landmarks with mindful, uncrowded moments.
    • Seasonal Cuisine & Dining: Mention signature seasonal dishes and culinary experiences to savor during this time of year (e.g. ${seasonalContext.signatureFoods.slice(0, 3).join(', ')}).
-   • Smart Transit & Packing Essentials: Provide practical transit tips (e.g. Suica/Pasmo/JR Pass in Japan, Oyster card in London) and essential seasonal attire (${seasonalContext.packingAdvice.slice(0, 2).join(', ')}).
-3. Tools: Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
-4. Transparency: Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or catalog estimates.
-5. Formatting: Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (•). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
-6. Closing: End with 1–2 thoughtful follow-up questions tailored to their season, pace, and interests.`;
+   • Smart Transit & Packing Essentials: Provide practical transit tips and essential seasonal attire (${seasonalContext.packingAdvice.slice(0, 2).join('; ')}).
+4. Tools: Call the tools to search destinations, find real hotels and flight routes via live web search, and call generate_itinerary or modify_itinerary when the user asks to plan or adjust a trip.
+5. Transparency: Never fabricate confirmed airline seat inventory or live hotel availability; clearly note when prices are indicative ranges or catalog estimates.
+6. Formatting: Write clean, polished plain prose with short crisp paragraphs or clean bullet lines (•). NEVER output raw markdown formatting tokens like **bold**, *italic*, ### headers, or markdown tables because the UI renders structured itinerary, stay, budget, map, and direct booking link cards immediately below your reply.
+7. Closing: End with 1–2 thoughtful follow-up questions tailored to their season, pace, and interests.`;
 
     const contents: Content[] = [
       ...input.history.slice(-8).map((m) => ({
@@ -495,17 +505,21 @@ Rules & Guidelines:
       'I have crafted an updated travel plan with curated stays, route timing, and live booking links below.';
     const replyText = cleanChatReply(rawReply, 3800);
 
-    if (!generatedItinerary && /\b(plan|trip|days|itinerary|budget|travel|cheaper|crowd)\b/i.test(input.message)) {
-      const extracted = extractRequirementsFromText(input.message, defaults);
-      generatedItinerary = buildDeterministicItinerary(extracted);
-      toolsUsed.push('generate_itinerary');
+    const destMismatch =
+      generatedItinerary &&
+      freshReq.destination &&
+      generatedItinerary.destination.toLowerCase() !== freshReq.destination.toLowerCase() &&
+      /\b(want to go to|going to|trip to|tour to|travel to|fly to|visit|explore|vacation in|holiday in|in|to)\b/i.test(input.message);
+
+    if (!generatedItinerary || destMismatch) {
+      if (/\b(plan|trip|tour|days|month|weeks?|itinerary|budget|travel|cheaper|crowd|want|go|visit|explore|vacation|holiday|lights|aurora)\b/i.test(input.message)) {
+        generatedItinerary = buildDeterministicItinerary(freshReq);
+        toolsUsed.push('generate_itinerary');
+      }
     }
 
-    const activeOrigin = generatedItinerary?.origin || defaults?.origin || 'Kolkata';
-    const activeDest =
-      generatedItinerary?.destination ||
-      extractRequirementsFromText(input.message, defaults).destination ||
-      'Bali';
+    const activeOrigin = generatedItinerary?.origin || freshReq.origin || defaults?.origin || 'Kolkata';
+    const activeDest = generatedItinerary?.destination || freshReq.destination || 'Alaska';
 
     // Ensure unique sources
     const uniqueSources: ResearchSource[] = [];
@@ -550,20 +564,29 @@ async function runTavilyConciergeFallback(
   defaults?: Partial<ReturnType<typeof extractRequirementsFromText>>
 ): Promise<AgentRunResult> {
   const lower = input.message.toLowerCase();
-  const extracted = extractRequirementsFromText(input.message, {
-    ...defaults,
-    origin: input.currentItinerary?.origin || defaults?.origin,
-    destination: input.currentItinerary?.destination || defaults?.destination,
-    durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
-    travellers: input.currentItinerary?.travellers || defaults?.travellers,
-  });
+  const fresh = extractRequirementsFromText(input.message, defaults);
+  const isDestShift = Boolean(
+    input.currentItinerary &&
+    fresh.destination &&
+    fresh.destination.toLowerCase() !== input.currentItinerary.destination.toLowerCase()
+  );
+
+  const extracted = isDestShift
+    ? fresh
+    : extractRequirementsFromText(input.message, {
+        ...defaults,
+        origin: input.currentItinerary?.origin || defaults?.origin,
+        destination: input.currentItinerary?.destination || defaults?.destination,
+        durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
+        travellers: input.currentItinerary?.travellers || defaults?.travellers,
+      });
 
   let activeItinerary: Itinerary;
   let recommendedHotels: HotelOption[];
   let budgetChanges: string[] | undefined;
   let isBudgetRevision = false;
 
-  if (input.currentItinerary && /cheaper|lower|reduce|save|under\s*\d/i.test(lower)) {
+  if (!isDestShift && input.currentItinerary && /cheaper|lower|reduce|save|under\s*\d/i.test(lower)) {
     isBudgetRevision = true;
     const targetBudget =
       extracted.budget !== 80000 && extracted.budget < input.currentItinerary.targetBudget
@@ -626,15 +649,24 @@ function runDeterministicFallback(
   budgetChanges?: string[]
 ): AgentRunResult {
   const lower = input.message.toLowerCase();
-  const extracted = extractRequirementsFromText(input.message, {
-    ...defaults,
-    origin: input.currentItinerary?.origin || defaults?.origin,
-    destination: input.currentItinerary?.destination || defaults?.destination,
-    durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
-    travellers: input.currentItinerary?.travellers || defaults?.travellers,
-  });
+  const fresh = extractRequirementsFromText(input.message, defaults);
+  const isDestShift = Boolean(
+    input.currentItinerary &&
+    fresh.destination &&
+    fresh.destination.toLowerCase() !== input.currentItinerary.destination.toLowerCase()
+  );
 
-  if (isBudgetRevision && prebuiltItinerary && budgetChanges) {
+  const extracted = isDestShift
+    ? fresh
+    : extractRequirementsFromText(input.message, {
+        ...defaults,
+        origin: input.currentItinerary?.origin || defaults?.origin,
+        destination: input.currentItinerary?.destination || defaults?.destination,
+        durationDays: input.currentItinerary?.durationDays || defaults?.durationDays,
+        travellers: input.currentItinerary?.travellers || defaults?.travellers,
+      });
+
+  if (!isDestShift && isBudgetRevision && prebuiltItinerary && budgetChanges) {
     return {
       reply: `I recalculated your ${prebuiltItinerary.destination} journey for ${prebuiltItinerary.currency} ${prebuiltItinerary.estimatedTotal.toLocaleString()}:\n\n• ${budgetChanges.join('\n• ')}\n\nNote: Stay and transport figures reflect indicative estimates alongside direct partner booking links below.`,
       itinerary: prebuiltItinerary,
